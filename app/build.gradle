@@ -1,0 +1,131 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+}
+
+android {
+    namespace 'com.bluesheets'
+    compileSdk 33
+
+    defaultConfig {
+        applicationId "com.bluesheets"
+        minSdk 21
+        targetSdk 33
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+//    //Supported Modules
+    // Android Support Library
+    implementation "androidx.appcompat:appcompat:$rootProject.app_compat_version"
+    implementation "androidx.core:core-ktx:$rootProject.ktx"
+    implementation "androidx.vectordrawable:vectordrawable:$rootProject.vector"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$rootProject.lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$rootProject.lifecycle_version"
+    implementation "androidx.navigation:navigation-fragment-ktx:$rootProject.navigation"
+    implementation "androidx.navigation:navigation-ui-ktx:$rootProject.navigation"
+
+    // Constraint Layout
+    implementation "androidx.constraintlayout:constraintlayout:$rootProject.constraint_version"
+
+    // Material Design
+    implementation "com.google.android.material:material:$rootProject.support_library_version"
+
+    // RecyclerView
+    implementation "androidx.recyclerview:recyclerview:$rootProject.recyclerViewVersion"
+
+    // CardView
+    implementation "androidx.cardview:cardview:$rootProject.cardViewVersion"
+
+    // Multidex
+    implementation "androidx.multidex:multidex:2.0.1"
+
+    // Database
+    implementation "androidx.room:room-runtime:$rootProject.roomDatabaseVersion"
+    implementation "androidx.annotation:annotation:$rootProject.annotation"
+    implementation "androidx.legacy:legacy-support-v4:$rootProject.legacy_support"
+    kapt "androidx.room:room-compiler:$rootProject.roomDatabaseVersion"
+    implementation "androidx.room:room-rxjava2:$rootProject.roomDatabaseVersion"
+
+    // Image
+    implementation "com.github.bumptech.glide:glide:$rootProject.glide_version"
+    kapt "com.github.bumptech.glide:compiler:$rootProject.glide_version"
+
+    // Networking
+    implementation "com.squareup.retrofit2:retrofit:$rootProject.retrofit_version"
+    implementation "com.squareup.retrofit2:converter-gson:$rootProject.retrofit_version"
+    implementation "com.squareup.okhttp3:okhttp:$rootProject.okhttp_version"
+    implementation "com.squareup.okhttp3:logging-interceptor:$rootProject.okhttp_version"
+    implementation "com.jakewharton.retrofit:retrofit2-rxjava2-adapter:$rootProject.rx_adapter"
+
+    // Reactive
+    implementation "io.reactivex.rxjava2:rxjava:$rootProject.rxjava_version"
+    implementation "io.reactivex.rxjava2:rxandroid:$rootProject.rxandroid_version"
+
+    // Parser
+    implementation "com.google.code.gson:gson:$rootProject.gson_version"
+
+    // Local Unit tests
+    testImplementation "junit:junit:$rootProject.junit_version"
+    testImplementation "org.mockito:mockito-core:$rootProject.mockito_version"
+
+    // UI Testing
+    androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.espresso_version"
+    androidTestImplementation "androidx.test.espresso:espresso-intents:$rootProject.espresso_version"
+    androidTestImplementation "org.mockito:mockito-core:$rootProject.mockito_version"
+
+    androidTestImplementation "androidx.test.espresso:espresso-contrib:$rootProject.espresso_version"
+    androidTestImplementation "androidx.test.espresso:espresso-accessibility:$rootProject.espresso_version"
+    androidTestImplementation "androidx.test.espresso:espresso-web:$rootProject.espresso_version"
+    androidTestImplementation "androidx.test.espresso.idling:idling-concurrent:$rootProject.espresso_version"
+
+    // The following Espresso dependency can be either "implementation"
+    // or "androidTestImplementation", depending on whether you want the
+    // dependency to appear on your APK's compile classpath or the test APK
+    // classpath.
+    androidTestImplementation "androidx.test.espresso:espresso-idling-resource:$rootProject.espresso_version"
+
+    // firebase dependencies
+    // Import the Firebase BoM
+    implementation platform('com.google.firebase:firebase-bom:26.2.0')
+
+    // Add the dependency for the Firebase SDK for Google Analytics
+    // When using the BoM, don't specify versions in Firebase dependencies
+    // Add the dependencies for any other desired Firebase products
+
+    // Firebase Crashlytics (Kotlin)
+    implementation 'com.google.firebase:firebase-crashlytics-ktx'
+
+    // For an optimal experience using Crashlytics, add the Firebase SDK
+    // for Google Analytics. This is recommended, but not required.
+    // Declare the dependencies for the Remote Config and Analytics libraries
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+    implementation 'com.google.firebase:firebase-config-ktx'
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+
+    implementation "com.google.android.gms:play-services-location:$rootProject.location_service"
+
+    implementation "androidx.viewpager2:viewpager2:1.0.0"
+
+    kapt "com.android.databinding:compiler:3.1.4"
+
+}
