@@ -13,8 +13,10 @@
         android:theme="@style/Theme.Bluesheets"
         tools:targetApi="31">
         <activity
-            android:name=".SplashScreen"
-            android:exported="true">
+            android:name=".SplashActivity"
+            android:exported="true"
+            android:label="@string/title_activity_splash"
+            android:theme="@style/Theme.Bluesheets">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
