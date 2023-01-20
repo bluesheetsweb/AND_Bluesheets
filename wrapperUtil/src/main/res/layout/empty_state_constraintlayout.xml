@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<src.wrapperutil.uicomponent.RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/parentEmptyLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <src.wrapperutil.uicomponent.LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/layoutError"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        app:background_state="WHITE">
+
+        <src.wrapperutil.uicomponent.ImageView
+            android:id="@+id/imageIcon"
+            android:layout_marginTop="@dimen/_30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@color/cardview_dark_background"
+            tools:background="#000000"
+            tools:ignore="ContentDescription" />
+
+        <src.wrapperutil.uicomponent.TextView
+            android:id="@+id/textTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:gravity="center"
+            android:text="@string/app_name"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:text_mode="SUB_HEADING_BOLD"
+            tools:text="@string/app_name" />
+
+        <src.wrapperutil.uicomponent.TextView
+            android:id="@+id/textDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="56dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="56dp"
+            android:gravity="center"
+            android:lineSpacingExtra="5.5dp"
+            app:text_mode="PARAGRAPH_MEDIUM_GRAY_75"
+            tools:text="@string/app_name" />
+
+
+        <src.wrapperutil.uicomponent.LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_16dp"
+            android:layout_marginTop="@dimen/_10dp"
+            android:layout_marginRight="@dimen/_16dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <src.wrapperutil.uicomponent.Button
+                android:id="@+id/okButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/_10dp"
+                android:gravity="center"
+                android:padding="20dp"
+                app:button_mode="SECONDARY"
+                tools:text="@string/app_name" />
+
+            <src.wrapperutil.uicomponent.Button
+                android:id="@+id/cancelButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_10dp"
+                android:gravity="center"
+                android:padding="20dp"
+                app:button_mode="SECONDARY"
+                tools:text="@string/app_name" />
+
+
+        </src.wrapperutil.uicomponent.LinearLayout>
+
+
+    </src.wrapperutil.uicomponent.LinearLayout>
+
+
+    <ProgressBar
+        android:id="@+id/progressBarTop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/_20dp"
+        android:layout_gravity="center"
+        android:visibility="gone" />
+
+
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:visibility="gone" />
+
+    <ProgressBar
+        android:id="@+id/progressBarBottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:visibility="gone" />
+
+
+</src.wrapperutil.uicomponent.RelativeLayout>
+
+
+    <!--
+    <android.support.constraint.ConstraintLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+    </android.support.constraint.ConstraintLayout>-->

@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">DCAppUtils</string>
+
+    <string name="progressActivityEmptyTitlePlaceholder">"progressActivityEmptyTitlePlaceholder"</string>
+    <string name="progressActivityEmptyContentPlaceholder">"progressActivityEmptyContentPlaceholder"</string>
+    <string name="progressActivityErrorButton">"progressActivityErrorButton"</string>
+</resources>

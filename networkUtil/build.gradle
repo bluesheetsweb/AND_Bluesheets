@@ -1,0 +1,109 @@
+//apply plugin: 'com.android.library'
+//apply plugin: 'kotlin-android'
+//apply plugin: 'kotlin-android-extensions'
+
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+}
+
+
+android {
+    compileSdkVersion rootProject.compileSdkVersion
+    packagingOptions {
+        exclude 'META-INF/ktor-http.kotlin_module'
+        exclude 'META-INF/ktor-utils.kotlin_module'
+        exclude 'META-INF/ktor-client-core.kotlin_module'
+        exclude 'META-INF/ktor-client-json.kotlin_module'
+        exclude 'META-INF/kotlinx-io.kotlin_module'
+        exclude 'META-INF/atomicfu.kotlin_module'
+        exclude 'META-INF/kotlinx-coroutines-io.kotlin_module'
+        exclude 'META-INF/kotlinx-coroutines-core.kotlin_module'
+    }
+
+
+//    dataBinding {
+//        enabled = true
+//    }
+
+    buildFeatures {
+        viewBinding true
+        dataBinding true
+    }
+
+//    rootProject.flavour = 0
+    flavorDimensions "default"
+    productFlavors {
+
+        production {
+            dimension "default"
+            buildConfigField "String", "SSL_FINGERPRINT_GLOBAL", "\"sha256/B6 05 3A 21 F8 11 FA 2E FA BF 9C B9 76 31 99 2A DD D3 F3 1A EF EE C2 EB 16 3E 18 6C B0 0F DD 1F\""
+
+
+        }
+        staging {
+            dimension "default"
+            buildConfigField "String", "SSL_FINGERPRINT_GLOBAL", "\"\""
+        }
+
+        uat{
+            dimension "default"
+            buildConfigField "String", "ssl_fingerprint_global", "\"\""
+//            rootProject.flavour = 3
+
+        }
+    }
+
+
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 33
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            zipAlignEnabled true
+        }
+
+        debug {
+
+        }
+
+
+
+        innerTest {
+             matchingFallbacks = ['debug', 'release']
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    testImplementation "junit:junit:${rootProject.junit_version}"
+    api 'androidx.legacy:legacy-support-v4:1.0.0'
+    api "com.google.code.gson:gson:2.8.9"
+    api("com.squareup.retrofit2:converter-gson:2.9.0") {
+        exclude group: 'com.squareup.okhttp3', module: 'okhttp'
+        exclude group: 'com.google.code.gson', module: 'gson'
+    }
+    implementation "com.squareup.okhttp3:okhttp:4.9.0"
+    api("com.squareup.okhttp3:logging-interceptor:4.9.3") {
+        exclude group: 'com.squareup.okhttp3', module: 'okhttp'
+    }
+        implementation ('io.socket:socket.io-client:1.0.0') {
+        // excluding org.json which is provided by Android
+        exclude group: 'org.json', module: 'json'
+    }
+
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4"
+    implementation("io.ktor:ktor-client-android:1.6.7")
+    implementation("io.ktor:ktor-server-core:2.2.2")
+    implementation("io.ktor:ktor-server-netty:2.2.2")
+
+}

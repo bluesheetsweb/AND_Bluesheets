@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <src.wrapperutil.uicomponent.RelativeLayout
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:layout_height="wrap_content">
+
+        <src.wrapperutil.uicomponent.LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_16dp"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/_20dp"
+            android:paddingTop="@dimen/_10dp"
+            android:gravity="center"
+            android:paddingRight="@dimen/_20dp"
+            android:paddingBottom="@dimen/_15dp"
+            app:background_state="WHITE"
+            app:corner_radius="@dimen/_7dp">
+
+            <src.wrapperutil.uicomponent.LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingVertical="@dimen/_10dp">
+
+                <src.wrapperutil.uicomponent.ImageView
+                    android:id="@+id/cross_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:paddingVertical="@dimen/_2dp"/>
+
+                <src.wrapperutil.uicomponent.ImageView
+                    android:id="@+id/imageThumb"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingVertical="@dimen/_2dp" />
+
+                <src.wrapperutil.uicomponent.TextView
+                    android:id="@+id/error_title"
+                    android:layout_width="@dimen/_200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/_7dp"
+                    android:layout_marginBottom="@dimen/_15dp"
+                    android:gravity="center_horizontal"
+                    android:paddingVertical="@dimen/_5dp"
+                    android:textSize="@dimen/txt_size_15sp"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/okay_btn"
+                    android:layout_width="@dimen/_150dp"
+                    android:layout_height="@dimen/_40dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/rg_bg_login_enable"
+                    android:paddingVertical="@dimen/_10dp"
+                    android:textColor="@color/white" />
+
+            </src.wrapperutil.uicomponent.LinearLayout>
+
+        </src.wrapperutil.uicomponent.LinearLayout>
+    </src.wrapperutil.uicomponent.RelativeLayout>
+</layout>

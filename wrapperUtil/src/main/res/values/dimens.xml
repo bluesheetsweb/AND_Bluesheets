@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <!--Group Image PIC-->
+
+
+    <!-- Main Screen Padding -->
+
+
+    <!-- Account Profile Information Description Margin -->
+
+    <!-- EDIT PROFILE -->
+
+    <!-- Profile View -->
+
+    <!-- lIST VIEW PADDING -->
+
+    <!-- Search Screen -->
+
+    <!-- pager itemmmmm -->
+
+
+    <!--FEEDS-->
+
+    <!-- onboarding -->
+    <!-- on Boarding -> RegisterActivity -->
+
+
+    <!--- search screen -->
+
+
+    <!--this is sdp section-->
+
+
+    <!--quick block-->
+
+    <dimen name="chat_attachment_preview_size">80dp</dimen>
+
+
+    <dimen name="toolbar_padding_for_content">15dp</dimen>
+    <dimen name="upload_pic">250dp</dimen>
+
+
+    <dimen name="edit_txt">10dp</dimen>
+
+
+    <!--Post Feed Type-->
+
+    <!--Posting New Feed -->
+    <!--Pool -->
+
+
+    <!--SearchProfileMaSearchProfileDetailView -->
+    <!--AccountBasicInfoEdit -->
+    <!--Feed_Selector -->
+
+
+    <!--Refer_Earn -->
+
+
+    <!--MyFeedRecyclerAdp(feeds_item2)-->
+    <!--FeedDetailAScreen(comments_item)-->
+    <dimen name="comments_item_profile_img_height_width">40dp</dimen>
+
+
+    <!--Refer Earn-->
+
+    <!--Email PopUp-->
+
+    80dp
+
+
+    <!--Cme Detail Screen-->
+
+
+    <!--RegisterPageForm_npn-->
+
+
+    <!-- CourseList_cursor_adp-->
+
+    <!--  ProfileEdit-->
+
+    <!-- FeedReplyListDialog-->
+
+
+    <!--New Release 51 font sizes-->
+
+
+    <!--feed suggestion item-->
+
+
+    <!--new-->
+
+    <dimen name="hintSize">13sp</dimen>
+    <dimen name="titleSize">16sp</dimen>
+
+
+    <dimen name="namesize">15sp</dimen>
+
+    <dimen name="progressBarMargin">20dp</dimen>
+
+
+    <dimen name="_0dp">0dp</dimen>
+    <dimen name="_0_5dp">0.5dp</dimen>
+    <dimen name="_1dp">1dp</dimen>
+    <dimen name="_2dp">2dp</dimen>
+    <dimen name="_3dp">3dp</dimen>
+    <dimen name="_4dp">4dp</dimen>
+    <dimen name="_5dp">5dp</dimen>
+    <dimen name="_6dp">6dp</dimen>
+    <dimen name="_7dp">7dp</dimen>
+    <dimen name="_8dp">8dp</dimen>
+    <dimen name="_9dp">9dp</dimen>
+    <dimen name="_10dp">10dp</dimen>
+    <dimen name="_11dp">11dp</dimen>
+    <dimen name="_12dp">12dp</dimen>
+    <dimen name="_13dp">13dp</dimen>
+    <dimen name="_14dp">14dp</dimen>
+    <dimen name="_15dp">15dp</dimen>
+    <dimen name="_16dp">16dp</dimen>
+    <dimen name="_17dp">17dp</dimen>
+    <dimen name="_18dp">18dp</dimen>
+    <dimen name="_19dp">19dp</dimen>
+    <dimen name="_20dp">20dp</dimen>
+    <dimen name="_21dp">21dp</dimen>
+    <dimen name="_22dp">22dp</dimen>
+    <dimen name="_24dp">24dp</dimen>
+    <dimen name="_25dp">25dp</dimen>
+    <dimen name="_26dp">26dp</dimen>
+    <dimen name="_30dp">30dp</dimen>
+    <dimen name="_38dp">38dp</dimen>
+    <dimen name="_34dp">34dp</dimen>
+    <dimen name="_35dp">35dp</dimen>
+    <dimen name="_36dp">36dp</dimen>
+    <dimen name="_40dp">40dp</dimen>
+    <dimen name="_45dp">45dp</dimen>
+    <dimen name="_50dp">50dp</dimen>
+    <dimen name="_52dp">52dp</dimen>
+    <!--standard height for tool bar-->
+    <dimen name="_60dp">60dp</dimen>
+    <dimen name="_65dp">65dp</dimen>
+    <dimen name="_70dp">70dp</dimen>
+    <dimen name="_76dp">76dp</dimen>
+    <dimen name="_80dp">80dp</dimen>
+    <dimen name="_82dp">82dp</dimen>
+    <dimen name="_90dp">90dp</dimen>
+    <dimen name="_55dp">55dp</dimen>
+    <dimen name="_100dp">100dp</dimen>
+    <dimen name="_120dp">120dp</dimen>
+    <dimen name="_125dp">125dp</dimen>
+    <dimen name="_130dp">130dp</dimen>
+    <dimen name="_140dp">140dp</dimen>
+    <dimen name="_147dp">147dp</dimen>
+    <dimen name="_150dp">150dp</dimen>
+    <dimen name="_155dp">155dp</dimen>
+    <dimen name="_172dp">172dp</dimen>
+    <dimen name="_180dp">180dp</dimen>
+    <dimen name="_210dp">210dp</dimen>
+    <dimen name="_200dp">200dp</dimen>
+    <dimen name="_220dp">220dp</dimen>
+    <dimen name="_250dp">250dp</dimen>
+    <dimen name="_290dp">290dp</dimen>
+    <dimen name="_300dp">300dp</dimen>
+    <dimen name="txt_size_10sp">10sp</dimen>
+    <dimen name="txt_size_12sp">12sp</dimen>
+    <dimen name="txt_size_13sp">13sp</dimen>
+    <dimen name="txt_size_15sp">15sp</dimen>
+    <dimen name="txt_size_14sp">14sp</dimen>
+    <dimen name="txt_size_20sp">20sp</dimen>
+    <dimen name="channel_banner_horizontal_adapter_width">@dimen/_172dp</dimen>
+    <dimen name="_n4_5dp">-4dp</dimen>
+    <dimen name="_n10dp">-10dp</dimen>
+    <dimen name="_n30dp">-30dp</dimen>
+    <dimen name="_110dp">110dp</dimen>
+    <dimen name="_28dp">28dp</dimen>
+    <dimen name="webinar_speaker_portrait_width">@dimen/_82dp</dimen>
+    <dimen name="webinar_speaker_portrait_height">@dimen/_52dp</dimen>
+    <dimen name="webinar_speaker_landscape_width">@dimen/_110dp</dimen>
+    <dimen name="webinar_speaker_landscape_height">@dimen/_80dp</dimen>
+
+    <dimen name="txt_size_h4">18dp</dimen>
+    <dimen name="txt_size_h3">22dp</dimen>
+    <dimen name="txt_size_h2">32dp</dimen>
+    <dimen name="txt_size_h1">48dp</dimen>
+    <dimen name="txt_size_default">16dp</dimen>
+    <dimen name="txt_size_small">14dp</dimen>
+    <dimen name="txt_size_extra_small">12dp</dimen>
+    <dimen name="button_height_max">40dp</dimen>
+
+    <!--<dimen name="txt_size_8">8</dimen>
+    <dimen name="txt_size_9">9</dimen>
+    <dimen name="txt_size_10">10</dimen>
+    <dimen name="txt_size_11">11</dimen>
+    <dimen name="txt_size_12">12</dimen>
+    <dimen name="txt_size_13">13</dimen>
+    <dimen name="txt_size_14">14</dimen>
+    <dimen name="txt_size_15">15</dimen>
+    <dimen name="txt_size_16">16</dimen>
+    <dimen name="txt_size_17">17</dimen>
+    <dimen name="txt_size_18">18</dimen>
+    <dimen name="txt_size_19">19</dimen>
+    <dimen name="txt_size_20">20</dimen>
+    <dimen name="txt_size_21">21</dimen>
+    <dimen name="txt_size_22">22</dimen>
+    <dimen name="txt_size_23">23</dimen>
+    <dimen name="txt_size_24">24</dimen>
+    <dimen name="txt_size_25">25</dimen>-->
+
+</resources>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+    </data>
+
+    <src.wrapperutil.uicomponent.FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipChildren="true"
+        android:clipToPadding="false"
+        android:padding="@dimen/_1dp">
+
+        <src.wrapperutil.uicomponent.RelativeLayout
+            android:id="@+id/middleLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <src.wrapperutil.uicomponent.ImageView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:scaleType="centerCrop"
+                android:visibility="gone"
+                />
+
+
+            <src.wrapperutil.uicomponent.RelativeLayout
+                android:id="@+id/viewName"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true">
+
+                <src.wrapperutil.uicomponent.TextView
+                    android:id="@+id/textName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:textAllCaps="true"
+                    android:textColor="@color/color_white"
+                    android:textSize="@dimen/txt_size_default"
+                    tools:text="12" />
+            </src.wrapperutil.uicomponent.RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/viewNameCircle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"
+                android:background="@drawable/rg_multiple_circle_bg"
+                android:layout_centerInParent="true">
+
+                <src.wrapperutil.uicomponent.TextView
+                    android:id="@+id/textName1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:textAllCaps="true"
+                    android:textColor="@color/color_white"
+                    android:textSize="@dimen/txt_size_h2"
+                    tools:text="12" />
+            </RelativeLayout>
+
+
+        </src.wrapperutil.uicomponent.RelativeLayout>
+
+    </src.wrapperutil.uicomponent.FrameLayout>
+</layout>

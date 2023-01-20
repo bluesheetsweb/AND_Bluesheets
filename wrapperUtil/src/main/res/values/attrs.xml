@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <attr name="corner_radius" format="dimension" />
+
+    <attr name="stroke_width" />
+    <attr name="image_src" />
+
+    <declare-styleable name="Shape">
+        <attr name="corner_radius" />
+        <attr name="stroke_width" />
+        <attr name="background_state" format="enum">
+            <enum name="WHITE" value="1" />
+            <enum name="PRIMARY" value="2" />
+            <enum name="SECONDARY" value="3" />
+            <enum name="ERROR" value="4" />
+            <enum name="BLACK" value="5" />
+            <enum name="GRAY_75" value="6" />
+            <enum name="GRAY_50" value="7" />
+            <enum name="GRAY_25" value="8" />
+            <enum name="GRAY_LIGHT" value="9" />
+            <enum name="TRANSPARENT_BLACK" value="10" />
+            <enum name="TRANSPARENT" value="11" />
+            <enum name="TRANSPARENT_WHITE" value="12" />
+            <enum name="SEPERATOR_COLOR" value="13" />
+            <enum name="TRANSPARENT_SECONDARY" value="14" />
+            <enum name="BLACK_PURE" value="15" />
+            <enum name="BLACK_TRANSPARENT_80" value="16" />
+            <enum name="TRANSPARENT_WHITE_90" value="17" />
+            <enum name="GREEN_DARK" value="18" />
+            <enum name="SEPERATOR_COLOR_TWO" value="19" />
+            <enum name="GRAY_PALE" value="20" />
+            <enum name="BLACK_TRANSPARENT_50" value="21" />
+            <enum name="OFF_RED" value="22" />
+            <enum name="BLUE" value="23" />
+        </attr>
+
+        <attr name="stroke_color" format="enum">
+            <enum name="WHITE" value="1" />
+            <enum name="PRIMARY" value="2" />
+            <enum name="SECONDARY" value="3" />
+            <enum name="ERROR" value="4" />
+            <enum name="BLACK" value="5" />
+            <enum name="GRAY_75" value="6" />
+            <enum name="GRAY_50" value="7" />
+            <enum name="GRAY_25" value="8" />
+            <enum name="GRAY_LIGHT" value="9" />
+            <enum name="TRANSPARENT_BLACK" value="10" />
+            <enum name="TRANSPARENT" value="11" />
+            <enum name="TRANSPARENT_WHITE" value="12" />
+            <enum name="SEPERATOR_COLOR" value="13" />
+            <enum name="TRANSPARENT_SECONDARY" value="14" />
+            <enum name="BLACK_PURE" value="15" />
+            <enum name="BLACK_TRANSPARENT_80" value="16" />
+            <enum name="TRANSPARENT_WHITE_90" value="17" />
+            <enum name="GREEN_DARK" value="18" />
+            <enum name="SEPERATOR_COLOR_TWO" value="19" />
+            <enum name="GRAY_PALE" value="20" />
+            <enum name="BLACK_TRANSPARENT_50" value="21" />
+            <enum name="OFF_RED" value="22" />
+            <enum name="BLUE" value="23" />
+        </attr>
+
+        <attr name="transparent_background" format="boolean" />
+        <attr name="corner_type" format="enum">
+            <enum name="ALL" value="1" />
+            <enum name="SKIP_TOP_LEFT" value="2" />
+            <enum name="SKIP_TOP_RIGHT" value="3" />
+            <enum name="SKIP_BOTTOM_RIGHT" value="4" />
+            <enum name="SKIP_ALL" value="5" />
+            <enum name="BOTTOM_ONLY" value="6" />
+            <enum name="RIGHT_ONLY" value="7" />
+            <enum name="LEFT_ONLY" value="8" />
+        </attr>
+        <!--<attr name="top_left_corner_radius" />-->
+        <!--<attr name="top_right_corner_radius" />-->
+        <!--<attr name="bottom_right_corner_radius" />-->
+        <!--<attr name="bottom_left_corner_radius" />-->
+    </declare-styleable>
+
+    <declare-styleable name="AttrImageView">
+        <attr name="isBorder" format="boolean" />
+        <attr name="stroke_width"/>
+    </declare-styleable>
+
+    <declare-styleable name="AttrCustomView">
+        <attr name="textSize" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="AttrCircleWithText">
+        <attr name="text_str" format="string" />
+        <attr name="text_circle_mode" format="enum">
+            <enum name="PARAGRAPH_MEDIUM_WHITE_TEXT_PRIMARY_BG" value="1" />
+            <enum name="PARAGRAPH_MEDIUM_WHITE_TEXT_SECONDARY_BG" value="2" />
+            <enum name="PARAGRAPH_MEDIUM_WHITE_TEXT_GRAY_75_BG" value="3" />
+            <enum name="PARAGRAPH_MEDIUM_GRAY_75_TEXT_GRAY_75_BG" value="4" />
+        </attr>
+        <attr name="background_mode" format="enum">
+            <enum name="WHITE" value="1" />
+            <enum name="PRIMARY" value="2" />
+            <enum name="SECONDARY" value="3" />
+            <enum name="ERROR" value="4" />
+            <enum name="BLACK" value="5" />
+            <enum name="GRAY_75" value="6" />
+            <enum name="GRAY_50" value="7" />
+            <enum name="GRAY_25" value="8" />
+            <enum name="GRAY_LIGHT" value="9" />
+            <enum name="TRANSPARENT_BLACK" value="10" />
+            <enum name="TRANSPARENT" value="11" />
+            <enum name="TRANSPARENT_WHITE" value="12" />
+            <enum name="SEPERATOR_COLOR" value="13" />
+            <enum name="TRANSPARENT_SECONDARY" value="14" />
+            <enum name="BLACK_PURE" value="15" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="AttrTag">
+        <attr name="tag_mode" format="enum">
+            <enum name="GREY" value="1" />
+            <enum name="WHITE" value="2" />
+            <enum name="GREY_75" value="3" />
+            <enum name="YELLOW" value="4" />
+            <enum name="GREY_50" value="5" />
+            <enum name="GREY_BORDER" value="6" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="AttrStateView">
+
+        <attr name="state_mode" format="enum">
+            <enum name="FULL_SCREEN" value="1" />
+            <enum name="WRAP_CONTENT" value="2" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="AttrButton">
+        <attr name="corner_radius" />
+        <attr name="stroke_width" />
+        <attr name="text_value" format="string" />
+        <attr name="image_src" />
+        <attr name="defaultPadding" format="boolean"></attr>
+        <attr name="lessPadding" format="boolean"></attr>
+        <attr name="gravity_mode" format="enum">
+            <enum name="LEFT" value="1" />
+            <enum name="RIGHT" value="2" />
+            <enum name="CENTRE" value="3" />
+        </attr>
+        <attr name="drawable_mode" format="enum">
+            <enum name="LEFT" value="1" />
+            <enum name="RIGHT" value="2" />
+        </attr>
+        <attr name="button_mode" format="enum">
+            <enum name="PRIMARY" value="1" />
+            <enum name="SECONDARY" value="2" />
+            <enum name="DISABLED" value="3" />
+            <enum name="PRIMARY_STROKED_ONLY" value="4" />
+            <enum name="SECONDARY_STROKED_ONLY" value="5" />
+            <enum name="PRIMARY_BLANK" value="6" />
+            <enum name="SECONDARY_BLANK" value="7" />
+            <enum name="STROKE_ONLY" value="8" />
+            <enum name="TEXT_DISABLED" value="9" />
+            <enum name="WHITE_TEXT_STROKE_ONLY" value="10" />
+            <enum name="TEXT_BLACK_WITHOUT_BACKGROUND" value="11" />
+            <enum name="SECONDARY_CORNER_RIGHT_ONLY" value="12" />
+            <enum name="DISABLED_STROKE_ONLY" value="13" />
+            <enum name="BLACK_BUTTON" value="14" />
+            <enum name="GRAY_75" value="16" />
+            <enum name="GRAY_FILLED_ENABLE" value="17" />
+            <enum name="WHITE_TEXT_BLANK" value="18" />
+            <enum name="SECONDARY_STROKED" value="20" />
+            <enum name="SECONDARY_TEXT_WHITE" value="21" />
+            <enum name="TEXT_DISABLED_WITH_BORDER" value="22" />
+            <enum name="TEXT_SECONDARY_WITH_GRAY_BORDER" value="23" />
+            <enum name="BLACK_WHITE" value="24" />
+            <enum name="GREEN" value="25" />
+        </attr>
+
+        <attr name="button_text_mode" format="enum">
+            <enum name="MAIN_HEADING_MEDIUM" value="1" />
+            <enum name="SUB_HEADING_BOLD" value="2" />
+            <enum name="SUB_HEADING_REGULAR" value="3" />
+            <enum name="SUB_HEADING_MEDIUM_WHITE" value="4" />
+            <enum name="SUB_HEADING_MEDIUM_GRAY_75" value="5" />
+            <enum name="SUB_HEADING_MEDIUM_SECONDARY" value="6" />
+            <enum name="SUB_HEADING_REGULAR_GRAY_50" value="7" />
+            <enum name="PARAGRAPH_BOLD" value="8" />
+            <enum name="PARAGRAPH_REGULAR_GRAY_50" value="9" />
+            <enum name="PARAGRAPH_MEDIUM_GRAY_75" value="10" />
+            <enum name="PARAGRAPH_MEDIUM_WHITE" value="11" />
+            <enum name="PARAGRAPH_MEDIUM_SECONDARY" value="12" />
+            <enum name="PARAGRAPH_MEDIUM_ERROR" value="13" />
+            <enum name="SMALL_MEDIUM_GRAY_75" value="14" />
+            <enum name="PARAGRAPH_REGULAR" value="15" />
+        </attr>
+
+        <!--<attr name="top_left_corner_radius" />-->
+        <!--<attr name="top_right_corner_radius" />-->
+        <!--<attr name="bottom_right_corner_radius" />-->
+        <!--<attr name="bottom_left_corner_radius" />-->
+    </declare-styleable>
+
+    <declare-styleable name="AttrTextView">
+        <attr name="default_link_check" format="boolean"></attr>
+        <attr name="text_mode" format="enum">
+            <!--<enum name="MAIN_HEADING_BOLD" value="1" />-->
+            <!--<enum name="MAIN_HEADING_MEDIUM" value="2" />-->
+            <!--<enum name="MAIN_HEADING_REGULAR" value="3" />-->
+            <!--<enum name="SECONDARY_HEADING_BOLD" value="4" />-->
+            <!--<enum name="SECONDARY_HEADING_MEDIUM" value="5" />-->
+            <!--<enum name="SECONDARY_HEADING_REGULAR" value="6" />-->
+            <!--<enum name="PARAGRAPH_MEDIUM" value="7" />-->
+            <!--<enum name="SMALL_MEDIUM" value="8" />-->
+            <!--<enum name="ERROR" value="9" />-->
+            <!--<enum name="SMALL_MEDIUM_GRAY_25" value="10" />-->
+            <!--<enum name="PARAGRAPH_MEDIUM_SECONDARY" value="11" />-->
+            <!--<enum name="SECONDARY_HEADING_MEDIUM_GRAY_25" value="12" />-->
+            <!--<enum name="PARAGRAPH_MEDIUM_GRAY_50" value="13" />-->
+            <!--<enum name="SECONDARY_HEADING_BOLD_GRAY_50" value="14" />-->
+            <!--<enum name="PARAGRAPH_MEDIUM_ERROR" value="15" />-->
+            <!--<enum name="SMALL_MEDIUM_GRAY_75" value="16" />-->
+            <enum name="MAIN_HEADING_MEDIUM" value="1" />
+            <enum name="SUB_HEADING_BOLD" value="2" />
+            <enum name="SUB_HEADING_REGULAR" value="3" />
+            <enum name="SUB_HEADING_MEDIUM_WHITE" value="4" />
+            <enum name="SUB_HEADING_MEDIUM_GRAY_75" value="5" />
+            <enum name="SUB_HEADING_MEDIUM_SECONDARY" value="6" />
+            <enum name="SUB_HEADING_REGULAR_GRAY_50" value="7" />
+            <enum name="PARAGRAPH_BOLD" value="8" />
+            <enum name="PARAGRAPH_REGULAR_GRAY_50" value="9" />
+            <enum name="PARAGRAPH_MEDIUM_GRAY_75" value="10" />
+            <enum name="PARAGRAPH_MEDIUM_WHITE" value="11" />
+            <enum name="PARAGRAPH_MEDIUM_SECONDARY" value="12" />
+            <enum name="PARAGRAPH_MEDIUM_ERROR" value="13" />
+            <enum name="SMALL_MEDIUM_GRAY_75" value="14" />
+            <enum name="PARAGRAPH_REGULAR" value="15" />
+            <enum name="SUB_HEADING_MEDIUM_PRIMARY" value="16" />
+            <enum name="SUB_HEADING_MEDIUM" value="17" />
+            <enum name="LARGE_MEDIUM_WHITE" value="18" />
+            <enum name="SUB_HEADING_REGULAR_SECONDARY" value="19" />
+            <enum name="SMALL_MEDIUM_WHITE" value="20" />
+            <enum name="LARGE_REGULAR_WHITE" value="21" />
+            <enum name="LARGE_MEDIUM_BLACK" value="22" />
+            <enum name="SUB_HEADING_BOLD_WHITE" value="23" />
+            <enum name="SUB_HEADING_REGULAR_BLUE" value="24" />
+            <enum name="SUB_HEADING_MEDIUM_GREEN" value="25" />
+            <enum name="SUB_HEADING_REGULAR_GREEN" value="26" />
+            <enum name="PARAGRAPH_BOLD_GREEN" value="27" />
+            <enum name="PARAGRAPH_REGULAR_GREEN" value="28" />
+        </attr>
+
+        <!--<attr name="top_left_corner_radius" />-->
+        <!--<attr name="top_right_corner_radius" />-->
+        <!--<attr name="bottom_right_corner_radius" />-->
+        <!--<attr name="bottom_left_corner_radius" />-->
+    </declare-styleable>
+
+    <declare-styleable name="AttrEditText">
+        <attr name="defaultInputPadding" format="boolean"></attr>
+        <attr name="lessInputPadding" format="boolean"></attr>
+        <attr name="edit_mode" format="enum">
+            <enum name="TEXT_LARGE" value="1" />
+            <enum name="TEXT_MEDIUM" value="2" />
+            <enum name="TEXT_SMALL" value="3" />
+            <enum name="ERROR" value="4" />
+            <enum name="WHITE" value="5" />
+            <enum name="GREEN" value="6" />
+        </attr>
+        <!--<attr name="top_left_corner_radius" />-->
+        <!--<attr name="top_right_corner_radius" />-->
+        <!--<attr name="bottom_right_corner_radius" />-->
+        <!--<attr name="bottom_left_corner_radius" />-->
+    </declare-styleable>
+
+
+    <declare-styleable name="AttrFloatingButton">
+        <attr name="floating_mode" format="enum">
+            <enum name="CIRCLE" value="1" />
+            <enum name="RECTANGLE" value="2" />
+        </attr>
+        <!--<attr name="top_left_corner_radius" />-->
+        <!--<attr name="top_right_corner_radius" />-->
+        <!--<attr name="bottom_right_corner_radius" />-->
+        <!--<attr name="bottom_left_corner_radius" />-->
+    </declare-styleable>
+
+
+    <declare-styleable name="AttrSeparator">
+        <attr name="seprator_mode" format="enum">
+            <enum name="TINY" value="1" />
+            <enum name="TINY_PLUS" value="2" />
+            <enum name="NORMAL" value="3" />
+            <enum name="MEDIUM" value="4" />
+            <enum name="LARGE" value="5" />
+        </attr>
+
+        <attr name="seprator_type" format="enum">
+            <enum name="HORIZONTAL" value="1" />
+            <enum name="VERTICAL" value="2" />
+        </attr>
+
+    </declare-styleable>
+
+    <declare-styleable name="AttrToolBarV7">
+
+    </declare-styleable>
+
+    <declare-styleable name="ProgressActivity">
+        <attr name="loadingProgressBarWidth" format="dimension" />
+        <attr name="loadingProgressBarHeight" format="dimension" />
+        <attr name="loadingProgressBarColor" format="color" />
+        <attr name="loadingBackgroundColor" format="color" />
+
+        <attr name="emptyImageWidth" format="dimension" />
+        <attr name="emptyImageHeight" format="dimension" />
+        <attr name="emptyTitleTextSize" format="dimension" />
+        <attr name="emptyContentTextSize" format="dimension" />
+        <attr name="emptyTitleTextColor" format="color" />
+        <attr name="emptyContentTextColor" format="color" />
+        <attr name="emptyBackgroundColor" format="color" />
+
+        <attr name="errorImageWidth" format="dimension" />
+        <attr name="errorImageHeight" format="dimension" />
+        <attr name="errorTitleTextSize" format="dimension" />
+        <attr name="errorContentTextSize" format="dimension" />
+        <attr name="errorTitleTextColor" format="color" />
+        <attr name="errorContentTextColor" format="color" />
+        <attr name="errorButtonTextColor" format="color" />
+        <attr name="errorButtonBackgroundColor" format="color" />
+        <attr name="errorBackgroundColor" format="color" />
+    </declare-styleable>
+
+
+    <declare-styleable name="AttrRoundedImageView">
+        <attr name="riv_corner_radius" format="dimension" />
+        <attr name="riv_corner_radius_top_left" format="dimension" />
+        <attr name="riv_corner_radius_top_right" format="dimension" />
+        <attr name="riv_corner_radius_bottom_left" format="dimension" />
+        <attr name="riv_corner_radius_bottom_right" format="dimension" />
+        <attr name="riv_border_width" format="dimension" />
+        <attr name="riv_border_color" format="color" />
+        <attr name="riv_mutate_background" format="boolean" />
+        <attr name="riv_oval" format="boolean" />
+        <attr name="android:scaleType" />
+        <attr name="riv_tile_mode">
+            <enum name="clamp" value="0" />
+            <enum name="repeat" value="1" />
+            <enum name="mirror" value="2" />
+        </attr>
+        <attr name="riv_tile_mode_x">
+            <enum name="clamp" value="0" />
+            <enum name="repeat" value="1" />
+            <enum name="mirror" value="2" />
+        </attr>
+        <attr name="riv_tile_mode_y">
+            <enum name="clamp" value="0" />
+            <enum name="repeat" value="1" />
+            <enum name="mirror" value="2" />
+        </attr>
+    </declare-styleable>
+
+
+    <!--
+        <declare-styleable name="DCSpannedGridLayoutManager">
+            <attr name="android:orientation" />
+            <attr name="spanCount" />
+            <attr name="aspectRatio" format="string" />
+        </declare-styleable>
+    -->
+
+
+    <declare-styleable name="SpannedGridLayoutManager">
+        <attr name="android:orientation" />
+        <attr name="spanCount" />
+        <attr name="aspectRatio" format="string" />
+    </declare-styleable>
+
+    <declare-styleable name="TagView">
+        <attr name="lineMargin" format="dimension" />
+        <attr name="tagMargin" format="dimension" />
+        <attr name="textPaddingLeft" format="dimension" />
+        <attr name="textPaddingRight" format="dimension" />
+        <attr name="textPaddingTop" format="dimension" />
+        <attr name="textPaddingBottom" format="dimension" />
+    </declare-styleable>
+
+
+</resources>
