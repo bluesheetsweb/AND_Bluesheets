@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+<data>
+<variable
+    name="viewModel"
+    type="com.bluesheets.ui.signup.viewmodel.SignInViewModel" />
+</data>
+<src.wrapperutil.uicomponent.ScrollView
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ffffff"
+        android:clickable="true"
+        android:padding="@dimen/_30dp">
+
+        <src.wrapperutil.uicomponent.TextView
+            android:id="@+id/textTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="Sign in"
+            app:text_mode="EXTRA_LARGE_MEDIUM_BLACK"/>
+
+        <src.wrapperutil.uicomponent.TextView
+            android:id="@+id/textHeadingEmailAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginTop="@dimen/_30dp"
+            android:text="Email"
+            app:layout_constraintTop_toBottomOf="@+id/textTitle"
+            app:text_mode="SUB_HEADING_BOLD"/>
+
+        <src.wrapperutil.uicomponent.EditText
+            android:id="@+id/editTextEmailAddress"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textHeadingEmailAddress"
+            android:onTextChanged="@{(text, start, before, count) -> viewModel.onEmailTextChanged(text)}"
+            android:singleLine="true"/>
+
+        <src.wrapperutil.uicomponent.TextView
+            android:id="@+id/textHeadingPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginTop="@dimen/_10dp"
+            android:text="Password"
+            app:layout_constraintTop_toBottomOf="@+id/editTextEmailAddress"
+            app:text_mode="SUB_HEADING_BOLD"/>
+
+        <src.wrapperutil.uicomponent.EditText
+            android:id="@+id/editTextPassword"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textHeadingPassword"
+            android:inputType="textPassword"
+            android:onTextChanged="@{(text, start, before, count) -> viewModel.onPasswordTextChanged(text)}"
+            android:singleLine="true"/>
+
+        <src.wrapperutil.uicomponent.TextView
+            android:id="@+id/textForgotPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginTop="@dimen/_10dp"
+            android:text="I Forgot my Password"
+            android:autoLink="all"
+            app:layout_constraintTop_toBottomOf="@+id/editTextPassword"
+            app:text_mode="SUB_HEADING_REGULAR_GRAY_50"
+            android:onClick="@{() -> viewModel.forgotClicked()}"/>
+
+        <src.wrapperutil.uicomponent.Button
+            android:id="@+id/buttonSignIn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textForgotPassword"
+            android:text="Sign In"
+            android:layout_marginTop="@dimen/_20dp"
+            app:button_mode="DISABLED"
+            android:onClick="@{() -> viewModel.signInClicked()}"
+            />
+
+        <src.wrapperutil.uicomponent.TextView
+            android:id="@+id/textDontHaveAccount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/buttonSignUp"
+            android:layout_marginTop="@dimen/_20dp"
+            android:text="Don't have an account?"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintTop_toBottomOf="@+id/buttonSignIn"
+            app:text_mode="SUB_HEADING_REGULAR"/>
+
+        <src.wrapperutil.uicomponent.Button
+            android:id="@+id/buttonSignUp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/textDontHaveAccount"
+            app:layout_constraintTop_toTopOf="@id/textDontHaveAccount"
+            app:layout_constraintBottom_toBottomOf="@id/textDontHaveAccount"
+            android:text="Sign Up"
+            app:button_mode="PRIMARY_BLANK"
+            app:lessPadding="true"
+            android:onClick="@{() -> viewModel.signUpClicked()}"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</src.wrapperutil.uicomponent.ScrollView>
+</layout>

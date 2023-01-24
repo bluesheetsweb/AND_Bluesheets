@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<src.wrapperutil.uicomponent.ScrollView
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:clickable="true"
+    android:padding="@dimen/_30dp">
+
+    <src.wrapperutil.uicomponent.TextView
+        android:id="@+id/textTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="Sign up"
+        app:text_mode="EXTRA_LARGE_MEDIUM_BLACK"/>
+
+    <src.wrapperutil.uicomponent.Button
+        android:id="@+id/buttonSignIn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/textTitle"
+        app:layout_constraintBottom_toBottomOf="@id/textTitle"
+        android:text="Sign In"
+        app:button_mode="PRIMARY_BLANK"
+        app:lessPadding="true"/>
+
+    <src.wrapperutil.uicomponent.TextView
+        android:id="@+id/textHeadingFullName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textTitle"
+        android:layout_marginTop="@dimen/_40dp"
+        android:text="Full Name"
+        app:text_mode="SUB_HEADING_BOLD"/>
+
+    <src.wrapperutil.uicomponent.EditText
+        android:id="@+id/editTextFullName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textHeadingFullName"
+        android:singleLine="true"/>
+
+    <src.wrapperutil.uicomponent.TextView
+        android:id="@+id/textHeadingEmailAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="@dimen/_10dp"
+        android:text="Email"
+        app:layout_constraintTop_toBottomOf="@+id/editTextFullName"
+        app:text_mode="SUB_HEADING_BOLD"/>
+
+    <src.wrapperutil.uicomponent.EditText
+        android:id="@+id/editTextEmailAddress"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textHeadingEmailAddress"
+        android:singleLine="true"/>
+
+    <src.wrapperutil.uicomponent.ImageView
+        android:id="@+id/imageInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextEmailAddress"
+        android:src="@drawable/ic_info"/>
+
+    <src.wrapperutil.uicomponent.TextView
+        android:id="@+id/textInfoDesc"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@id/imageInfo"
+        android:layout_marginStart="@dimen/_10dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:text="Use your work email to make it easier to join to an already created Workspace"
+        app:layout_constraintTop_toTopOf="@+id/imageInfo"
+        android:lines="3"
+        app:text_mode="PARAGRAPH_REGULAR"/>
+
+    <src.wrapperutil.uicomponent.TextView
+        android:id="@+id/textHeadingPhone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="@dimen/_10dp"
+        android:text="Phone Number"
+        app:layout_constraintTop_toBottomOf="@+id/textInfoDesc"
+        app:text_mode="SUB_HEADING_BOLD"/>
+
+    <src.wrapperutil.uicomponent.EditText
+        android:id="@+id/editTextPhoneNumber"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textHeadingPhone"
+        android:inputType="phone"
+        android:singleLine="true"/>
+
+    <src.wrapperutil.uicomponent.TextView
+        android:id="@+id/textHeadingPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="@dimen/_10dp"
+        android:text="Password"
+        app:layout_constraintTop_toBottomOf="@+id/editTextPhoneNumber"
+        app:text_mode="SUB_HEADING_BOLD"/>
+
+    <src.wrapperutil.uicomponent.EditText
+        android:id="@+id/editTextPassword"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textHeadingPassword"
+        android:inputType="textPassword"
+        android:singleLine="true"/>
+
+    <src.wrapperutil.uicomponent.TextView
+        android:id="@+id/textHeadingRePassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="@dimen/_10dp"
+        android:text="Re-Type Password"
+        app:layout_constraintTop_toBottomOf="@+id/editTextPassword"
+        app:text_mode="SUB_HEADING_BOLD"/>
+
+    <src.wrapperutil.uicomponent.EditText
+        android:id="@+id/editTextRePassword"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textHeadingRePassword"
+        android:inputType="textPassword"
+        android:singleLine="true"/>
+
+    <src.wrapperutil.uicomponent.Button
+        android:id="@+id/buttonSignUp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextRePassword"
+        android:text="Sign Up"
+        android:layout_marginTop="@dimen/_10dp"
+        app:button_mode="DISABLED"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</src.wrapperutil.uicomponent.ScrollView>

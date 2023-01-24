@@ -246,6 +246,8 @@
             <enum name="SUB_HEADING_REGULAR_GREEN" value="26" />
             <enum name="PARAGRAPH_BOLD_GREEN" value="27" />
             <enum name="PARAGRAPH_REGULAR_GREEN" value="28" />
+            <enum name="EXTRA_LARGE_MEDIUM_WHITE" value="29" />
+            <enum name="EXTRA_LARGE_MEDIUM_BLACK" value="30" />
         </attr>
 
         <!--<attr name="top_left_corner_radius" />-->

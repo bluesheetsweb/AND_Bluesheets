@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">Bluesheets</string>
-    <string name="title_activity_splash">SplashActivity</string>
+    <string name="title_activity_splash">Bluesheets</string>
 </resources>

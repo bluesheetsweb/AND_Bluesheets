@@ -151,21 +151,9 @@ class NetworkBase(
 
             else -> {
                 NetworkRequestHeader(
-                    authorization = NetworkGlobalDataHolder.getMyAuthKey()!!,
-                    apiVersion = NetworkApiManager.GENRIC_API_VERSION,
-                    appVersion = NetworkSharedPrefUtils.INSTANCE.getFromPreferences(NetworkConstant.appVersion),
-                    lang = NetworkSharedPrefUtils.INSTANCE.getFromPreferences(NetworkConstant.currentLang),
-                    udid = NetworkSupportUtils.generateRandomUUID(),
-                    timeZone = Calendar.getInstance().timeZone.id,
-                    campaignId = NetworkGlobalDataHolder.campaignId,
-                    sessionId = NetworkSharedPrefUtils.INSTANCE.getFromPreferencesLongval(
-                        NetworkConstant.PREF_KEY_SESSION_BACKGROUND_TIME
-                    ),
-                    userSessionToken = NetworkSharedPrefUtils.INSTANCE.getFromPreferences(
-                        NetworkConstant.PREF_KEY_SESSION_USER_TOKEN
-                    ),
-                    otpToken = NetworkSharedPrefUtils.INSTANCE.getFromPreferences(NetworkConstant.PREF_OTP_TOKEN)
-                )
+                    authorization = NetworkGlobalDataHolder.getMyAuthKey(),
+                    organizationToken = NetworkGlobalDataHolder.getOrgAuthKey(),
+                    workspaceToken = NetworkGlobalDataHolder.getWorkAuthKey())
             }
         }
     }

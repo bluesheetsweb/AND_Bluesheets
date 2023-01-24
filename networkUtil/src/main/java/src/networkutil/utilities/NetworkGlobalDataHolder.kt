@@ -49,6 +49,24 @@ object NetworkGlobalDataHolder {
         }
         if (myAuthKey.isNullOrBlank())
             myAuthKey = ""
+        return myAuthKey
+    }
+    fun getOrgAuthKey(): String {
+        if (myAuthKey.isNullOrBlank()) {
+            myAuthKey =
+                NetworkSharedPrefUtils.INSTANCE.getFromPreferences(NetworkConstant.PREF_KEY_ORG_AUTH_KEY)
+        }
+        if (myAuthKey.isNullOrBlank())
+            myAuthKey = ""
+        return "Bearer $myAuthKey"
+    }
+    fun getWorkAuthKey(): String {
+        if (myAuthKey.isNullOrBlank()) {
+            myAuthKey =
+                NetworkSharedPrefUtils.INSTANCE.getFromPreferences(NetworkConstant.PREF_KEY_WORKSPACE_AUTH_KEY)
+        }
+        if (myAuthKey.isNullOrBlank())
+            myAuthKey = ""
         return "Bearer $myAuthKey"
     }
 }

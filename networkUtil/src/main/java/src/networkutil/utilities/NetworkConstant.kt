@@ -34,6 +34,8 @@ object NetworkConstant {
     const val HEADER_CONTENT_TYPE = "Content-Type"
 
     const val PREF_KEY_USER_AUTH_KEY = "user_auth_key"
+    const val PREF_KEY_ORG_AUTH_KEY = "org_auth_key"
+    const val PREF_KEY_WORKSPACE_AUTH_KEY = "work_auth_key"
     const val PREF_KEY_UUID = "udid"
     const val PREF_KEY_SESSION_BACKGROUND_TIME = "analysticsSession"
 

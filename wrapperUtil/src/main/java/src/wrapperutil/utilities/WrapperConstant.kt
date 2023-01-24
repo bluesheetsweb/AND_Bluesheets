@@ -86,6 +86,8 @@ object WrapperConstant {
     const val TEXT_MODE_SUB_HEADING_REGULAR_GREEN = 26
     const val TEXT_MODE_PARAGRAPH_BOLD_GREEN = 27
     const val TEXT_MODE_PARAGRAPH_REGULAR_GREEN = 28
+    const val TEXT_MODE_EXTRA_LARGE_MEDIUM_WHITE = 29
+    const val TEXT_MODE_EXTRA_LARGE_MEDIUM_BLACK = 30
 
     const val EDIT_MODE_LARGE = 1
     const val EDIT_MODE_MEDIUM = 2

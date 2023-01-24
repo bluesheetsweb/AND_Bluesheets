@@ -2,7 +2,7 @@ package src.wrapperutil.utilities
 
 object ColorPicker {
     var WHITE: String = "#ffffff"
-    var PRIMARY: String = "#dc1d00"
+    var PRIMARY: String = "#0061FE"
     var SECONDARY: String = "#f62101"
     var ERROR: String = "#F58C2A"
     var BLACK: String = "#444445"

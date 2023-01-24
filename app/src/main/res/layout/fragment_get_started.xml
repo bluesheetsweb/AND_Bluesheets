@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#0061FE">
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:background="@drawable/ic_blue_bg"
+        android:padding="@dimen/_30dp">
+
+    <src.wrapperutil.uicomponent.ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_logo_white"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="@dimen/_50dp"
+        />
+    
+    <src.wrapperutil.uicomponent.TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/buttonGetStarted"
+        android:layout_marginBottom="@dimen/_60dp"
+        android:text="Automate and organize your company's finances"
+        app:text_mode="EXTRA_LARGE_MEDIUM_WHITE"
+        />
+
+    <src.wrapperutil.uicomponent.Button
+        android:id="@+id/buttonGetStarted"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/textAlreadyHaveAccount"
+        android:text="Get Started"
+        android:layout_marginBottom="@dimen/_20dp"
+        app:button_mode="BLACK_WHITE"
+        />
+
+
+    <src.wrapperutil.uicomponent.TextView
+        android:id="@+id/textAlreadyHaveAccount"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:gravity="center_horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="I already have an account"
+        android:padding="@dimen/_10dp"
+        app:text_mode="PARAGRAPH_MEDIUM_WHITE"
+        />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

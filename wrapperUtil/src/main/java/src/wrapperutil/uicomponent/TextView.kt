@@ -397,6 +397,32 @@ class TextView
                     e.printStackTrace()
                 }
             }
+            WrapperConstant.TEXT_MODE_EXTRA_LARGE_MEDIUM_WHITE -> {
+                try {
+                    // var fontSize = resources.getDimension(R.dimen.txt_size_20)
+                    var fontSize = 38f
+                    setTextSize(TypedValue.COMPLEX_UNIT_SP, fontSize)
+//                    typeface = Typeface.create("sans-serif-bold", Typeface.NORMAL)
+//                    typeface = Typeface.DEFAULT_BOLD
+                    typeface = Typeface.create("sans-serif-medium", Typeface.NORMAL)
+                    setTextColor(Color.parseColor(ColorPicker.WHITE))
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            }
+            WrapperConstant.TEXT_MODE_EXTRA_LARGE_MEDIUM_BLACK -> {
+                try {
+                    // var fontSize = resources.getDimension(R.dimen.txt_size_20)
+                    var fontSize = 38f
+                    setTextSize(TypedValue.COMPLEX_UNIT_SP, fontSize)
+//                    typeface = Typeface.create("sans-serif-bold", Typeface.NORMAL)
+//                    typeface = Typeface.DEFAULT_BOLD
+                    typeface = Typeface.create("sans-serif-medium", Typeface.NORMAL)
+                    setTextColor(Color.parseColor(ColorPicker.BLACK))
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            }
             else -> {
                 /* try {
                      var fontSize = resources.getDimension(R.dimen.txt_size_12)

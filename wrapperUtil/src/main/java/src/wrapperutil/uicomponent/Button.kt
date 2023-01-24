@@ -381,7 +381,7 @@ class Button
             }
             WrapperConstant.BUTTON_MODE_WHITE -> {
                 border.setColor(Color.parseColor(ColorPicker.WHITE))
-                setTextColor(Color.parseColor(ColorPicker.GRAY_50))
+                setTextColor(Color.parseColor(ColorPicker.BLACK))
                 isEnabled = true
                 border.cornerRadius = cornerRadius
                 setTextSize(TypedValue.COMPLEX_UNIT_SP, 12f)

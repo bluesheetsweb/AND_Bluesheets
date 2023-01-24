@@ -82,7 +82,7 @@ class NetworkRequest(
 
         Log.e(
             TAG,
-            "$requestUrl callService userSessionToken ${baseNetwork.requestHeader.userSessionToken} requestUrl $requestUrl"
+            "$requestUrl callService userSessionToken ${baseNetwork.requestHeader.authorization} requestUrl $requestUrl"
         )
         var preDefineResponse = baseNetwork.preDefineResponse
         call.enqueue(object : Callback<ResponseBody> {
@@ -111,10 +111,9 @@ class NetworkRequest(
                         return
                     }
                     var jsonBody = JSONObject(rawResponse)
-                    var status: Int = NetworkConstant.RESPONSE_CODE_INVALID
-                    var code: Int = NetworkConstant.RESPONSE_CODE_ERROR
+                    var status: Int = response.code()
 
-                    var message: String
+                    var message: String = "Success"
                     var responseData = ""
                     var action: JSONObject? = null
                     var toopTips: MutableList<Any> = mutableListOf()
@@ -138,10 +137,6 @@ class NetworkRequest(
                         }
                     }
                     else*/
-                    status = parent.optInt(preDefineResponse.statusKey)
-
-                    message = parent.optString(preDefineResponse.messageKey)
-                    code = parent.optInt(preDefineResponse.codeKey)
                     try {
                         action = parent.optJSONObject(preDefineResponse.actionKey)
                     } catch (ex: java.lang.Exception) {
@@ -155,19 +150,19 @@ class NetworkRequest(
                         e.printStackTrace()
                     }
 
-                    try {
-                        responseData = when (preDefineResponse.dataKeyTypeObject) {
-                            true -> {
-                                parent.optJSONObject(preDefineResponse.dataKey).toString()
-                            }
-                            false -> {
-                                parent.optJSONArray(preDefineResponse.dataKey).toString()
-                            }
-                        }
-                    } catch (e: Throwable) {
-                        e.printStackTrace()
-                        Log.e(TAG, "responseData ex", e)
-                    }
+//                    try {
+//                        responseData = when (preDefineResponse.dataKeyTypeObject) {
+//                            true -> {
+//                                parent.optJSONObject(preDefineResponse.dataKey).toString()
+//                            }
+//                            false -> {
+//                                parent.optJSONArray(preDefineResponse.dataKey).toString()
+//                            }
+//                        }
+//                    } catch (e: Throwable) {
+//                        e.printStackTrace()
+//                        Log.e(TAG, "responseData ex", e)
+//                    }
 
                     var isAction = false
 
@@ -176,148 +171,157 @@ class NetworkRequest(
 //                        isSuccess = true
                         isAction = true
                     }
-                    if (preDefineResponse.isThirdPartyApi) {
-                        Log.e(TAG, "isThirdPartyApi called")
+//                    if (preDefineResponse.isThirdPartyApi) {
+//                        Log.e(TAG, "isThirdPartyApi called")
+//                        isSuccess = true
+//                    } else if (preDefineResponse.successArrayCode != null && preDefineResponse.successArrayCode.isNotEmpty()) {
+//                        if (preDefineResponse.successArrayCode.contains(status))
+//                            isSuccess = true
+//                    } else if (preDefineResponse.isToCheckStatusValueType) {
+//                        Log.e(TAG, "else if preDefineResponse")
+//                        isSuccess = parent.optJSONObject(preDefineResponse.dataKey)
+//                            .getBoolean(preDefineResponse.statusKey)
+//                    } else {
+//                        if (status == NetworkConstant.RESPONSE_CODE_SUCCESS)
+//                            isSuccess = true
+//                    }
+                    if (status in 200..300){
                         isSuccess = true
-                    } else if (preDefineResponse.successArrayCode != null && preDefineResponse.successArrayCode.isNotEmpty()) {
-                        if (preDefineResponse.successArrayCode.contains(status))
-                            isSuccess = true
-                    } else if (preDefineResponse.isToCheckStatusValueType) {
-                        Log.e(TAG, "else if preDefineResponse")
-                        isSuccess = parent.optJSONObject(preDefineResponse.dataKey)
-                            .getBoolean(preDefineResponse.statusKey)
-                    } else {
-                        if (status == NetworkConstant.RESPONSE_CODE_SUCCESS)
-                            isSuccess = true
                     }
 
                     if (isSuccess) {
                         Log.e(TAG, "isSuccess")
-                        if (isAction)
-                            code = NetworkConstant.RESPONSE_CODE_ACTION
+//                        if (isAction)
+//                            code = NetworkConstant.RESPONSE_CODE_ACTION
 
-                        listener?.onSuccess(code, message, responseData, rawResponse)
+                        listener?.onSuccess(status, message, responseData, rawResponse)
                         NetworkGlobalCallBack.registerNetworkCallBack?.onSuccess(
-                            code,
+                            status,
                             message,
                             responseData,
                             rawResponse
                         )
                     } else {
-                        if (status == NetworkConstant.RESPONSE_CODE_ERROR) {
-                            var jsonError = parent.getJSONObject(preDefineResponse.errorKey)
-                            message = jsonError.optString(preDefineResponse.messageKey)
-                            code = jsonError.optInt(preDefineResponse.codeKey)
-                            Log.e(TAG, "session expired code $code")
-                            if (code == NetworkConstant.RESPONSE_CODE_TOKEN_EXPIRED) {
-                                Log.e(
-                                    TAG,
-                                    "session expired" + NetworkGlobalDataHolder.autoRefreshNetworkListener.size
-                                )
-                                Log.e(
-                                    TAG,
-                                    "session isSessionCreationInProgress" + NetworkGlobalDataHolder.isSessionCreationInProgress
-                                )
-                                Handler(Looper.getMainLooper()).post {
-                                    if (NetworkGlobalDataHolder.isSessionCreationInProgress) {
-                                        val currentTimeUtils = Calendar.getInstance().timeInMillis
-                                        Log.e(
-                                            TAG,
-                                            "session expired currentTimeUtils $currentTimeUtils"
-                                        )
-                                        NetworkGlobalDataHolder.autoRefreshNetworkListener.put(
-                                            currentTimeUtils,
-                                            object : OnGenericUpdateListener {
-                                                override fun onUpdate(data: Any?) {
-                                                    if (data != null && data is String) {
-                                                        baseNetwork.requestHeader.userSessionToken =
-                                                            data
-                                                        baseNetwork.requestHeader.sessionId =
-                                                            NetworkSharedPrefUtils.INSTANCE.getFromPreferencesLongval(
-                                                                NetworkConstant.PREF_KEY_SESSION_BACKGROUND_TIME
-                                                            )
-                                                        Log.e(
-                                                            TAG,
-                                                            "session onUpdate listener called." + requestUrl
-                                                        )
-                                                        callService(listener)
-                                                    }
-                                                }
-
-                                                override fun onUpdateList() {
-                                                }
-                                            }
-                                        )
-                                    } else {
-                                        NetworkGlobalDataHolder.isSessionCreationInProgress = true
-                                        pullNewSession(
-                                            context,
-                                            object : IOnResponse {
-                                                override fun onException(t: Throwable?) {
-                                                }
-
-                                                override fun onSuccess(
-                                                    code: Int?,
-                                                    message: String?,
-                                                    data: Any?,
-                                                    rawResponse: String?
-                                                ) {
-                                                    Log.e(TAG, "session successfully created")
-                                                    callService(listener)
-                                                }
-
-                                                override fun onFailed(
-                                                    code: Int?,
-                                                    message: String?,
-                                                    data: Any?,
-                                                    rawResponse: String?
-                                                ) {
-                                                }
-                                            }
-                                        )
-                                    }
-                                }
-                                return
-                            }
-                            var errorBModel = NetworkErrorBModel()
-                            errorBModel.code = code
-                            errorBModel.message = message
-                            try {
-                                responseData = when (preDefineResponse.dataKeyErrorTypeObject) {
-                                    true -> {
-                                        jsonError.optJSONObject(preDefineResponse.dataKey)
-                                            .toString()
-                                    }
-                                    false -> {
-                                        jsonError.optJSONArray(preDefineResponse.dataKey).toString()
-                                    }
-                                }
-                            } catch (ex: Throwable) {
-                                ex.printStackTrace()
-                            }
-                            errorBModel.data = responseData
-                            Log.e(TAG, "isSuccess failed" + message)
-                            listener?.onFailed(code, message, errorBModel, rawResponse)
-                            NetworkGlobalCallBack.registerNetworkCallBack?.onFailed(
-                                code,
-                                message,
-                                errorBModel,
-                                rawResponse
-                            )
-
-                            if (!message.isNullOrBlank() && isShowErrorAlert && !isAction) {
-                                showAlert(message)
-                            }
-                        } else if (status == NetworkConstant.RESPONSE_CODE_EXIT_APP) {
-                            // TODO: Exit App
-//                        ExitApp().exitApp(context, msg)
-                        } else if (status == NetworkConstant.RESPONSE_CODE_SHOW_DIALOG) {
-                            // TODO: show dialog
-//                        UserStatus.setReadOnlyAndOpenDialog(context)
-                        } else {
+//                        if (status == NetworkConstant.RESPONSE_CODE_ERROR) {
+//                            var jsonError = parent.getJSONObject(preDefineResponse.errorKey)
+//                            message = jsonError.optString(preDefineResponse.messageKey)
+//                            code = jsonError.optInt(preDefineResponse.codeKey)
+//                            Log.e(TAG, "session expired code $code")
+////                            if (code == NetworkConstant.RESPONSE_CODE_TOKEN_EXPIRED) {
+////                                Log.e(
+////                                    TAG,
+////                                    "session expired" + NetworkGlobalDataHolder.autoRefreshNetworkListener.size
+////                                )
+////                                Log.e(
+////                                    TAG,
+////                                    "session isSessionCreationInProgress" + NetworkGlobalDataHolder.isSessionCreationInProgress
+////                                )
+////                                Handler(Looper.getMainLooper()).post {
+////                                    if (NetworkGlobalDataHolder.isSessionCreationInProgress) {
+////                                        val currentTimeUtils = Calendar.getInstance().timeInMillis
+////                                        Log.e(
+////                                            TAG,
+////                                            "session expired currentTimeUtils $currentTimeUtils"
+////                                        )
+//////                                        NetworkGlobalDataHolder.autoRefreshNetworkListener.put(
+//////                                            currentTimeUtils,
+//////                                            object : OnGenericUpdateListener {
+//////                                                override fun onUpdate(data: Any?) {
+//////                                                    if (data != null && data is String) {
+//////                                                        baseNetwork.requestHeader.userSessionToken =
+//////                                                            data
+//////                                                        baseNetwork.requestHeader.sessionId =
+//////                                                            NetworkSharedPrefUtils.INSTANCE.getFromPreferencesLongval(
+//////                                                                NetworkConstant.PREF_KEY_SESSION_BACKGROUND_TIME
+//////                                                            )
+//////                                                        Log.e(
+//////                                                            TAG,
+//////                                                            "session onUpdate listener called." + requestUrl
+//////                                                        )
+//////                                                        callService(listener)
+//////                                                    }
+//////                                                }
+//////
+//////                                                override fun onUpdateList() {
+//////                                                }
+//////                                            }
+//////                                        )
+////                                    } else {
+////                                        NetworkGlobalDataHolder.isSessionCreationInProgress = true
+////                                        pullNewSession(
+////                                            context,
+////                                            object : IOnResponse {
+////                                                override fun onException(t: Throwable?) {
+////                                                }
+////
+////                                                override fun onSuccess(
+////                                                    code: Int?,
+////                                                    message: String?,
+////                                                    data: Any?,
+////                                                    rawResponse: String?
+////                                                ) {
+////                                                    Log.e(TAG, "session successfully created")
+////                                                    callService(listener)
+////                                                }
+////
+////                                                override fun onFailed(
+////                                                    code: Int?,
+////                                                    message: String?,
+////                                                    data: Any?,
+////                                                    rawResponse: String?
+////                                                ) {
+////                                                }
+////                                            }
+////                                        )
+////                                    }
+////                                }
+////                                return
+////                            }
+//                            var errorBModel = NetworkErrorBModel()
+//                            errorBModel.code = code
+//                            errorBModel.message = message
+//                            try {
+//                                responseData = when (preDefineResponse.dataKeyErrorTypeObject) {
+//                                    true -> {
+//                                        jsonError.optJSONObject(preDefineResponse.dataKey)
+//                                            .toString()
+//                                    }
+//                                    false -> {
+//                                        jsonError.optJSONArray(preDefineResponse.dataKey).toString()
+//                                    }
+//                                }
+//                            } catch (ex: Throwable) {
+//                                ex.printStackTrace()
+//                            }
+//                            errorBModel.data = responseData
+//                            Log.e(TAG, "isSuccess failed" + message)
+//                            listener?.onFailed(code, message, errorBModel, rawResponse)
+//                            NetworkGlobalCallBack.registerNetworkCallBack?.onFailed(
+//                                code,
+//                                message,
+//                                errorBModel,
+//                                rawResponse
+//                            )
+//
+//                            if (!message.isNullOrBlank() && isShowErrorAlert && !isAction) {
+//                                showAlert(message)
+//                            }
+//                        } else if (status == NetworkConstant.RESPONSE_CODE_EXIT_APP) {
+//                            // TODO: Exit App
+////                        ExitApp().exitApp(context, msg)
+//                        } else if (status == NetworkConstant.RESPONSE_CODE_SHOW_DIALOG) {
+//                            // TODO: show dialog
+////                        UserStatus.setReadOnlyAndOpenDialog(context)
+//                        } else {
                             Log.e(TAG, "else failed")
-                            listener?.onFailed(status, message, rawResponse)
-                            NetworkGlobalCallBack.registerNetworkCallBack?.onFailed(
+                            rawResponse = response.errorBody()?.string()
+                            var jsonError = JSONObject(rawResponse)
+                            message = jsonError.optString("message")
+                        var errorBModel = NetworkErrorBModel()
+                            errorBModel.code = status
+                            errorBModel.message = message
+                        listener?.onFailed(status, message,errorBModel, rawResponse)
+                        NetworkGlobalCallBack.registerNetworkCallBack?.onFailed(
                                 status,
                                 message,
                                 rawResponse
@@ -326,7 +330,7 @@ class NetworkRequest(
                             if (!message.isNullOrBlank() && isShowErrorAlert && !isAction) {
                                 showAlert(message)
                             }
-                        }
+//                        }
                     }
                 } catch (e: Exception) {
                     e.printStackTrace()
@@ -388,7 +392,7 @@ class NetworkRequest(
 
         Log.e(
             TAG,
-            "$requestUrl callService userSessionToken ${baseNetwork.requestHeader.userSessionToken} requestUrl $requestUrl"
+            "$requestUrl callService userSessionToken ${baseNetwork.requestHeader.authorization} requestUrl $requestUrl"
         )
         var preDefineResponse = baseNetwork.preDefineResponse
         call.enqueue(object : Callback<ResponseBody> {
@@ -615,72 +619,72 @@ class NetworkRequest(
         })
     }
 
-    fun pullNewSession(context: Context, listener: IOnResponse) {
-        Log.e(TAG, "pullNewSession")
-        var baseNetworkUtil = NetworkBase(
-            requestingServer = NetworkEnumAnnotation(NetworkConstant.REQUESTING_SERVER_BASE),
-            context = context
-        )
-        baseNetworkUtil.requestHeader.apiVersion = NetworkApiManager.GENRIC_API_VERSION_4_3
-        baseNetworkUtil.initializeService()
-        var request = NetworkRequest(
-            context = context,
-            baseNetwork = baseNetworkUtil,
-            apiMethod = NetworkConstant.GENERATE_SESSION_TOKEN,
-            requestType = NetworkEnumAnnotation(NetworkConstant.REQUEST_TYPE_POST),
-            params = hashMapOf()
-        )
-
-        Log.e(TAG, "usersessiontoken  ${request.requestUrl}")
-
-        request.callService(
-            listener = object : IOnResponse {
-                override fun onSuccess(
-                    code: Int?,
-                    message: String?,
-                    data: Any?,
-                    rawResponse: String?
-                ) {
-                    try {
-                        var jsonData = JSONObject(data.toString())
-                        var usersessiontoken = jsonData.optString("usersessiontoken")
-                        Log.e(TAG, "usersessiontoken is $usersessiontoken")
-                        NetworkSharedPrefUtils.INSTANCE.savePreferences(
-                            NetworkConstant.PREF_KEY_SESSION_USER_TOKEN,
-                            usersessiontoken
-                        )
-                        baseNetwork.requestHeader.userSessionToken = usersessiontoken
-                        baseNetwork.requestHeader.sessionId =
-                            NetworkSharedPrefUtils.INSTANCE.getFromPreferencesLongval(
-                                NetworkConstant.PREF_KEY_SESSION_BACKGROUND_TIME
-                            )
-
-                        NetworkGlobalDataHolder.autoCallAllPendingRequests(usersessiontoken)
-                        listener.onSuccess(code, message, data, rawResponse)
-                        NetworkGlobalDataHolder.isSessionCreationInProgress = false
-                    } catch (ex: Exception) {
-                        if (ex != null)
-                            Log.e(TAG, "" + ex.message)
-                        listener.onException(ex)
-                    }
-                }
-
-                override fun onFailed(
-                    code: Int?,
-                    message: String?,
-                    data: Any?,
-                    rawResponse: String?
-                ) {
-                    Log.e(TAG, "usersessiontoken onFailed $rawResponse")
-                    listener.onFailed(code, message, data, rawResponse)
-                }
-
-                override fun onException(t: Throwable?) {
-                    listener.onException(t)
-                }
-            }
-        )
-    }
+//    fun pullNewSession(context: Context, listener: IOnResponse) {
+//        Log.e(TAG, "pullNewSession")
+//        var baseNetworkUtil = NetworkBase(
+//            requestingServer = NetworkEnumAnnotation(NetworkConstant.REQUESTING_SERVER_BASE),
+//            context = context
+//        )
+//        baseNetworkUtil.requestHeader.apiVersion = NetworkApiManager.GENRIC_API_VERSION_4_3
+//        baseNetworkUtil.initializeService()
+//        var request = NetworkRequest(
+//            context = context,
+//            baseNetwork = baseNetworkUtil,
+//            apiMethod = NetworkConstant.GENERATE_SESSION_TOKEN,
+//            requestType = NetworkEnumAnnotation(NetworkConstant.REQUEST_TYPE_POST),
+//            params = hashMapOf()
+//        )
+//
+//        Log.e(TAG, "usersessiontoken  ${request.requestUrl}")
+//
+//        request.callService(
+//            listener = object : IOnResponse {
+//                override fun onSuccess(
+//                    code: Int?,
+//                    message: String?,
+//                    data: Any?,
+//                    rawResponse: String?
+//                ) {
+//                    try {
+//                        var jsonData = JSONObject(data.toString())
+//                        var usersessiontoken = jsonData.optString("usersessiontoken")
+//                        Log.e(TAG, "usersessiontoken is $usersessiontoken")
+//                        NetworkSharedPrefUtils.INSTANCE.savePreferences(
+//                            NetworkConstant.PREF_KEY_SESSION_USER_TOKEN,
+//                            usersessiontoken
+//                        )
+//                        baseNetwork.requestHeader.userSessionToken = usersessiontoken
+//                        baseNetwork.requestHeader.sessionId =
+//                            NetworkSharedPrefUtils.INSTANCE.getFromPreferencesLongval(
+//                                NetworkConstant.PREF_KEY_SESSION_BACKGROUND_TIME
+//                            )
+//
+//                        NetworkGlobalDataHolder.autoCallAllPendingRequests(usersessiontoken)
+//                        listener.onSuccess(code, message, data, rawResponse)
+//                        NetworkGlobalDataHolder.isSessionCreationInProgress = false
+//                    } catch (ex: Exception) {
+//                        if (ex != null)
+//                            Log.e(TAG, "" + ex.message)
+//                        listener.onException(ex)
+//                    }
+//                }
+//
+//                override fun onFailed(
+//                    code: Int?,
+//                    message: String?,
+//                    data: Any?,
+//                    rawResponse: String?
+//                ) {
+//                    Log.e(TAG, "usersessiontoken onFailed $rawResponse")
+//                    listener.onFailed(code, message, data, rawResponse)
+//                }
+//
+//                override fun onException(t: Throwable?) {
+//                    listener.onException(t)
+//                }
+//            }
+//        )
+//    }
 
     fun isConnectingToInternet(context: Context): Boolean {
         val connectivityManager =

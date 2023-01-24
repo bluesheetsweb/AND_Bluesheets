@@ -12,35 +12,35 @@ object NetworkManager {
 
     private val TAG = NetworkManager::class.java.simpleName
 
-    fun getOldClient(header: NetworkRequestHeader): NetworkService {
-        val authToken = Credentials.basic(InitNetworkUtils.app_auth, "")
-        header.authToken = authToken
-        val okHttpClientG = getHttClientBuilder()
-            .connectTimeout(NetworkConstant.NETWORK_REQUEST_TIME_OUT.toLong(), TimeUnit.SECONDS)
-            .writeTimeout(NetworkConstant.NETWORK_REQUEST_TIME_OUT.toLong(), TimeUnit.SECONDS)
-            .readTimeout(NetworkConstant.NETWORK_REQUEST_TIME_OUT.toLong(), TimeUnit.SECONDS)
-
-        val builder = Retrofit.Builder().baseUrl(InitNetworkUtils.server_path)
-        //                .addConverterFactory(GsonConverterFactory.create());
-
-//        val interceptor = HeaderOldAPI(authToken, authkey, apiVersion, app_version, lang, DeviceType, token_id)
-        val interceptor = RetrofitOldApiHeader(header)
-//        val interceptor = DCRetrofitOldApiHeader(
-//                DCNetworkRequestHeader(
-//                        authToken = authToken,
-//                        authKey = authkey
-//                        apiVersion = apiVersion,
-//                        appVersion = app_version,
-//                        lang = lang,
-//                        tokenId = token_id))
-
-        if (!okHttpClientG.interceptors().contains(interceptor)) {
-            okHttpClientG.addInterceptor(interceptor)
-            builder.client(okHttpClientG.build())
-        }
-
-        return builder.build().create(NetworkService::class.java)
-    }
+//    fun getOldClient(header: NetworkRequestHeader): NetworkService {
+//        val authToken = Credentials.basic(InitNetworkUtils.app_auth, "")
+//        header.authToken = authToken
+//        val okHttpClientG = getHttClientBuilder()
+//            .connectTimeout(NetworkConstant.NETWORK_REQUEST_TIME_OUT.toLong(), TimeUnit.SECONDS)
+//            .writeTimeout(NetworkConstant.NETWORK_REQUEST_TIME_OUT.toLong(), TimeUnit.SECONDS)
+//            .readTimeout(NetworkConstant.NETWORK_REQUEST_TIME_OUT.toLong(), TimeUnit.SECONDS)
+//
+//        val builder = Retrofit.Builder().baseUrl(InitNetworkUtils.server_path)
+//        //                .addConverterFactory(GsonConverterFactory.create());
+//
+////        val interceptor = HeaderOldAPI(authToken, authkey, apiVersion, app_version, lang, DeviceType, token_id)
+//        val interceptor = RetrofitOldApiHeader(header)
+////        val interceptor = DCRetrofitOldApiHeader(
+////                DCNetworkRequestHeader(
+////                        authToken = authToken,
+////                        authKey = authkey
+////                        apiVersion = apiVersion,
+////                        appVersion = app_version,
+////                        lang = lang,
+////                        tokenId = token_id))
+//
+//        if (!okHttpClientG.interceptors().contains(interceptor)) {
+//            okHttpClientG.addInterceptor(interceptor)
+//            builder.client(okHttpClientG.build())
+//        }
+//
+//        return builder.build().create(NetworkService::class.java)
+//    }
 
     fun getThirdPartyClient(): NetworkService {
         val okHttpClientG = getHttClientBuilder()
@@ -70,35 +70,35 @@ object NetworkManager {
         return builder.build().create(NetworkService::class.java)
     }
 
-    fun getOldClientWithoutInterceptor(header: NetworkRequestHeader): NetworkService {
-        val authToken = Credentials.basic(InitNetworkUtils.app_auth, "")
-        header.authToken = authToken
-        val okHttpClientG = getHttClientBuilderWithoutInterceptor()
-            .connectTimeout(NetworkConstant.NETWORK_REQUEST_TIME_OUT.toLong(), TimeUnit.SECONDS)
-            .writeTimeout(NetworkConstant.NETWORK_REQUEST_TIME_OUT.toLong(), TimeUnit.SECONDS)
-            .readTimeout(NetworkConstant.NETWORK_REQUEST_TIME_OUT.toLong(), TimeUnit.SECONDS)
-
-        val builder = Retrofit.Builder().baseUrl(InitNetworkUtils.server_path)
-        //                .addConverterFactory(GsonConverterFactory.create());
-
-//        val interceptor = HeaderOldAPI(authToken, authkey, apiVersion, app_version, lang, DeviceType, token_id)
-        val interceptor = RetrofitOldApiHeader(header)
-//        val interceptor = DCRetrofitOldApiHeader(
-//                DCNetworkRequestHeader(
-//                        authToken = authToken,
-//                        authKey = authkey,
-//                        apiVersion = apiVersion,
-//                        appVersion = app_version,
-//                        lang = lang,
-//                        tokenId = token_id))
-
-        if (!okHttpClientG.interceptors().contains(interceptor)) {
-            okHttpClientG.addInterceptor(interceptor)
-            builder.client(okHttpClientG.build())
-        }
-
-        return builder.build().create(NetworkService::class.java)
-    }
+//    fun getOldClientWithoutInterceptor(header: NetworkRequestHeader): NetworkService {
+//        val authToken = Credentials.basic(InitNetworkUtils.app_auth, "")
+//        header.authToken = authToken
+//        val okHttpClientG = getHttClientBuilderWithoutInterceptor()
+//            .connectTimeout(NetworkConstant.NETWORK_REQUEST_TIME_OUT.toLong(), TimeUnit.SECONDS)
+//            .writeTimeout(NetworkConstant.NETWORK_REQUEST_TIME_OUT.toLong(), TimeUnit.SECONDS)
+//            .readTimeout(NetworkConstant.NETWORK_REQUEST_TIME_OUT.toLong(), TimeUnit.SECONDS)
+//
+//        val builder = Retrofit.Builder().baseUrl(InitNetworkUtils.server_path)
+//        //                .addConverterFactory(GsonConverterFactory.create());
+//
+////        val interceptor = HeaderOldAPI(authToken, authkey, apiVersion, app_version, lang, DeviceType, token_id)
+//        val interceptor = RetrofitOldApiHeader(header)
+////        val interceptor = DCRetrofitOldApiHeader(
+////                DCNetworkRequestHeader(
+////                        authToken = authToken,
+////                        authKey = authkey,
+////                        apiVersion = apiVersion,
+////                        appVersion = app_version,
+////                        lang = lang,
+////                        tokenId = token_id))
+//
+//        if (!okHttpClientG.interceptors().contains(interceptor)) {
+//            okHttpClientG.addInterceptor(interceptor)
+//            builder.client(okHttpClientG.build())
+//        }
+//
+//        return builder.build().create(NetworkService::class.java)
+//    }
 
     fun getNewClient(header: NetworkRequestHeader): NetworkService {
 //        val authToken = Credentials.basic(InitNetworkUtils.app_auth, "")
