@@ -18,4 +18,5 @@ object FragmentConstant {
 
 object ApiMethods {
     const val LOGIN = "customUsers/login"
+    const val REGISTER = "customUsers/register"
 }

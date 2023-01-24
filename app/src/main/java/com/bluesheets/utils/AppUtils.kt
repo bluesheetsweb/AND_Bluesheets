@@ -3,6 +3,13 @@ package com.bluesheets.utils
 import android.text.TextUtils
 
 object AppUtils {
+    fun isValidNameLength(password: String) : Boolean {
+        return if (TextUtils.isEmpty(password)) {
+            return false
+        } else {
+            return password.trim().length >= 3
+        }
+    }
     fun isValidEmail(email: String) : Boolean {
         return if (TextUtils.isEmpty(email)) {
             false

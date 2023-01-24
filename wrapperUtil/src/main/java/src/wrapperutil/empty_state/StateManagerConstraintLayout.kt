@@ -22,6 +22,7 @@ import src.wrapperutil.R
 import src.wrapperutil.listener.OnYesNoClickListener
 import src.wrapperutil.model.UIPlaceHolderItem
 import src.wrapperutil.uicomponent.*
+import src.wrapperutil.utilities.Toaster
 import src.wrapperutil.utilities.WrapperConstant
 import src.wrapperutil.utilities.WrapperEnumAnnotation
 import src.wrapperutil.utilities.WrapperGlobalDataHolder
@@ -311,18 +312,21 @@ class StateManagerConstraintLayout : ConstraintLayout {
                     }
                     WrapperConstant.STATE_SCREEN_ERROR_TOAST -> {
                         WrapperGlobalDataHolder.isErrorScreenShown = false
-                        showOkDialog(
-                            message = parentVM.errorToastState.msg,
-                            okButtonText = parentVM.errorToastState.okButtonTitle,
+                        showToast(
                             context = context,
-                            listener = object : OnYesNoClickListener {
-                                override fun onYesClick(data: Any?) {
-                                }
-
-                                override fun onNoClick(data: Any?) {
-                                }
-                            }
-                        )
+                            message = parentVM.errorToastState.msg)
+//                        showOkDialog(
+//                            message = parentVM.errorToastState.msg,
+//                            okButtonText = parentVM.errorToastState.okButtonTitle,
+//                            context = context,
+//                            listener = object : OnYesNoClickListener {
+//                                override fun onYesClick(data: Any?) {
+//                                }
+//
+//                                override fun onNoClick(data: Any?) {
+//                                }
+//                            }
+//                        )
                         configureData(parentVM.successState)
 //                        configureData(dcParentVM.errorToastState)
                     }
@@ -407,6 +411,14 @@ class StateManagerConstraintLayout : ConstraintLayout {
 
     var builder: AlertDialog? = null
     var dialogClickListener: DialogInterface.OnClickListener? = null
+
+    fun showToast(
+        context: Context,
+        message: String? = "") {
+        message?.let {
+            Toaster.show(context, it)
+        }
+    }
 
     fun showOkDialog(
         title: String? = "",

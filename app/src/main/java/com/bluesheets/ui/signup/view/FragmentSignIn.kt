@@ -35,6 +35,9 @@ class FragmentSignIn: Fragment() {
 
         binding?.textForgotPassword?.paintFlags = Paint.UNDERLINE_TEXT_FLAG
 
+        viewModel.getState().observe(viewLifecycleOwner) {
+            binding?.stateLayout?.setViewState(it.state, viewModel)
+        }
         viewModel.buttonEnabled.observe(viewLifecycleOwner) {
             if (it) {
                 binding?.buttonSignIn?.updateMode(WrapperEnumAnnotation(WrapperConstant.BUTTON_MODE_PRIMARY))

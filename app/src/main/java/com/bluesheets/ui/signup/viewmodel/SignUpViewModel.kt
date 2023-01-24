@@ -13,10 +13,14 @@ import src.wrapperutil.utilities.WrapperConstant
 import src.wrapperutil.utilities.WrapperEnumAnnotation
 import src.wrapperutil.viewmodel.ParentVM
 
-class SignInViewModel: ParentVM() {
+class SignUpViewModel: ParentVM() {
 
+    private var name: String = ""
     private var email: String = ""
     private var password: String = ""
+    private var mobile: String = ""
+    private var rePassword: String = ""
+    var passwordDontMatch = MutableLiveData<Boolean>()
     var buttonEnabled = MutableLiveData<Boolean>()
 
     init {
@@ -27,8 +31,18 @@ class SignInViewModel: ParentVM() {
         return mProgressState
     }
 
+    fun onNameTextChanged(s: CharSequence) {
+        name = s.toString()
+        checkSignInButtonEnablity()
+    }
+
     fun onEmailTextChanged(s: CharSequence) {
         email = s.toString()
+        checkSignInButtonEnablity()
+    }
+
+    fun onPhoneTextChanged(s: CharSequence) {
+        mobile = s.toString()
         checkSignInButtonEnablity()
     }
 
@@ -37,20 +51,44 @@ class SignInViewModel: ParentVM() {
         checkSignInButtonEnablity()
     }
 
-    private fun checkSignInButtonEnablity(){
-        buttonEnabled.value =  AppUtils.isValidEmail(email) && AppUtils.isValidPasswordLength(password)
+    fun onRePasswordTextChanged(s: CharSequence) {
+        rePassword = s.toString()
+        checkSignInButtonEnablity()
     }
 
+    private fun checkSignInButtonEnablity() {
+            if (AppUtils.isValidEmail(email) && AppUtils.isValidPasswordLength(password)
+                && AppUtils.isValidPasswordLength(rePassword) && AppUtils.isValidNameLength(name)
+                && AppUtils.isValidMobileLength(mobile)) {
+                if  (password == rePassword) {
+                    passwordDontMatch.value = false
+                    buttonEnabled.value = true
+                } else {
+                    buttonEnabled.value = false
+                    passwordDontMatch.value = true
+                }
+            } else {
+                buttonEnabled.value = false
+            }
+    }
+
+
     fun signInClicked() {
+        NavigateTo.screen(activityType = FragmentConstant.SIGN_UP_ACTIVITY,
+            fragmentType = FragmentConstant.SIGN_IN_FRAGMENT)
+
+    }
+
+    fun signUpClicked() {
         mProgressState.value = WrapperEnumAnnotation(WrapperConstant.STATE_SCREEN_LOADING)
-        (repository as SignInRepo).login(email,password,object : NetworkRequest.IOnResponse{
+        (repository as SignInRepo).register(name, email, mobile, password, object : NetworkRequest.IOnResponse{
             override fun onException(t: Throwable?) {
                 errorToastState.msg = "Login Failed With Exception"
                 mProgressState.value = WrapperEnumAnnotation(WrapperConstant.STATE_SCREEN_ERROR_TOAST)
             }
 
             override fun onSuccess(code: Int?, message: String?, data: Any?, rawResponse: String?) {
-                    Toaster.show(BluesheetApplication.instance.applicationContext, "Login Success")
+                Toaster.show(BluesheetApplication.instance.applicationContext, "Registration Success")
                 mProgressState.value = WrapperEnumAnnotation(WrapperConstant.STATE_SCREEN_SUCCESS)
             }
 
@@ -60,20 +98,10 @@ class SignInViewModel: ParentVM() {
                         errorToastState.msg = it
                     }
                 } else {
-                    errorToastState.msg = "Login Failed"
+                    errorToastState.msg = "Registration Failed"
                 }
-
                 mProgressState.value = WrapperEnumAnnotation(WrapperConstant.STATE_SCREEN_ERROR_TOAST)
             }
         })
-    }
-
-    fun signUpClicked() {
-        NavigateTo.screen(activityType = FragmentConstant.SIGN_UP_ACTIVITY,
-            fragmentType = FragmentConstant.SIGN_UP_FRAGMENT)
-    }
-
-    fun forgotClicked() {
-
     }
 }

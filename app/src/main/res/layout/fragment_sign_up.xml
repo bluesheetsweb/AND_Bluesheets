@@ -1,9 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<src.wrapperutil.uicomponent.ScrollView
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<layout>
+    <data>
+        <variable
+            name="viewModel"
+            type="com.bluesheets.ui.signup.viewmodel.SignUpViewModel" />
+    </data>
+    <src.wrapperutil.empty_state.StateManagerConstraintLayout
+        android:id="@+id/stateLayout"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <src.wrapperutil.uicomponent.ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -29,7 +44,8 @@
         app:layout_constraintBottom_toBottomOf="@id/textTitle"
         android:text="Sign In"
         app:button_mode="PRIMARY_BLANK"
-        app:lessPadding="true"/>
+        app:lessPadding="true"
+        android:onClick="@{() -> viewModel.signInClicked()}"/>
 
     <src.wrapperutil.uicomponent.TextView
         android:id="@+id/textHeadingFullName"
@@ -48,6 +64,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textHeadingFullName"
+        android:onTextChanged="@{(text, start, before, count) -> viewModel.onNameTextChanged(text)}"
         android:singleLine="true"/>
 
     <src.wrapperutil.uicomponent.TextView
@@ -67,6 +84,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textHeadingEmailAddress"
+        android:onTextChanged="@{(text, start, before, count) -> viewModel.onEmailTextChanged(text)}"
         android:singleLine="true"/>
 
     <src.wrapperutil.uicomponent.ImageView
@@ -108,7 +126,8 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textHeadingPhone"
         android:inputType="phone"
-        android:singleLine="true"/>
+        android:singleLine="true"
+        android:onTextChanged="@{(text, start, before, count) -> viewModel.onPhoneTextChanged(text)}"/>
 
     <src.wrapperutil.uicomponent.TextView
         android:id="@+id/textHeadingPassword"
@@ -128,7 +147,8 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textHeadingPassword"
         android:inputType="textPassword"
-        android:singleLine="true"/>
+        android:singleLine="true"
+        android:onTextChanged="@{(text, start, before, count) -> viewModel.onPasswordTextChanged(text)}"/>
 
     <src.wrapperutil.uicomponent.TextView
         android:id="@+id/textHeadingRePassword"
@@ -148,7 +168,8 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textHeadingRePassword"
         android:inputType="textPassword"
-        android:singleLine="true"/>
+        android:singleLine="true"
+        android:onTextChanged="@{(text, start, before, count) -> viewModel.onRePasswordTextChanged(text)}"/>
 
     <src.wrapperutil.uicomponent.Button
         android:id="@+id/buttonSignUp"
@@ -160,7 +181,10 @@
         android:text="Sign Up"
         android:layout_marginTop="@dimen/_10dp"
         app:button_mode="DISABLED"
+        android:onClick="@{() -> viewModel.signUpClicked()}"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 </src.wrapperutil.uicomponent.ScrollView>
+    </src.wrapperutil.empty_state.StateManagerConstraintLayout>
+</layout>
