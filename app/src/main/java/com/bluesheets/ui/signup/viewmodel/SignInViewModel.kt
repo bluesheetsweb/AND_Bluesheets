@@ -75,6 +75,9 @@ class SignInViewModel: ParentVM() {
                 UserInfoUtil.workSpaceName = user.workspace?.name
                 UserInfoUtil.workSpaceToken = user.workspace?.id
                 mProgressState.value = WrapperEnumAnnotation(WrapperConstant.STATE_SCREEN_SUCCESS)
+                NavigateTo.screen(
+                    activityType = FragmentConstant.HOME_ACTIVITY
+                )
             }
 
             override fun onFailed(code: Int?, message: String?, data: Any?, rawResponse: String?) {

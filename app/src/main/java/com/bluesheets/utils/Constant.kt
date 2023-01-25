@@ -3,6 +3,7 @@ package com.bluesheets.utils
 object FragmentConstant {
     //Activity
     const val SIGN_UP_ACTIVITY = 1
+    const val HOME_ACTIVITY = 2
 
 
 
