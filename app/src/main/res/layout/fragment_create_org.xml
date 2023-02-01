@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+            name="viewModel"
+            type="com.bluesheets.ui.organisation.viewmodel.CreateOrgViewModel" />
+    </data>
+    <src.wrapperutil.empty_state.StateManagerConstraintLayout
+        android:id="@+id/stateLayout"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <src.wrapperutil.uicomponent.ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffffff"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:clickable="true"
+                android:padding="@dimen/_30dp">
+
+                <src.wrapperutil.uicomponent.TextView
+                    android:id="@+id/textTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:text="Create an Organization"
+                    app:text_mode="EXTRA_LARGE_MEDIUM_BLACK"/>
+
+                <src.wrapperutil.uicomponent.TextView
+                    android:id="@+id/textInfoDesc"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/textTitle"
+                    android:layout_marginStart="@dimen/_10dp"
+                    android:layout_marginTop="@dimen/_14dp"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:text="Use your work email to make it easier to join to an already created Workspace"
+                    android:lines="3"
+                    app:text_mode="PARAGRAPH_REGULAR"/>
+
+                <src.wrapperutil.uicomponent.TextView
+                    android:id="@+id/textHeadingPhone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:layout_marginTop="@dimen/_10dp"
+                    android:text="Organization Name"
+                    app:layout_constraintTop_toBottomOf="@+id/textInfoDesc"
+                    app:text_mode="SUB_HEADING_BOLD"/>
+
+                <src.wrapperutil.uicomponent.EditText
+                    android:id="@+id/editTextOrgName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textHeadingPhone"
+                    android:onTextChanged="@{(text, start, before, count) -> viewModel.onNameTextChanged(text)}"
+                    android:singleLine="true"/>
+
+                <src.wrapperutil.uicomponent.ImageView
+                    android:id="@+id/imageInfo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/editTextOrgName"
+                    android:src="@drawable/ic_info"/>
+
+                <src.wrapperutil.uicomponent.TextView
+                    android:id="@+id/textInfoDesc1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintLeft_toRightOf="@id/imageInfo"
+                    android:layout_marginStart="@dimen/_10dp"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:text="Numbers and specify characters are not allowed."
+                    app:layout_constraintTop_toTopOf="@+id/imageInfo"
+                    android:lines="3"
+                    app:text_mode="PARAGRAPH_REGULAR"/>
+
+                <src.wrapperutil.uicomponent.Button
+                    android:id="@+id/buttonCreateOrg"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textInfoDesc1"
+                    android:text="Create"
+                    android:layout_marginTop="@dimen/_10dp"
+                    app:button_mode="DISABLED"
+                    android:onClick="@{() -> viewModel.createOrgClicked()}"
+                    />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </src.wrapperutil.uicomponent.ScrollView>
+    </src.wrapperutil.empty_state.StateManagerConstraintLayout>
+</layout>
