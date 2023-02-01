@@ -20,4 +20,13 @@ object AppRequestParams {
         params.put("info", infoParams)
         return params
     }
+
+    fun registerOrg(name: String, description: String, workspaceId: String): HashMap<String, Any?> {
+        var params = HashMap<String, Any?>()
+
+        params.put("name", name)
+        params.put("description", description)
+        params.put("workspaceId", workspaceId)
+        return params
+    }
 }
