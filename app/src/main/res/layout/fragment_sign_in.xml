@@ -5,11 +5,20 @@
     name="viewModel"
     type="com.bluesheets.ui.signup.viewmodel.SignInViewModel" />
 </data>
-<src.wrapperutil.uicomponent.ScrollView
+<src.wrapperutil.empty_state.StateManagerConstraintLayout
+    android:id="@+id/stateLayout"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <src.wrapperutil.uicomponent.ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -120,4 +129,5 @@
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 </src.wrapperutil.uicomponent.ScrollView>
+</src.wrapperutil.empty_state.StateManagerConstraintLayout>
 </layout>

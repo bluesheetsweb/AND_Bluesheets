@@ -2,6 +2,7 @@ package com.bluesheets
 
 import android.app.Application
 import com.bluesheets.utils.MyLifecycleHandler
+import com.bluesheets.utils.SharedPrefUtils
 import src.networkutil.network.InitNetworkUtils
 
 class BluesheetApplication: Application() {
@@ -17,6 +18,7 @@ class BluesheetApplication: Application() {
 
     private fun initServer(){
         InitNetworkUtils.server_path = "https://dev.bluesheets.io/backend/api/"
+        SharedPrefUtils.INSTANCE.initContext(this)
     }
 
     companion object {
