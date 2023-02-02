@@ -55,6 +55,9 @@ class CreateOrgViewModel : ParentVM() {
                 override fun onSuccess(code: Int?, message: String?, data: Any?, rawResponse: String?) {
                     Toaster.show(BluesheetApplication.instance.applicationContext, "Registration Success")
                     var organization = Gson().fromJson(rawResponse, OrganizationModel::class.java)
+                    UserInfoUtil.organizationId = organization.id
+                    UserInfoUtil.organizationName = organization.name
+                    UserInfoUtil.organizationToken = organization.token
 
                     mProgressState.value = WrapperEnumAnnotation(WrapperConstant.STATE_SCREEN_SUCCESS)
                 }

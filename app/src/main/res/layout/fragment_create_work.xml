@@ -3,7 +3,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.bluesheets.ui.organisation.viewmodel.CreateOrgViewModel" />
+            type="com.bluesheets.ui.workspace.viewmodel.CreateWorkSpaceViewModel" />
     </data>
     <src.wrapperutil.empty_state.StateManagerConstraintLayout
         android:id="@+id/stateLayout"
@@ -76,6 +76,7 @@
                     android:layout_height="@dimen/_20dp"
                     app:layout_constraintLeft_toRightOf="@id/imgBgView"
                     android:layout_marginStart="@dimen/_10dp"
+                    android:layout_marginTop="@dimen/_10dp"
                     app:layout_constraintRight_toRightOf="parent"
                     android:text="Min. 150x150px"
                     app:layout_constraintTop_toBottomOf="@+id/textWork"
@@ -123,6 +124,7 @@
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textHeadingWorkSpace"
+                    android:onTextChanged="@{(text, start, before, count) -> viewModel.onNameTextChanged(text)}"
                     android:singleLine="true"/>
 
                 <src.wrapperutil.uicomponent.ImageView
@@ -164,10 +166,11 @@
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textWorkDescription"
+                    android:onTextChanged="@{(text, start, before, count) -> viewModel.onNameTextChanged(text)}"
                     android:singleLine="true"/>
 
                 <src.wrapperutil.uicomponent.Button
-                    android:id="@+id/buttonSignUp"
+                    android:id="@+id/buttonCreateWork"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     app:layout_constraintStart_toStartOf="parent"
@@ -176,6 +179,7 @@
                     android:text="Create"
                     android:layout_marginTop="@dimen/_10dp"
                     app:button_mode="DISABLED"
+                    android:onClick="@{() -> viewModel.createWorkSpaceClicked()}"
                     />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
