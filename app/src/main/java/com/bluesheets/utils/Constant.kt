@@ -24,4 +24,5 @@ object ApiMethods {
     const val REGISTER = "customUsers/register"
     const val CREATE_ORGANIZATION = "organizations"
     const val CREATE_WORKSPACE = "workspaces"
+    const val VERIFY_OTP = "customUsers/verifyUser"
 }

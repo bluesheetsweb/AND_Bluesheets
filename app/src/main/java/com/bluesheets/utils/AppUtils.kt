@@ -33,4 +33,10 @@ object AppUtils {
             return mobile.trim().length >= 10
         }
     }
+
+    fun isValidString(value: String?): Boolean {
+        if (value.isNullOrEmpty() || value.isNullOrBlank())
+            return false
+        return true
+    }
 }
