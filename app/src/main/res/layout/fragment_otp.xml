@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.bluesheets.ui.signup.viewmodel.OtpViewModel" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:fillViewport="true"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <src.wrapperutil.uicomponent.TextView
+                android:id="@+id/textOtpMessage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_40dp"
+                android:layout_marginTop="@dimen/_40dp"
+                android:layout_marginRight="@dimen/_40dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:text="Please enter the code"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:text_mode="EXTRA_LARGE_MEDIUM_BLACK" />
+
+            <src.wrapperutil.uicomponent.EditText
+                android:id="@+id/enterOtp1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_40dp"
+                android:layout_marginEnd="@dimen/_40dp"
+                android:layout_marginTop="@dimen/_15dp"
+                android:cursorVisible="true"
+                android:gravity="center"
+                android:inputType="number"
+                android:selectAllOnFocus="true"
+                android:maxLength="1"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/enterOtp2"
+                app:layout_constraintTop_toBottomOf="@id/textOtpMessage" />
+
+            <src.wrapperutil.uicomponent.EditText
+                android:id="@+id/enterOtp2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_40dp"
+                android:layout_marginTop="@dimen/_15dp"
+                android:cursorVisible="true"
+                android:selectAllOnFocus="true"
+                android:gravity="center"
+                android:inputType="number"
+                android:maxLength="1"
+                app:layout_constraintLeft_toRightOf="@id/enterOtp1"
+                app:layout_constraintRight_toLeftOf="@id/enterOtp3"
+                app:layout_constraintTop_toBottomOf="@id/textOtpMessage" />
+
+            <src.wrapperutil.uicomponent.EditText
+                android:id="@+id/enterOtp3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_40dp"
+                android:layout_marginTop="@dimen/_15dp"
+                android:cursorVisible="true"
+                android:selectAllOnFocus="true"
+                android:gravity="center"
+                android:inputType="number"
+                android:maxLength="1"
+                app:layout_constraintLeft_toRightOf="@id/enterOtp2"
+                app:layout_constraintRight_toLeftOf="@id/enterOtp4"
+                app:layout_constraintTop_toBottomOf="@id/textOtpMessage" />
+
+            <src.wrapperutil.uicomponent.EditText
+                android:id="@+id/enterOtp4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_40dp"
+                android:layout_marginTop="@dimen/_15dp"
+                android:cursorVisible="true"
+                android:selectAllOnFocus="true"
+                android:gravity="center"
+                android:inputType="number"
+                android:maxLength="1"
+                app:layout_constraintLeft_toRightOf="@id/enterOtp3"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textOtpMessage" />
+
+            <src.wrapperutil.uicomponent.LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="2"
+                android:layout_marginHorizontal="@dimen/_50dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:orientation="horizontal">
+
+                <src.wrapperutil.uicomponent.Button
+                    android:id="@+id/buttonCancel"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:layout_margin="@dimen/_5dp"
+                    android:text="Cancel"
+                    app:button_mode="DISABLED"/>
+
+                <src.wrapperutil.uicomponent.Button
+                    android:id="@+id/buttonVerify"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:layout_margin="@dimen/_5dp"
+                    android:background="@color/color_blue"
+                    android:text="Verify"
+                    app:button_mode="DISABLED"
+                    android:onClick="@{() -> viewModel.verifyOTP()}"/>
+
+            </src.wrapperutil.uicomponent.LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</layout>

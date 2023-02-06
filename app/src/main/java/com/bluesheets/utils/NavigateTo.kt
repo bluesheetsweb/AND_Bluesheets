@@ -33,4 +33,11 @@ object NavigateTo {
         myIntent.putExtra(FragmentConstant.ACTIVITY_BUNDLE, bundle)
         BluesheetApplication.instance.activityLifeCycle.currentActivity?.startActivity(myIntent)
     }
+
+    private fun toCreateWOrkSpace(fragmentType: Int, bundle: Bundle?) {
+        val myIntent = Intent(BluesheetApplication.instance.activityLifeCycle.currentActivity, SignUpActivity::class.java)
+        myIntent.putExtra(FragmentConstant.FRAGMENT_TYPE, fragmentType)
+        myIntent.putExtra(FragmentConstant.ACTIVITY_BUNDLE, bundle)
+        BluesheetApplication.instance.activityLifeCycle.currentActivity?.startActivity(myIntent)
+    }
 }

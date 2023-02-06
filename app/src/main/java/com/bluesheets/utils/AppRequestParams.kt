@@ -29,4 +29,11 @@ object AppRequestParams {
         params.put("workspaceId", workspaceId)
         return params
     }
+
+    fun registerWorkSpace(name: String, description: String): HashMap<String, Any?> {
+        var params = HashMap<String, Any?>()
+        params.put("name", name)
+        params.put("description", description)
+        return params
+    }
 }
