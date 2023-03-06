@@ -2,6 +2,7 @@ package com.bluesheets
 
 import android.app.Application
 import android.content.ComponentCallbacks2
+import com.bluesheets.utils.ChatSharedClient
 import com.bluesheets.utils.MyLifecycleHandler
 import com.bluesheets.utils.SharedPrefUtils
 import src.networkutil.network.InitNetworkUtils
@@ -20,6 +21,7 @@ class BluesheetApplication: Application() {
     private fun initServer(){
         InitNetworkUtils.server_path = BuildConfig.BASE_URL
         SharedPrefUtils.INSTANCE.initContext(this)
+        ChatSharedClient.INSTANCE.initContext(this)
     }
 
     companion object {

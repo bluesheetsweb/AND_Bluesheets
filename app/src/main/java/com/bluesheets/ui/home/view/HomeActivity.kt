@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.bluesheets.R
 import com.bluesheets.databinding.ActivityHomeBinding
+import com.bluesheets.ui.chat.view.FragmentChatList
 import com.bluesheets.ui.contact.view.FragmentContact
 import com.bluesheets.ui.home.viewmodel.HomeViewModel
 import com.bluesheets.utils.FragmentConstant
@@ -42,7 +43,7 @@ class HomeActivity : AppCompatActivity() {
                 binding.imageDocument.setImageResource(R.drawable.ic_black_document)
                 binding.imageContact.setImageResource(R.drawable.ic_black_contact)
                 FragmentTransaction.add(type = FragmentConstant.HOME_ACTIVITY,
-                    fragment = FragmentContact()
+                    fragment = FragmentChatList()
                 )
             }
             1 -> {

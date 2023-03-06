@@ -67,7 +67,7 @@ class SignInViewModel: ParentVM() {
                 UserInfoUtil.userId = user.userId
                 UserInfoUtil.authToken = user.id
                 UserInfoUtil.userName = user.userName
-                UserInfoUtil.chatToken = user.mobileToken
+                UserInfoUtil.chatToken = user.mobileToken.toString()
                 UserInfoUtil.organizationId = user.organization?.organizationId
                 UserInfoUtil.organizationName = user.organization?.name
                 UserInfoUtil.organizationToken = user.organization?.id
