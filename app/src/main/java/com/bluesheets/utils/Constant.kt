@@ -32,5 +32,9 @@ object ApiMethods {
     const val GET_ORGANISATIONS_FOR_WORKSPACE = "organizations"
     const val LOGIN_TO_WORKSPACE = "workspaces/loginToWorkspace"
     const val LOGIN_TO_ORGANISATIONS = "organizations/login"
+    const val GET_DOCUMENTS = "documents"
+    const val USER_INFO = "customUsers/"
+    const val WORKSPACE_LOGO = "workspaces/uploadWorkspaceLogo"
+
 
 }

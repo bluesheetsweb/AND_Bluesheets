@@ -36,4 +36,48 @@ object AppRequestParams {
         params.put("description", description)
         return params
     }
+
+    fun userLogOut(access_token: String): HashMap<String, Any?> {
+        var params = HashMap<String, Any?>()
+        params.put("access_token", access_token)
+        return params
+    }
+
+    fun userProfileImage(access_token: String, image: String): HashMap<String, Any?> {
+        var params = HashMap<String, Any?>()
+        params.put("access_token", access_token)
+        params.put("image", image)
+        return params
+    }
+
+    fun getWorkSpace(access_token: String): HashMap<String, Any?> {
+        var params = HashMap<String, Any?>()
+        params.put("filter", "{\"searchValue\":\"\"}")
+        params.put("access_token", access_token)
+        return params
+    }
+
+    fun getOrganizations(workspaceId: String, access_token: String): HashMap<String, Any?> {
+        var params = HashMap<String, Any?>()
+        params.put("filter", "{\"where\":{\"workspaceId\":$workspaceId}}")
+        params.put("access_token", access_token)
+        return params
+    }
+
+     fun loginToWorkSpace(workspaceId: String, access_token: String): HashMap<String, Any?> {
+        var params = HashMap<String, Any?>()
+        params.put("workspaceId", workspaceId)
+        params.put("access_token", access_token)
+        return params
+    }
+
+     fun loginToOrganizations(organizationId: String, access_token: String): HashMap<String, Any?> {
+        var params = HashMap<String, Any?>()
+        params.put("organizationId", organizationId)
+        params.put("access_token", access_token)
+        return params
+    }
+
+
+
 }

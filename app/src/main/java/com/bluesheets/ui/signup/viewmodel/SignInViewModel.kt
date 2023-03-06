@@ -68,12 +68,14 @@ class SignInViewModel: ParentVM() {
                 UserInfoUtil.authToken = user.id
                 UserInfoUtil.userName = user.userName
                 UserInfoUtil.chatToken = user.mobileToken.toString()
+                UserInfoUtil.userProfileImage = user.userAvatar.toString()
                 UserInfoUtil.organizationId = user.organization?.organizationId
                 UserInfoUtil.organizationName = user.organization?.name
                 UserInfoUtil.organizationToken = user.organization?.id
                 UserInfoUtil.workSpaceId = user.workspace?.workspaceId
                 UserInfoUtil.workSpaceName = user.workspace?.name
                 UserInfoUtil.workSpaceToken = user.workspace?.id
+                UserInfoUtil.workSpaceLOGO = user.workspace?.logoUrl
                 mProgressState.value = WrapperEnumAnnotation(WrapperConstant.STATE_SCREEN_SUCCESS)
                 NavigateTo.screen(
                     activityType = FragmentConstant.HOME_ACTIVITY

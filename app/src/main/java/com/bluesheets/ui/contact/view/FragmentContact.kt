@@ -6,17 +6,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.bluesheets.databinding.FragmentContactBinding
+import com.bluesheets.databinding.FragmentContactsBinding
 
 class FragmentContact: Fragment() {
 
-    private var binding: FragmentContactBinding? = null
+    private var binding: FragmentContactsBinding? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentContactBinding.inflate(inflater, container, false)
+        binding = FragmentContactsBinding.inflate(inflater, container, false)
         return binding?.root
     }
 }

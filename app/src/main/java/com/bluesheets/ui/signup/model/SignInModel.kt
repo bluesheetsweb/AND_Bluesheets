@@ -22,6 +22,7 @@ data class SignInModel( var id: String?,
 data class WorkspaceItem(
     var id: String?,
     var name: String?,
+    var logoUrl: String?,
     var workspaceId: String?)
 
 data class OrganizationItem(
