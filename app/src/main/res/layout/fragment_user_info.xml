@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+<!--    <data>-->
+<!--        <variable-->
+<!--            name="viewModel"-->
+<!--            type="com.bluesheets.ui.workspace.viewmodel.CreateWorkSpaceViewModel" />-->
+<!--    </data>-->
+    <src.wrapperutil.empty_state.StateManagerConstraintLayout
+        android:id="@+id/stateLayout"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <src.wrapperutil.uicomponent.ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffffff"
+                android:clickable="true"
+                android:padding="@dimen/_30dp">
+
+                <src.wrapperutil.uicomponent.TextView
+                    android:id="@+id/textTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:text="Edit Profile"
+                    app:text_mode="EXTRA_LARGE_MEDIUM_BLACK"/>
+
+
+                <src.wrapperutil.uicomponent.roundedimageview.RoundedImageView
+                    android:id="@+id/imgBgView"
+                    android:layout_width="@dimen/_100dp"
+                    android:layout_height="@dimen/_100dp"
+                    android:layout_marginTop="@dimen/_30dp"
+                    app:layout_constraintTop_toBottomOf="@id/textTitle"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:src="@drawable/ic_pic"/>
+
+                <src.wrapperutil.uicomponent.TextView
+                    android:id="@+id/textWork"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_20dp"
+                    android:layout_marginTop="@dimen/_30dp"
+                    app:layout_constraintLeft_toRightOf="@id/imgBgView"
+                    android:layout_marginStart="@dimen/_10dp"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:hint="Username"
+                    app:layout_constraintTop_toTopOf="@+id/imgBgView"
+                    android:lines="3"
+                    app:text_mode="SUB_HEADING_BOLD"/>
+
+                <src.wrapperutil.uicomponent.TextView
+                    android:id="@+id/textWork3"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_20dp"
+                    app:layout_constraintLeft_toRightOf="@id/imgBgView"
+                    android:layout_marginStart="@dimen/_10dp"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:text=""
+                    android:hint="user email"
+                    app:layout_constraintTop_toBottomOf="@+id/textWork"
+                    android:lines="3"
+                    app:text_mode="PARAGRAPH_REGULAR"/>
+
+                <com.google.android.material.divider.MaterialDivider
+                    android:id="@+id/divider_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:layout_marginTop="@dimen/_50dp"
+                    app:layout_constraintTop_toBottomOf="@+id/imgBgView"
+                    />
+
+                <src.wrapperutil.uicomponent.TextView
+                    android:id="@+id/headerAccount"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_20dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:layout_marginTop="@dimen/_15dp"
+                    android:text="ACCOUNT"
+                    app:layout_constraintTop_toBottomOf="@+id/divider_1"
+                    android:lines="3"
+                    app:text_mode="PARAGRAPH_BOLD_GREEN"/>
+
+                <src.wrapperutil.uicomponent.TextView
+                    android:id="@+id/changeProfilePicture"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_20dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:layout_marginVertical="@dimen/_25dp"
+                    android:text="Change profile picture"
+                    app:layout_constraintTop_toBottomOf="@+id/headerAccount"
+                    android:drawableEnd="@drawable/ic_right_arrow"
+                    android:lines="3"
+                    app:text_mode="PARAGRAPH_REGULAR"/>
+
+                <com.google.android.material.divider.MaterialDivider
+                    android:id="@+id/divider_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:layout_marginVertical="@dimen/_20dp"
+                    app:layout_constraintTop_toBottomOf="@+id/changeProfilePicture"
+                    />
+
+                <src.wrapperutil.uicomponent.TextView
+                    android:id="@+id/deleteAccount"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_20dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:layout_marginVertical="@dimen/_25dp"
+                    android:text="Delete Account"
+                    app:layout_constraintTop_toBottomOf="@+id/divider_2"
+                    android:drawableEnd="@drawable/ic_right_arrow"
+                    android:lines="3"
+                    app:text_mode="PARAGRAPH_REGULAR"/>
+
+                <com.google.android.material.divider.MaterialDivider
+                    android:id="@+id/divider_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:layout_marginVertical="@dimen/_20dp"
+                    app:layout_constraintTop_toBottomOf="@+id/deleteAccount"
+                    />
+
+                <src.wrapperutil.uicomponent.TextView
+                    android:id="@+id/ic_logOut"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_20dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:layout_marginVertical="@dimen/_25dp"
+                    android:text="Log Out"
+                    android:drawablePadding="@dimen/_10dp"
+                    app:layout_constraintTop_toBottomOf="@+id/divider_3"
+                    android:drawableStart="@drawable/ic_logout"
+                    android:lines="3"
+                    app:text_mode="PARAGRAPH_BOLD"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </src.wrapperutil.uicomponent.ScrollView>
+    </src.wrapperutil.empty_state.StateManagerConstraintLayout>
+</layout>

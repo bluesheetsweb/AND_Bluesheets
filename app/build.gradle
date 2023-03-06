@@ -43,14 +43,21 @@ android {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             applicationIdSuffix ".debug"
-            buildConfigField("String", "BASE_URL", "\"http://13.232.186.171:8080\"")
+            buildConfigField("String", "BASE_URL", "\"https://dev.bluesheets.io/backend/api/\"")
             buildConfigField("String", "API_KEY", "\"HBNA19QVVAPP\"")
             buildConfigField("boolean", "ON_DEBUG_MODE", "true")
+        }
+        preprod {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField("String", "BASE_URL", "\"https://preprod.bluesheets.io/backend/api/\"")
+            buildConfigField("String", "API_KEY", "\"HBNA19QVVAPP\"")
+            buildConfigField("boolean", "ON_DEBUG_MODE", "false")
         }
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            buildConfigField("String", "BASE_URL", "\"https://reqres.in\"")
+            buildConfigField("String", "BASE_URL", "\"https://app.bluesheets.io/backend/api/\"")
             buildConfigField("String", "API_KEY", "\"HBNA19QVVAPP\"")
             buildConfigField("boolean", "ON_DEBUG_MODE", "false")
         }
