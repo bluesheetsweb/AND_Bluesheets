@@ -27,11 +27,17 @@ object NetworkConstant {
     const val HEADER_DEVICETYPE = "devicetype"
     const val HEADER_TOKENID = "tokenid"
     const val HEADER_TIME_ZONE = "timezone"
+    
     const val HEADER_AUTHORIZATION = "Authorization"
-    const val HEADER_CONNECTION = "Connection"
-    const val HEADER_ACCEPT_ENCODING = "Accept-Encoding"
+    const val HEADER_X_WORKSPACE_TOKEN = "x-workspace-token"
+    const val HEADER_X_ORGANISATION_TOKEN = "organization-token"
+    const val HEADER_X_USER_AGENT = "user-agent"
     const val HEADER_ACCEPT = "Accept"
     const val HEADER_CONTENT_TYPE = "Content-Type"
+
+    const val HEADER_CONNECTION = "Connection"
+    const val HEADER_ACCEPT_ENCODING = "Accept-Encoding"
+
 
     const val PREF_KEY_USER_AUTH_KEY = "user_auth_key"
     const val PREF_KEY_ORG_AUTH_KEY = "org_auth_key"

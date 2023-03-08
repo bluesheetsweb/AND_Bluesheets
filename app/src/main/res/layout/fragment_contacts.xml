@@ -7,12 +7,14 @@
 
         <variable
             name="viewModel"
-            type="com.bluesheets.ui.workspace.viewmodel.CreateWorkSpaceViewModel" />
+            type="com.bluesheets.ui.contact.viewmodel.UserInfoViewModel" />
     </data>
 
     <src.wrapperutil.empty_state.StateManagerConstraintLayout
         android:id="@+id/stateLayout"
         android:layout_width="match_parent"
+        android:background="@color/white"
+        android:clickable="true"
         android:layout_height="match_parent">
 
         <src.wrapperutil.uicomponent.ScrollView
@@ -49,17 +51,17 @@
                         android:id="@+id/textUserName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:text="@{viewModel.userName}"
                         android:layout_marginTop="@dimen/_10dp"
                         android:layout_gravity="center_horizontal"
-                        android:text="Username"
                         app:text_mode="SUB_HEADING_BOLD" />
 
                     <src.wrapperutil.uicomponent.Button
-                        android:id="@+id/buttonCreateWork"
+                        android:id="@+id/buttonEditProfile"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_10dp"
-                        android:onClick="@{() -> viewModel.createWorkSpaceClicked()}"
+                        android:onClick="@{() -> viewModel.enableNavigationToEditProfile()}"
                         android:text="Edit Profile"
                         app:layout_constraintTop_toBottomOf="@+id/textUserName" />
 

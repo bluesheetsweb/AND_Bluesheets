@@ -10,11 +10,11 @@ import src.networkutil.utilities.NetworkEnumAnnotation
 
 class UserInfoRepo {
 
-    fun userInfoRepo(name: String, description: String, listener: NetworkRequest.IOnResponse?) {
+    fun userInfoRepo(userID: String, listener: NetworkRequest.IOnResponse?) {
         var baseNetwork = NetworkBase(context = BluesheetApplication.instance.applicationContext)
         baseNetwork.initializeService()
         var request = NetworkRequest(
-            apiMethod = ApiMethods.USER_INFO,
+            apiMethod = ApiMethods.USER_INFO+userID,
             baseNetwork = baseNetwork,
             context = BluesheetApplication.instance.applicationContext,
             requestType = NetworkEnumAnnotation(NetworkConstant.REQUEST_TYPE_GET)
@@ -39,7 +39,7 @@ class UserInfoRepo {
         var baseNetwork = NetworkBase(context = BluesheetApplication.instance.applicationContext)
         baseNetwork.initializeService()
         var request = NetworkRequest(
-            apiMethod = ApiMethods.LOGOUT,
+            apiMethod = ApiMethods.USER_LOGOUT,
             baseNetwork = baseNetwork,
             context = BluesheetApplication.instance.applicationContext,
             requestType = NetworkEnumAnnotation(NetworkConstant.REQUEST_TYPE_POST),
@@ -66,7 +66,7 @@ class UserInfoRepo {
         var baseNetwork = NetworkBase(context = BluesheetApplication.instance.applicationContext)
         baseNetwork.initializeService()
         var request = NetworkRequest(
-            apiMethod = ApiMethods.DELETE_ACCOUNT,
+            apiMethod = ApiMethods.USER_DELETE_ACCOUNT,
             baseNetwork = baseNetwork,
             context = BluesheetApplication.instance.applicationContext,
             requestType = NetworkEnumAnnotation(NetworkConstant.REQUEST_TYPE_POST)
