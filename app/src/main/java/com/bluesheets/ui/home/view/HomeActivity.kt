@@ -33,6 +33,9 @@ class HomeActivity : AppCompatActivity() {
             navigateToFragment(it)
         }
         viewModel.currentSelectedPos.value = 0
+
+        binding?.imageWithButton?.updateImageSrc(R.drawable.ic_white_plus)
+        binding?.imageWithButton?.textValue
     }
 
     private fun navigateToFragment(selectedPos: Int){

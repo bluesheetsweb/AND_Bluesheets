@@ -4,6 +4,7 @@ object FragmentConstant {
     //Activity
     const val SIGN_UP_ACTIVITY = 1
     const val HOME_ACTIVITY = 2
+    const val CHAT_ACTIVITY = 3
 
     //Fragments
     const val GET_STARTED_FRAGMENT = 1
@@ -11,9 +12,16 @@ object FragmentConstant {
     const val SIGN_UP_FRAGMENT = 3
     const val CREATE_WORKSPACE_FRAGMENT = 3
     const val CREATE_ORGANISATION_FRAGMENT = 4
+    const val CHAT_MESSAGE_FRAGMENT = 10
 
     const val FRAGMENT_TYPE = "fragmentType"
     const val ACTIVITY_BUNDLE = "bundle"
+}
+
+object AppGlobalConstant {
+    const val RUPEE_SIGN = "₹"
+    const val CHANNEL_TYPE_GROUP = "group"
+    const val CHANNEL_TYPE_ONE_O_ONE = "oneToOne"
 }
 
 object ApiMethods {
