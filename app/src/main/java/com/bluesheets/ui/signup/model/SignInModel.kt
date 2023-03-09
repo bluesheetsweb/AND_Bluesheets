@@ -10,7 +10,7 @@ data class SignInModel( var id: String?,
                         var mobileToken: String?,
                         var donePreboarding: Boolean?,
                         var loggedIn: Boolean?,
-                        var userAvatar: String?,
+                        var profileImageUrl: String?,
                         var phoneNumber: String?,
                         var tfaEnabled: Boolean?,
                         var tfaRequest: String?,
@@ -22,6 +22,7 @@ data class SignInModel( var id: String?,
 data class WorkspaceItem(
     var id: String?,
     var name: String?,
+    var logoUrl: String?,
     var workspaceId: String?)
 
 data class OrganizationItem(
