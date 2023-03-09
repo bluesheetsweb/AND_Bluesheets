@@ -69,6 +69,18 @@ object UserInfoUtil {
             SharedPrefUtils.INSTANCE.savePreferences("CHAT_TOKEN", value)
         }
 
+    var workSpaceLOGO: String?
+        get() = SharedPrefUtils.INSTANCE.getFromPreferences("WORKSPACE_LOGO")
+        set(value) {
+            SharedPrefUtils.INSTANCE.savePreferences("WORKSPACE_LOGO", value)
+        }
+
+    var userProfileImage: String?
+        get() = SharedPrefUtils.INSTANCE.getFromPreferences("USER_LOGO")
+        set(value) {
+            SharedPrefUtils.INSTANCE.savePreferences("USER_LOGO", value)
+        }
+
     fun getChatId() : String {
         return "${BuildConfig.FLAVOR}-$userId"
     }

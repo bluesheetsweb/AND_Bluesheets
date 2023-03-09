@@ -6,6 +6,7 @@ import com.bluesheets.utils.ChatSharedClient
 import com.bluesheets.utils.MyLifecycleHandler
 import com.bluesheets.utils.SharedPrefUtils
 import src.networkutil.network.InitNetworkUtils
+import src.networkutil.utilities.NetworkSharedPrefUtils
 
 class BluesheetApplication: Application() {
     lateinit var activityLifeCycle: MyLifecycleHandler
@@ -21,6 +22,7 @@ class BluesheetApplication: Application() {
     private fun initServer(){
         InitNetworkUtils.server_path = BuildConfig.BASE_URL
         SharedPrefUtils.INSTANCE.initContext(this)
+        NetworkSharedPrefUtils.INSTANCE.initContext(this)
         ChatSharedClient.INSTANCE.initContext(this)
     }
 
