@@ -3,6 +3,7 @@ package com.bluesheets.utils
 import android.content.Intent
 import android.os.Bundle
 import com.bluesheets.BluesheetApplication
+import com.bluesheets.ui.chat.view.CustomMessageListActivity
 import com.bluesheets.ui.home.view.HomeActivity
 import com.bluesheets.ui.signup.view.SignUpActivity
 
@@ -18,6 +19,10 @@ object NavigateTo {
             {
                 toHome(bundle)
             }
+            FragmentConstant.CHAT_ACTIVITY ->
+            {
+                toChat(bundle)
+            }
         }
     }
 
@@ -30,14 +35,33 @@ object NavigateTo {
 
     private fun toHome(bundle: Bundle?) {
         val myIntent = Intent(BluesheetApplication.instance.activityLifeCycle.currentActivity, HomeActivity::class.java)
-        myIntent.putExtra(FragmentConstant.ACTIVITY_BUNDLE, bundle)
+        bundle ?. let {
+            myIntent.putExtras(it)
+        }
         BluesheetApplication.instance.activityLifeCycle.currentActivity?.startActivity(myIntent)
     }
 
     private fun toCreateWOrkSpace(fragmentType: Int, bundle: Bundle?) {
         val myIntent = Intent(BluesheetApplication.instance.activityLifeCycle.currentActivity, SignUpActivity::class.java)
         myIntent.putExtra(FragmentConstant.FRAGMENT_TYPE, fragmentType)
-        myIntent.putExtra(FragmentConstant.ACTIVITY_BUNDLE, bundle)
+        bundle ?. let {
+            myIntent.putExtras(it)
+        }
         BluesheetApplication.instance.activityLifeCycle.currentActivity?.startActivity(myIntent)
+    }
+
+    private fun toChat(bundle: Bundle?) {
+        bundle?.let {
+            bundle?.let {
+                it.getString("cId")?.let { cId ->
+                    BluesheetApplication.instance.activityLifeCycle.currentActivity?.startActivity(
+                        CustomMessageListActivity.createIntent(
+                            BluesheetApplication.instance.applicationContext,
+                            cid = cId
+                        )
+                    )
+                }
+            }
+        }
     }
 }

@@ -6,17 +6,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bluesheets.databinding.FragmentChatListBinding
-import com.bluesheets.databinding.FragmentGetStartedBinding
 import com.bluesheets.ui.chat.viewmodel.ChatListViewModel
-import com.bluesheets.ui.home.viewmodel.HomeViewModel
-import com.bluesheets.utils.FragmentConstant
-import com.bluesheets.utils.NavigateTo
+import src.wrapperutil.empty_state.StateManagerConstraintLayout
 
 class FragmentChatList: Fragment() {
 
     private var binding: FragmentChatListBinding? = null
     private lateinit var viewModel: ChatListViewModel
+    private lateinit var adapter: ChannelItemAdapter
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -28,16 +28,21 @@ class FragmentChatList: Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
         viewModel.initChat()
-//        binding?.buttonGetStarted?.setOnClickListener {
-//            NavigateTo.screen(activityType = FragmentConstant.SIGN_UP_ACTIVITY,
-//                fragmentType = FragmentConstant.SIGN_UP_FRAGMENT)
-//        }
-//
-//        binding?.textAlreadyHaveAccount?.setOnClickListener {
-//            NavigateTo.screen(activityType = FragmentConstant.SIGN_UP_ACTIVITY,
-//                fragmentType = FragmentConstant.SIGN_IN_FRAGMENT)
-//        }
+
+        val layoutManager: RecyclerView.LayoutManager = LinearLayoutManager(context)
+        binding?.recycleView?.setLayoutManager(layoutManager)
+        adapter = ChannelItemAdapter()
+        binding?.recycleView?.adapter = adapter
+
+        viewModel.getState().observe(viewLifecycleOwner) {
+            (binding?.root as StateManagerConstraintLayout)?.setViewState(it.state, viewModel)
+        }
+
+        viewModel.allChannels.observe(viewLifecycleOwner) {
+            adapter.updateList(it)
+        }
+
+        binding?.viewModel = viewModel
     }
 }
