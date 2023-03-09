@@ -5,6 +5,7 @@ object FragmentConstant {
     const val SIGN_UP_ACTIVITY = 1
     const val HOME_ACTIVITY = 2
     const val CHAT_ACTIVITY = 3
+    const val USER_INFO_ACTIVITY = 4
 
     //Fragments
     const val GET_STARTED_FRAGMENT = 1

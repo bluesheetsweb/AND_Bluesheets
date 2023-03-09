@@ -16,6 +16,7 @@ import com.bluesheets.ui.organisation.view.FragmentCreateOrg
 import com.bluesheets.ui.signup.viewmodel.SignInViewModel
 import com.bluesheets.ui.workspace.view.FragmentCreateWorkSpace
 import com.bluesheets.utils.FragmentConstant
+import com.bluesheets.utils.NavigateTo
 import com.bluesheets.utils.UserInfoUtil
 import com.bumptech.glide.Glide
 import src.wrapperutil.utilities.FragmentTransaction
@@ -43,7 +44,9 @@ class FragmentContact: Fragment() {
     }
 
     private fun navigateToUserFragment(value: Boolean){
-
+        NavigateTo.screen(
+            activityType = FragmentConstant.USER_INFO_ACTIVITY
+        )
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
