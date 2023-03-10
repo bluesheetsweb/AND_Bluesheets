@@ -8,6 +8,8 @@ import io.getstream.chat.android.client.models.User
 import io.getstream.chat.android.offline.model.message.attachments.UploadAttachmentsNetworkType
 import io.getstream.chat.android.offline.plugin.configuration.Config
 import io.getstream.chat.android.offline.plugin.factory.StreamOfflinePluginFactory
+import io.getstream.chat.android.ui.ChatUI
+import io.getstream.chat.android.ui.SupportedReactions
 
 class ChatSharedClient private constructor() {
 
@@ -27,6 +29,8 @@ class ChatSharedClient private constructor() {
                 .logLevel(ChatLogLevel.ALL)
                 .withPlugin(getOfflinePlugin())
                 .build()
+
+//            ChatUI.supportedReactions = SupportedReactions(context, mapOf())
         }
     }
 

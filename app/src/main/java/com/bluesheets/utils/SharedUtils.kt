@@ -1,9 +1,14 @@
 package com.bluesheets.utils
 
+import android.content.Context
+import android.content.DialogInterface
+import androidx.appcompat.app.AlertDialog
+import com.bluesheets.BluesheetApplication
 import com.bluesheets.R
 import com.bluesheets.ui.chat.model.ChannelExtraData
 import io.getstream.chat.android.client.models.Channel
 import io.getstream.chat.android.client.models.User
+import src.wrapperutil.listener.OnYesNoClickListener
 
 object SharedUtils {
 
@@ -145,13 +150,15 @@ object SharedUtils {
     fun updateChannelProfilePic(
         channel: Channel,
         profilePic: String,
-        onChanged: ((String) -> Void)
+        onChanged: ((String) -> Unit)
     ) {
-        val controller = ChatSharedClient.INSTANCE.client?.channel(channel.id)
+        val controller = ChatSharedClient.INSTANCE.client?.channel(channel.cid)
         var extraData = channel.extraData
-        extraData.remove("image")
         extraData.put(
             "image", profilePic
+        )
+        extraData.put(
+            "name", channel.name
         )
         controller?.update(
             extraData = extraData,
@@ -165,13 +172,16 @@ object SharedUtils {
         }
     }
 
-    fun updateChannelName(channel: Channel, channelName: String, onChanged: ((String) -> Void)) {
-        val controller = ChatSharedClient.INSTANCE.client?.channel(channel.id)
+    fun updateChannelName(channel: Channel, channelName: String, onChanged: ((String) -> Unit)) {
+        val controller = ChatSharedClient.INSTANCE.client?.channel(channel.cid)
         var extraData = channel.extraData
         extraData.remove("name")
         extraData.put(
             "name", channelName
         )
+        extraData.put(
+            "image", channel.image
+        )
         controller?.update(
             extraData = extraData,
         )?.enqueue() { result ->
@@ -184,8 +194,8 @@ object SharedUtils {
         }
     }
 
-    fun deleteChannel(channel: Channel, onResponse: ((Boolean) -> Void)) {
-        val controller = ChatSharedClient.INSTANCE.client?.channel(channel.id)
+    fun deleteChannel(channel: Channel, onResponse: ((Boolean) -> Unit)) {
+        val controller = ChatSharedClient.INSTANCE.client?.channel(channel.cid)
         controller?.delete()?.enqueue() { result ->
             if (result.isSuccess) {
                 onResponse(true)
@@ -198,7 +208,7 @@ object SharedUtils {
 
     fun leaveChannel(channel: Channel?, onResponse: ((Boolean) -> Unit)) {
         channel?.let {
-            val controller = ChatSharedClient.INSTANCE.client?.channel(channel.id)
+            val controller = ChatSharedClient.INSTANCE.client?.channel(channel.cid)
 
             controller?.removeMembers(listOf(UserInfoUtil.getChatId()))?.enqueue { result ->
                 if (result.isSuccess) {
@@ -212,8 +222,8 @@ object SharedUtils {
         }
     }
 
-    fun hideChannel(channel: Channel, onResponse: ((Boolean) -> Void)) {
-        val controller = ChatSharedClient.INSTANCE.client?.channel(channel.id)
+    fun hideChannel(channel: Channel, onResponse: ((Boolean) -> Unit)) {
+        val controller = ChatSharedClient.INSTANCE.client?.channel(channel.cid)
         controller?.hide(clearHistory = false)?.enqueue() { result ->
             if (result.isSuccess) {
                 onResponse(true)
@@ -224,9 +234,9 @@ object SharedUtils {
     }
 
     fun addParticipantsToChannel(
-        channel: Channel, participants: List<String>, onChanged: ((Boolean) -> Void)
+        channel: Channel, participants: List<String>, onChanged: ((Boolean) -> Unit)
     ) {
-        val controller = ChatSharedClient.INSTANCE.client?.channel(channel.id)
+        val controller = ChatSharedClient.INSTANCE.client?.channel(channel.cid)
         controller?.addMembers(participants)?.enqueue() { result ->
             if (result.isSuccess) {
                 val channel: Channel = result.data()
@@ -242,7 +252,7 @@ object SharedUtils {
         channel: Channel?, userId: String, onChanged: ((Boolean) -> Unit)
     ) {
         channel?.let {
-            val controller = ChatSharedClient.INSTANCE.client?.channel(channel.id)
+            val controller = ChatSharedClient.INSTANCE.client?.channel(channel.cid)
 
             controller?.removeMembers(listOf(userId))?.enqueue { result ->
                 if (result.isSuccess) {
@@ -267,5 +277,79 @@ object SharedUtils {
             }
         }
         return false
+    }
+
+    var builder: AlertDialog? = null
+    fun showYESNODialog(
+        title: String? = "",
+        message: String? = "",
+        okButtonText: String? = "Ok",
+        cancelButtonText: String? = "Cancel",
+        context: Context? = BluesheetApplication.instance.activityLifeCycle.currentActivity,
+        listenerPositive: DialogInterface.OnClickListener? = null,
+        listenerNegative: DialogInterface.OnClickListener? = null
+    ) {
+        if (message == null || message.isNullOrBlank())
+            return
+        try {
+            if (builder != null) {
+                if (builder?.isShowing!!) {
+                    builder?.dismiss()
+                }
+                builder = null
+            }
+        } catch (e: Throwable) {
+            e.printStackTrace()
+        }
+
+        try {
+            context ?. let {
+                builder = AlertDialog.Builder(it).create()
+                builder?.setTitle(title)
+                builder?.setMessage(message)
+                builder?.setButton(AlertDialog.BUTTON_POSITIVE, okButtonText, listenerPositive)
+                builder?.setButton(AlertDialog.BUTTON_NEGATIVE, cancelButtonText, listenerNegative)
+//        builder?.setPositiveButton(okButtonText, dialogClickListener)
+                builder?.show()
+
+            }
+        } catch (e: Throwable) {
+            e.printStackTrace()
+        }
+    }
+
+
+    fun showOKDialog(
+        title: String? = "",
+        message: String? = "",
+        okButtonText: String? = "Ok",
+        context: Context? = BluesheetApplication.instance.activityLifeCycle.currentActivity,
+        listener: DialogInterface.OnClickListener? = null
+    ) {
+        if (message == null || message.isNullOrBlank())
+            return
+        try {
+            if (builder != null) {
+                if (builder?.isShowing!!) {
+                    builder?.dismiss()
+                }
+                builder = null
+            }
+        } catch (e: Throwable) {
+            e.printStackTrace()
+        }
+
+        try {
+            context ?. let {
+                builder = AlertDialog.Builder(it).create()
+                builder?.setTitle(title)
+                builder?.setMessage(message)
+                builder?.setButton(AlertDialog.BUTTON_POSITIVE, okButtonText, listener)
+            }
+//        builder?.setPositiveButton(okButtonText, dialogClickListener)
+            builder?.show()
+        } catch (e: Throwable) {
+            e.printStackTrace()
+        }
     }
 }

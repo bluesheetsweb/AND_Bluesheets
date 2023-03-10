@@ -23,7 +23,7 @@ class CustomMessageListActivity : MessageListActivity() {
         @JvmStatic
         @JvmOverloads
         public fun createIntent(context: Context, cid: String, messageId: String? = null): Intent {
-            return Intent(context, MessageListActivity::class.java).apply {
+            return Intent(context, CustomMessageListActivity::class.java).apply {
                 putExtra(EXTRA_CID, cid)
                 putExtra(EXTRA_MESSAGE_ID, messageId)
             }
