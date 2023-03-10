@@ -81,6 +81,12 @@ object UserInfoUtil {
             SharedPrefUtils.INSTANCE.savePreferences("USER_LOGO", value)
         }
 
+    var userEmail: String?
+        get() = SharedPrefUtils.INSTANCE.getFromPreferences("USER_EMAIL")
+        set(value) {
+            SharedPrefUtils.INSTANCE.savePreferences("USER_EMAIL", value)
+        }
+
     fun getChatId() : String {
         return "${BuildConfig.FLAVOR}-$userId"
     }

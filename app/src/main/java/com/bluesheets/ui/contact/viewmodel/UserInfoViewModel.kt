@@ -50,7 +50,8 @@ class UserInfoViewModel : ParentVM() {
                     if (message != null) {
                         Toaster.show(BluesheetApplication.instance.applicationContext, message)
                     }
-
+                    var user = Gson().fromJson(rawResponse, SignInModel::class.java)
+                    UserInfoUtil.userEmail = user.email
                     mProgressState.value =
                         WrapperEnumAnnotation(WrapperConstant.STATE_SCREEN_SUCCESS)
 
