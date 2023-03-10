@@ -1,23 +1,29 @@
-package com.bluesheets.ui.contact.repository
+package com.bluesheets.ui.documents.repository
 
 import com.bluesheets.BluesheetApplication
 import com.bluesheets.utils.ApiMethods
 import com.bluesheets.utils.AppRequestParams
+import com.bluesheets.utils.UserInfoUtil
 import src.networkutil.network.NetworkBase
 import src.networkutil.network.NetworkRequest
 import src.networkutil.utilities.NetworkConstant
 import src.networkutil.utilities.NetworkEnumAnnotation
 
-class UserInfoRepo {
+class DocumentListRepo {
 
-    fun userInfoRepo(userID: String, listener: NetworkRequest.IOnResponse?) {
+    fun getDocumentListRepo(orgToken: String, authToken: String, listener: NetworkRequest.IOnResponse?) {
         var baseNetwork = NetworkBase(context = BluesheetApplication.instance.applicationContext)
         baseNetwork.initializeService()
         var request = NetworkRequest(
-            apiMethod = ApiMethods.USER_INFO+userID,
+            apiMethod = ApiMethods.GET_DOCUMENTS,
             baseNetwork = baseNetwork,
             context = BluesheetApplication.instance.applicationContext,
-            requestType = NetworkEnumAnnotation(NetworkConstant.REQUEST_TYPE_GET)
+            requestType = NetworkEnumAnnotation(NetworkConstant.REQUEST_TYPE_GET),
+            params = AppRequestParams.getAllDocuments(
+                orgToken,
+                authToken,
+                "{\"where\":{},\"include\":[\"bulkFilesAuthParams\"],\"fields\":[\"id\",\"filename\",\"exportPreviewUrl\",\"statusExport\",\"userId\"]}"
+            )
         )
 
         request.callService(listener = object : NetworkRequest.IOnResponse{

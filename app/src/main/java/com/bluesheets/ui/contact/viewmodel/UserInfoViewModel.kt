@@ -33,7 +33,7 @@ class UserInfoViewModel : ParentVM() {
 
     fun getUserInfo() {
         mProgressState.value = WrapperEnumAnnotation(WrapperConstant.STATE_SCREEN_LOADING)
-        UserInfoUtil.userId?.let {
+        UserInfoUtil.authToken?.let {
             (repository as UserInfoRepo).userInfoRepo(it, object : NetworkRequest.IOnResponse {
                 override fun onException(t: Throwable?) {
                     errorToastState.msg = "Something went wrong!"
@@ -77,96 +77,4 @@ class UserInfoViewModel : ParentVM() {
         }
     }
 
-    fun logOutClicked() {
-        mProgressState.value = WrapperEnumAnnotation(WrapperConstant.STATE_SCREEN_LOADING)
-        UserInfoUtil.authToken?.let {
-            (repository as UserInfoRepo).userLogOut(it, object : NetworkRequest.IOnResponse {
-                override fun onException(t: Throwable?) {
-                    errorToastState.msg = "Logout Failed With Exception"
-                    mProgressState.value =
-                        WrapperEnumAnnotation(WrapperConstant.STATE_SCREEN_ERROR_TOAST)
-                }
-
-                override fun onSuccess(
-                    code: Int?,
-                    message: String?,
-                    data: Any?,
-                    rawResponse: String?
-                ) {
-                    Toaster.show(BluesheetApplication.instance.applicationContext, "Logout Success")
-
-                    mProgressState.value =
-                        WrapperEnumAnnotation(WrapperConstant.STATE_SCREEN_SUCCESS)
-                    NavigateTo.screen(
-                        activityType = FragmentConstant.HOME_ACTIVITY
-                    )
-                }
-
-                override fun onFailed(
-                    code: Int?,
-                    message: String?,
-                    data: Any?,
-                    rawResponse: String?
-                ) {
-                    if (data != null && data is NetworkErrorBModel) {
-                        data.message?.let {
-                            errorToastState.msg = it
-                        }
-                    } else {
-                        errorToastState.msg = "Logout Failed"
-                    }
-
-                    mProgressState.value =
-                        WrapperEnumAnnotation(WrapperConstant.STATE_SCREEN_ERROR_TOAST)
-                }
-            })
-        }
-    }
-
-    fun deleteAccount() {
-        mProgressState.value = WrapperEnumAnnotation(WrapperConstant.STATE_SCREEN_LOADING)
-        UserInfoUtil.authToken?.let {
-            (repository as UserInfoRepo).userLogOut(it, object : NetworkRequest.IOnResponse {
-                override fun onException(t: Throwable?) {
-                    errorToastState.msg = "Login Failed With Exception"
-                    mProgressState.value =
-                        WrapperEnumAnnotation(WrapperConstant.STATE_SCREEN_ERROR_TOAST)
-                }
-
-                override fun onSuccess(
-                    code: Int?,
-                    message: String?,
-                    data: Any?,
-                    rawResponse: String?
-                ) {
-                    Toaster.show(
-                        BluesheetApplication.instance.applicationContext,
-                        message.toString()
-                    )
-
-                    mProgressState.value =
-                        WrapperEnumAnnotation(WrapperConstant.STATE_SCREEN_SUCCESS)
-
-                }
-
-                override fun onFailed(
-                    code: Int?,
-                    message: String?,
-                    data: Any?,
-                    rawResponse: String?
-                ) {
-                    if (data != null && data is NetworkErrorBModel) {
-                        data.message?.let {
-                            errorToastState.msg = it
-                        }
-                    } else {
-                        errorToastState.msg = it
-                    }
-
-                    mProgressState.value =
-                        WrapperEnumAnnotation(WrapperConstant.STATE_SCREEN_ERROR_TOAST)
-                }
-            })
-        }
-    }
 }

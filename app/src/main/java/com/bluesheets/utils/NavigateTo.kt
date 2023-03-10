@@ -6,6 +6,7 @@ import com.bluesheets.BluesheetApplication
 import com.bluesheets.ui.chat.view.CustomMessageListActivity
 import com.bluesheets.ui.home.view.HomeActivity
 import com.bluesheets.ui.signup.view.SignUpActivity
+import com.bluesheets.ui.user_info.view.UserInfoActivity
 
 object NavigateTo {
 
@@ -22,6 +23,10 @@ object NavigateTo {
             FragmentConstant.CHAT_ACTIVITY ->
             {
                 toChat(bundle)
+            }
+            FragmentConstant.USER_INFO_ACTIVITY ->
+            {
+                toUserInfoScreen(bundle)
             }
         }
     }
@@ -63,5 +68,13 @@ object NavigateTo {
                 }
             }
         }
+    }
+
+    private fun toUserInfoScreen(bundle: Bundle?) {
+        val myIntent = Intent(BluesheetApplication.instance.activityLifeCycle.currentActivity, UserInfoActivity::class.java)
+        bundle ?. let {
+            myIntent.putExtras(it)
+        }
+        BluesheetApplication.instance.activityLifeCycle.currentActivity?.startActivity(myIntent)
     }
 }
