@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.bluesheets.R
 import com.bluesheets.databinding.FragmentContactBinding
 import com.bluesheets.databinding.FragmentContactsBinding
 import com.bluesheets.ui.chat.view.FragmentChatList
@@ -19,6 +20,8 @@ import com.bluesheets.utils.FragmentConstant
 import com.bluesheets.utils.NavigateTo
 import com.bluesheets.utils.UserInfoUtil
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.BitmapTransitionOptions.withCrossFade
+import com.bumptech.glide.request.RequestOptions
 import src.wrapperutil.utilities.FragmentTransaction
 import src.wrapperutil.utilities.WrapperConstant
 import src.wrapperutil.utilities.WrapperEnumAnnotation
@@ -57,7 +60,10 @@ class FragmentContact: Fragment() {
         binding?.let {
             Glide.with(this)
                 .load(UserInfoUtil.userProfileImage)
+                .apply(RequestOptions.circleCropTransform())
+                .placeholder(R.drawable.ic_pic)
                 .into(it.imgBgView)
+
         };
 
         binding?.buttonEditProfile?.updateMode(WrapperEnumAnnotation(WrapperConstant.BUTTON_MODE_PRIMARY))
