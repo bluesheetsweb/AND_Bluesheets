@@ -3,6 +3,7 @@ package com.bluesheets.utils
 import android.content.Intent
 import android.os.Bundle
 import com.bluesheets.BluesheetApplication
+import com.bluesheets.ui.chat.view.ChatOtherActivity
 import com.bluesheets.ui.chat.view.CustomMessageListActivity
 import com.bluesheets.ui.home.view.HomeActivity
 import com.bluesheets.ui.signup.view.SignUpActivity
@@ -27,6 +28,10 @@ object NavigateTo {
             FragmentConstant.USER_INFO_ACTIVITY ->
             {
                 toUserInfoScreen(bundle)
+            }
+            FragmentConstant.CHAT_OTHER_ACTIVITY ->
+            {
+                toOtherChat(fragmentType, bundle)
             }
         }
     }
@@ -75,6 +80,13 @@ object NavigateTo {
         bundle ?. let {
             myIntent.putExtras(it)
         }
+        BluesheetApplication.instance.activityLifeCycle.currentActivity?.startActivity(myIntent)
+    }
+
+    private fun toOtherChat(fragmentType: Int, bundle: Bundle?) {
+        val myIntent = Intent(BluesheetApplication.instance.activityLifeCycle.currentActivity, ChatOtherActivity::class.java)
+        myIntent.putExtra(FragmentConstant.FRAGMENT_TYPE, fragmentType)
+        myIntent.putExtra(FragmentConstant.ACTIVITY_BUNDLE, bundle)
         BluesheetApplication.instance.activityLifeCycle.currentActivity?.startActivity(myIntent)
     }
 }

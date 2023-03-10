@@ -143,4 +143,10 @@ object AppRequestParams {
         return params
     }
 
+    fun getUses() : HashMap<String, Any?> {
+        var params = HashMap<String, Any?>()
+        params.put("contactsLevel", "workspace")
+        return params
+    }
+
 }

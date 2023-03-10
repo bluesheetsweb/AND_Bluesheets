@@ -78,10 +78,10 @@ class SignInViewModel: ParentVM() {
                 mProgressState.value = WrapperEnumAnnotation(WrapperConstant.STATE_SCREEN_SUCCESS)
                 NetworkSharedPrefUtils.INSTANCE.savePreferences(NetworkConstant.PREF_KEY_USER_AUTH_KEY, user.id?: "")
                 NetworkSharedPrefUtils.INSTANCE.savePreferences(NetworkConstant.PREF_KEY_WORKSPACE_AUTH_KEY, user.workspace?.id?: "")
-                NetworkSharedPrefUtils.INSTANCE.savePreferences(NetworkConstant.HEADER_X_ORGANISATION_TOKEN, user.organization?.id?: "")
+                NetworkSharedPrefUtils.INSTANCE.savePreferences(NetworkConstant.PREF_KEY_ORG_AUTH_KEY, user.organization?.id?: "")
                 AppLogger.e("com.bluesheets",  " => " +NetworkSharedPrefUtils.INSTANCE.getFromPreferences(NetworkConstant.PREF_KEY_USER_AUTH_KEY))
                 AppLogger.e("com.bluesheets",  " => " +NetworkSharedPrefUtils.INSTANCE.getFromPreferences(NetworkConstant.PREF_KEY_WORKSPACE_AUTH_KEY))
-                AppLogger.e("com.bluesheets",  " => " +NetworkSharedPrefUtils.INSTANCE.getFromPreferences(NetworkConstant.HEADER_X_ORGANISATION_TOKEN))
+                AppLogger.e("com.bluesheets",  " => " +NetworkSharedPrefUtils.INSTANCE.getFromPreferences(NetworkConstant.PREF_KEY_ORG_AUTH_KEY))
                 NavigateTo.screen(
                     activityType = FragmentConstant.HOME_ACTIVITY
                 )
