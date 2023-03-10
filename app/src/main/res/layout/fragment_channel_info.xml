@@ -6,11 +6,13 @@
             name="viewModel"
             type="com.bluesheets.ui.chat.viewmodel.ChannelInfoViewModel" />
     </data>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<src.wrapperutil.empty_state.StateManagerConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/white"
+    android:clickable="true">
 
     <src.wrapperutil.uicomponent.ImageView
         android:layout_width="0dp"
@@ -295,6 +297,6 @@
         app:button_mode="SECONDARY"
         android:layout_margin="@dimen/_12dp"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</src.wrapperutil.empty_state.StateManagerConstraintLayout>
 
 </layout>

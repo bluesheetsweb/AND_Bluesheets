@@ -110,67 +110,67 @@ class NetworkRequest(
                         )
                         return
                     }
-                    var jsonBody = JSONObject(rawResponse)
+//                    var jsonBody = JSONObject(rawResponse)
                     var status: Int = response.code()
-
-                    var message: String = "Success"
-                    var responseData = ""
-                    var action: JSONObject? = null
-                    var toopTips: MutableList<Any> = mutableListOf()
-                    var parent = jsonBody
-                    var isSuccess = false
-                    if (!android.text.TextUtils.isEmpty(preDefineResponse.parentKey)) {
-                        parent = jsonBody.optJSONObject(preDefineResponse.parentKey)
-                    }
-                    Log.e(
-                        TAG,
-                        "preDefineResponse.isToCheckStatusValueType)" + preDefineResponse.isToCheckStatusValueType
-                    )
-                    /*if(preDefineResponse.isToCheckStatusValueType){
-                       var key= parent.opt(preDefineResponse.statusKey)
-                        Log.e(TAG,"statuskey"+key)
-                        if(key is Boolean) {
-                            status = when (key) {
-                                true -> 1
-                                false -> 0
-                            }
-                        }
-                    }
-                    else*/
-                    try {
-                        action = parent.optJSONObject(preDefineResponse.actionKey)
-                    } catch (ex: java.lang.Exception) {
-                        Log.e(TAG, "ex", ex)
-                    }
-
-                    try {
-                        var jsonToolTipArray = parent.optJSONArray(preDefineResponse.tootTips)
-                        NetworkGlobalDataHolder.toolTipsJsonArray = jsonToolTipArray
-                    } catch (e: Throwable) {
-                        e.printStackTrace()
-                    }
-
-//                    try {
-//                        responseData = when (preDefineResponse.dataKeyTypeObject) {
-//                            true -> {
-//                                parent.optJSONObject(preDefineResponse.dataKey).toString()
-//                            }
-//                            false -> {
-//                                parent.optJSONArray(preDefineResponse.dataKey).toString()
+//
+//                    var message: String = "Success"
+//                    var responseData = ""
+//                    var action: JSONObject? = null
+//                    var toopTips: MutableList<Any> = mutableListOf()
+//                    var parent = jsonBody
+//                    var isSuccess = false
+//                    if (!android.text.TextUtils.isEmpty(preDefineResponse.parentKey)) {
+//                        parent = jsonBody.optJSONObject(preDefineResponse.parentKey)
+//                    }
+//                    Log.e(
+//                        TAG,
+//                        "preDefineResponse.isToCheckStatusValueType)" + preDefineResponse.isToCheckStatusValueType
+//                    )
+//                    /*if(preDefineResponse.isToCheckStatusValueType){
+//                       var key= parent.opt(preDefineResponse.statusKey)
+//                        Log.e(TAG,"statuskey"+key)
+//                        if(key is Boolean) {
+//                            status = when (key) {
+//                                true -> 1
+//                                false -> 0
 //                            }
 //                        }
+//                    }
+//                    else*/
+//                    try {
+//                        action = parent.optJSONObject(preDefineResponse.actionKey)
+//                    } catch (ex: java.lang.Exception) {
+//                        Log.e(TAG, "ex", ex)
+//                    }
+//
+//                    try {
+//                        var jsonToolTipArray = parent.optJSONArray(preDefineResponse.tootTips)
+//                        NetworkGlobalDataHolder.toolTipsJsonArray = jsonToolTipArray
 //                    } catch (e: Throwable) {
 //                        e.printStackTrace()
-//                        Log.e(TAG, "responseData ex", e)
 //                    }
-
-                    var isAction = false
-
-                    if (action != null) {
-                        NetworkGlobalCallBack.onNetworkAlertListener?.callAlert(action)
-//                        isSuccess = true
-                        isAction = true
-                    }
+//
+////                    try {
+////                        responseData = when (preDefineResponse.dataKeyTypeObject) {
+////                            true -> {
+////                                parent.optJSONObject(preDefineResponse.dataKey).toString()
+////                            }
+////                            false -> {
+////                                parent.optJSONArray(preDefineResponse.dataKey).toString()
+////                            }
+////                        }
+////                    } catch (e: Throwable) {
+////                        e.printStackTrace()
+////                        Log.e(TAG, "responseData ex", e)
+////                    }
+//
+//                    var isAction = false
+//
+//                    if (action != null) {
+//                        NetworkGlobalCallBack.onNetworkAlertListener?.callAlert(action)
+////                        isSuccess = true
+//                        isAction = true
+//                    }
 //                    if (preDefineResponse.isThirdPartyApi) {
 //                        Log.e(TAG, "isThirdPartyApi called")
 //                        isSuccess = true
@@ -185,6 +185,7 @@ class NetworkRequest(
 //                        if (status == NetworkConstant.RESPONSE_CODE_SUCCESS)
 //                            isSuccess = true
 //                    }
+                    var isSuccess = false
                     if (status in 200..300){
                         isSuccess = true
                     }
@@ -194,11 +195,11 @@ class NetworkRequest(
 //                        if (isAction)
 //                            code = NetworkConstant.RESPONSE_CODE_ACTION
 
-                        listener?.onSuccess(status, message, responseData, rawResponse)
+                        listener?.onSuccess(status, null, null, rawResponse)
                         NetworkGlobalCallBack.registerNetworkCallBack?.onSuccess(
                             status,
-                            message,
-                            responseData,
+                            null,
+                            null,
                             rawResponse
                         )
                     } else {
@@ -316,7 +317,7 @@ class NetworkRequest(
                             Log.e(TAG, "else failed")
                             rawResponse = response.errorBody()?.string()
                             var jsonError = JSONObject(rawResponse)
-                            message = jsonError.optString("message")
+                           var  message = jsonError.optString("message")
                         var errorBModel = NetworkErrorBModel()
                             errorBModel.code = status
                             errorBModel.message = message
@@ -327,9 +328,9 @@ class NetworkRequest(
                                 rawResponse
                             )
 
-                            if (!message.isNullOrBlank() && isShowErrorAlert && !isAction) {
-                                showAlert(message)
-                            }
+//                            if (!message.isNullOrBlank() && isShowErrorAlert && !isAction) {
+//                                showAlert(message)
+//                            }
 //                        }
                     }
                 } catch (e: Exception) {

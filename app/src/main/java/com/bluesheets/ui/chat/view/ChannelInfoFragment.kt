@@ -9,15 +9,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bluesheets.databinding.FragmentChannelInfoBinding
 import com.bluesheets.ui.chat.viewmodel.ChannelInfoViewModel
+import com.bluesheets.utils.FragmentConstant
+import com.bluesheets.utils.NavigateTo
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import io.getstream.chat.android.client.models.Channel
 import jp.wasabeef.glide.transformations.BlurTransformation
+import src.wrapperutil.empty_state.StateManagerConstraintLayout
 import src.wrapperutil.uicomponent.BaseDialogFragment
 import src.wrapperutil.utilities.ColorPicker
 import src.wrapperutil.utilities.WrapperConstant
@@ -27,7 +31,7 @@ private var binding: FragmentChannelInfoBinding? = null
 private lateinit var viewModel: ChannelInfoViewModel
 private lateinit var adapter: ChannelUserAdapter
 
-class ChannelInfoFragment(private val channel: Channel) : BaseDialogFragment() {
+class ChannelInfoFragment(private val cid: String) : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,19 +40,24 @@ class ChannelInfoFragment(private val channel: Channel) : BaseDialogFragment() {
     ): View? {
         binding = FragmentChannelInfoBinding.inflate(inflater,container, false)
         viewModel = ViewModelProvider(this).get(ChannelInfoViewModel::class.java)
-        viewModel.initChannel(channel)
-        binding?.viewModel = viewModel
+        viewModel.getChannel(cid)
         binding?.imageClose?.setOnClickListener {
-            dismissAllowingStateLoss()
+            activity?.onBackPressedDispatcher?.onBackPressed()
         }
-        val layoutManager: RecyclerView.LayoutManager = LinearLayoutManager(context)
-        binding?.recyclerView?.setLayoutManager(layoutManager)
-        adapter = ChannelUserAdapter(viewModel.adminId, !viewModel.isOneToOne) {
-            viewModel.removeUserFromChannel(it)
-        }
-        binding?.recyclerView?.adapter = adapter
         binding?.deleteButton?.setOnClickListener {
             viewModel.deleteOrLeaveChannel()
+        }
+        binding?.layoutAddUser?.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putString("cId", cid)
+            NavigateTo.screen(FragmentConstant.CHAT_OTHER_ACTIVITY, FragmentConstant.CHAT_ADD_MORE_FRAGMENT, bundle)
+        }
+
+        viewModel.getState().observe(viewLifecycleOwner) {
+            (binding?.root as StateManagerConstraintLayout)?.setViewState(it.state, viewModel)
+            if (it.state == WrapperConstant.STATE_SCREEN_SUCCESS) {
+                updateUI()
+            }
         }
         return binding?.root
     }
@@ -56,6 +65,17 @@ class ChannelInfoFragment(private val channel: Channel) : BaseDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+    }
+
+    fun updateUI(){
+        binding?.viewModel = viewModel
+        val layoutManager: RecyclerView.LayoutManager = LinearLayoutManager(context)
+        binding?.recyclerView?.setLayoutManager(layoutManager)
+        adapter = ChannelUserAdapter(viewModel.adminId, !viewModel.isOneToOne) {
+            viewModel.removeUserFromChannel(it)
+        }
+        binding?.recyclerView?.adapter = adapter
         Glide.with(this).load(viewModel.channelImage)
             .placeholder(viewModel.channelThumb)
             .into((binding?.imageProfile!!))
@@ -123,7 +143,7 @@ class ChannelInfoFragment(private val channel: Channel) : BaseDialogFragment() {
         }
         viewModel.isDisabled.observe(viewLifecycleOwner){
             if (it) {
-               binding?.editButton?.updateMode(WrapperEnumAnnotation(WrapperConstant.BUTTON_MODE_DISABLED))
+                binding?.editButton?.updateMode(WrapperEnumAnnotation(WrapperConstant.BUTTON_MODE_DISABLED))
             } else {
                 binding?.editButton?.updateMode(WrapperEnumAnnotation(WrapperConstant.BUTTON_MODE_PRIMARY))
             }
@@ -134,13 +154,13 @@ class ChannelInfoFragment(private val channel: Channel) : BaseDialogFragment() {
 
     }
 
-    override fun onStart() {
-        super.onStart()
-        val dialog: Dialog? = dialog
-        if (dialog != null) {
-            val width = ViewGroup.LayoutParams.MATCH_PARENT
-            val height = ViewGroup.LayoutParams.MATCH_PARENT
-            dialog.getWindow()?.setLayout(width, height)
-        }
-    }
+//    override fun onStart() {
+//        super.onStart()
+//        val dialog: Dialog? = dialog
+//        if (dialog != null) {
+//            val width = ViewGroup.LayoutParams.MATCH_PARENT
+//            val height = ViewGroup.LayoutParams.MATCH_PARENT
+//            dialog.getWindow()?.setLayout(width, height)
+//        }
+//    }
 }

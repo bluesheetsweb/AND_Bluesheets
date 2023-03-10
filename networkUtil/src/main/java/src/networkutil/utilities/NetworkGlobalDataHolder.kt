@@ -10,6 +10,8 @@ object NetworkGlobalDataHolder {
     private var TAG = NetworkGlobalDataHolder::class.java.simpleName
 
     private var myAuthKey: String = ""
+    private var myOrgKey: String = ""
+    private var myWorkKey: String = ""
 
     var isSessionCreationInProgress = false
 
@@ -38,9 +40,6 @@ object NetworkGlobalDataHolder {
         }
     }
 
-    fun clearMyAuth() {
-        myAuthKey = ""
-    }
 
     fun getMyAuthKey(): String {
         if (myAuthKey.isNullOrBlank()) {
@@ -52,21 +51,30 @@ object NetworkGlobalDataHolder {
         return myAuthKey
     }
     fun getOrgAuthKey(): String {
-        if (myAuthKey.isNullOrBlank()) {
-            myAuthKey =
+        if (myOrgKey.isNullOrBlank()) {
+            myOrgKey =
                 NetworkSharedPrefUtils.INSTANCE.getFromPreferences(NetworkConstant.PREF_KEY_ORG_AUTH_KEY)
         }
-        if (myAuthKey.isNullOrBlank())
-            myAuthKey = ""
-        return "Bearer $myAuthKey"
+        if (myOrgKey.isNullOrBlank())
+            myOrgKey = ""
+        return "$myOrgKey"
     }
     fun getWorkAuthKey(): String {
-        if (myAuthKey.isNullOrBlank()) {
-            myAuthKey =
+        if (myWorkKey.isNullOrBlank()) {
+            myWorkKey =
                 NetworkSharedPrefUtils.INSTANCE.getFromPreferences(NetworkConstant.PREF_KEY_WORKSPACE_AUTH_KEY)
         }
-        if (myAuthKey.isNullOrBlank())
-            myAuthKey = ""
-        return "Bearer $myAuthKey"
+        if (myWorkKey.isNullOrBlank())
+            myWorkKey = ""
+        return "$myWorkKey"
+    }
+
+    fun clearAllKeys() {
+        myAuthKey = ""
+        myOrgKey = ""
+        myWorkKey = ""
+        NetworkSharedPrefUtils.INSTANCE.savePreferences(NetworkConstant.PREF_KEY_USER_AUTH_KEY, "")
+        NetworkSharedPrefUtils.INSTANCE.savePreferences(NetworkConstant.PREF_KEY_WORKSPACE_AUTH_KEY, "")
+        NetworkSharedPrefUtils.INSTANCE.savePreferences(NetworkConstant.PREF_KEY_ORG_AUTH_KEY, "")
     }
 }

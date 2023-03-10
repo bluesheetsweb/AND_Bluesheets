@@ -6,6 +6,7 @@ object FragmentConstant {
     const val HOME_ACTIVITY = 2
     const val CHAT_ACTIVITY = 3
     const val USER_INFO_ACTIVITY = 4
+    const val CHAT_OTHER_ACTIVITY = 5
 
     //Fragments
     const val GET_STARTED_FRAGMENT = 1
@@ -14,6 +15,8 @@ object FragmentConstant {
     const val CREATE_WORKSPACE_FRAGMENT = 3
     const val CREATE_ORGANISATION_FRAGMENT = 4
     const val CHAT_MESSAGE_FRAGMENT = 10
+    const val CHAT_INFO_FRAGMENT = 11
+    const val CHAT_ADD_MORE_FRAGMENT = 12
 
     const val FRAGMENT_TYPE = "fragmentType"
     const val ACTIVITY_BUNDLE = "bundle"
@@ -52,5 +55,8 @@ object ApiMethods {
 
     // Documents Related API
     const val GET_DOCUMENTS = "documents"
+
+    //Get Users
+    const val GET_USERS = "workspaces/contacts"
 
 }

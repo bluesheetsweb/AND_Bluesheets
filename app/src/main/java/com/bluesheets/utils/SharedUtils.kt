@@ -6,7 +6,11 @@ import androidx.appcompat.app.AlertDialog
 import com.bluesheets.BluesheetApplication
 import com.bluesheets.R
 import com.bluesheets.ui.chat.model.ChannelExtraData
+import io.getstream.chat.android.client.api.models.QueryChannelsRequest
+import io.getstream.chat.android.client.api.models.querysort.QuerySortByField
 import io.getstream.chat.android.client.models.Channel
+import io.getstream.chat.android.client.models.Filters
+import io.getstream.chat.android.client.models.Member
 import io.getstream.chat.android.client.models.User
 import src.wrapperutil.listener.OnYesNoClickListener
 
@@ -350,6 +354,36 @@ object SharedUtils {
             builder?.show()
         } catch (e: Throwable) {
             e.printStackTrace()
+        }
+    }
+
+    fun getChannel(cid: String, onReceived: ((Channel) -> Unit)) {
+        val filter = Filters.and(
+            Filters.eq("cid", cid))
+            val offset = 0
+        val limit = 1
+        val request = QueryChannelsRequest(filter, offset, limit)
+        ChatSharedClient.INSTANCE.client?.queryChannels(request)?.enqueue { result ->
+            if (result.isSuccess) {
+                val channels = result.data()
+                onReceived(channels[0])
+            }
+        }
+    }
+
+    fun getChannelMembers(cid: String,onReceived: ((List<Member>) -> Unit)) {
+        val controller = ChatSharedClient.INSTANCE.client?.channel(cid)
+        val filter = Filters.neutral()
+        val offset = 0
+        val limit = 100
+        val sort = QuerySortByField<Member>()
+
+        controller?.queryMembers(offset, limit, filter, sort)?.enqueue { result ->
+            if (result.isSuccess) {
+                val members: List<Member> = result.data()
+                onReceived(members)
+            } else {
+            }
         }
     }
 }

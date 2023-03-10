@@ -1,18 +1,14 @@
 package com.bluesheets.ui.chat.view
 
-import androidx.core.view.isVisible
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.LifecycleOwner
+import android.os.Bundle
+import com.bluesheets.utils.FragmentConstant
+import com.bluesheets.utils.NavigateTo
 import com.bluesheets.utils.SharedUtils
-import com.getstream.sdk.chat.viewmodel.messages.MessageListViewModel
 import io.getstream.chat.android.client.models.Channel
 import io.getstream.chat.android.ui.message.MessageListFragment
 import io.getstream.chat.android.ui.message.input.MessageInputView
 import io.getstream.chat.android.ui.message.list.MessageListView
 import io.getstream.chat.android.ui.message.list.header.MessageListHeaderView
-import io.getstream.chat.android.ui.message.list.header.viewmodel.MessageListHeaderViewModel
-import io.getstream.chat.android.ui.message.list.header.viewmodel.bindView
-import io.getstream.chat.android.ui.message.list.viewmodel.factory.MessageListViewModelFactory
 
 class CustomMessageListFragment : MessageListFragment() {
     private var channel: Channel? = null
@@ -31,15 +27,25 @@ class CustomMessageListFragment : MessageListFragment() {
 
         messageListHeaderView.setTitleClickListener{
             channel ?.let {
-                var bottomSheet = ChannelInfoFragment(it)
-                bottomSheet.show(childFragmentManager,ChannelInfoFragment::class.java.simpleName)
+                val bundle = Bundle()
+                bundle.putString("cId", it.cid)
+                NavigateTo.screen(FragmentConstant.CHAT_OTHER_ACTIVITY, FragmentConstant.CHAT_INFO_FRAGMENT, bundle)
+//                var bottomSheet = ChannelInfoFragment(it)
+//                val ft = childFragmentManager!!.beginTransaction()
+//                ft.add(android.R.id.content, bottomSheet).commit()
+//                bottomSheet.show(childFragmentManager,ChannelInfoFragment::class.java.simpleName)
             }
         }
 
         messageListHeaderView.setSubtitleClickListener{
             channel ?.let {
-                var bottomSheet = ChannelInfoFragment(it)
-                bottomSheet.show(childFragmentManager,ChannelInfoFragment::class.java.simpleName)
+                val bundle = Bundle()
+                bundle.putString("cId", it.cid)
+                NavigateTo.screen(FragmentConstant.CHAT_OTHER_ACTIVITY, FragmentConstant.CHAT_INFO_FRAGMENT, bundle)
+//                var bottomSheet = ChannelInfoFragment(it)
+//                val ft = childFragmentManager!!.beginTransaction()
+//                ft.add(android.R.id.content, bottomSheet).commit()
+//                bottomSheet.show(childFragmentManager,ChannelInfoFragment::class.java.simpleName)
             }
         }
     }

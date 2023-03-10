@@ -9,6 +9,7 @@ import io.getstream.chat.android.client.models.Channel
 import io.getstream.chat.android.client.models.Member
 import io.getstream.chat.android.client.models.User
 import src.wrapperutil.utilities.Toaster
+import src.wrapperutil.utilities.WrapperConstant
 import src.wrapperutil.utilities.WrapperEnumAnnotation
 import src.wrapperutil.viewmodel.ParentVM
 
@@ -36,6 +37,12 @@ class ChannelInfoViewModel: ParentVM() {
     var refreshChannel: MutableLiveData<Boolean> = MutableLiveData(false)
     private var newName: String = ""
 
+    fun getChannel(cid: String){
+        mProgressState.value = WrapperEnumAnnotation(WrapperConstant.STATE_SCREEN_LOADING)
+        SharedUtils.getChannel(cid){
+            initChannel(it)
+        }
+    }
     fun initChannel(channel: Channel) {
         this.channel = channel
         isChannelAdmin = channel.createdBy.id == UserInfoUtil.getChatId()
@@ -63,20 +70,23 @@ class ChannelInfoViewModel: ParentVM() {
         channelSubDes = SharedUtils.getSubMessage(channel)
         channelThumb = SharedUtils.getChannelThumb(channel)
         newName = channelName
+        mProgressState.value = WrapperEnumAnnotation(WrapperConstant.STATE_SCREEN_SUCCESS)
     }
 
     private fun updateMembersList(){
-        tempMembers = mutableListOf()
-        for (member in channel.members) {
-            if (member.getUserId() == adminId) {
-                tempMembers.add(0,member)
-            } else if (member.getUserId() == UserInfoUtil.getChatId()) {
-                tempMembers.add(0,member)
-            } else {
-                tempMembers.add(member)
+        SharedUtils.getChannelMembers(channel.cid){
+            tempMembers = mutableListOf()
+            for (member in it) {
+                if (member.getUserId() == adminId) {
+                    tempMembers.add(0,member)
+                } else if (member.getUserId() == UserInfoUtil.getChatId()) {
+                    tempMembers.add(0,member)
+                } else {
+                    tempMembers.add(member)
+                }
             }
+            listUsers.value = tempMembers
         }
-        listUsers.value = tempMembers
     }
 
     fun editChannel(){
