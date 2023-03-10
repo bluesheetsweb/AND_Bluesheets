@@ -33,7 +33,7 @@ class UserInfoViewModel : ParentVM() {
 
     fun getUserInfo() {
         mProgressState.value = WrapperEnumAnnotation(WrapperConstant.STATE_SCREEN_LOADING)
-        UserInfoUtil.userId?.let {
+        UserInfoUtil.authToken?.let {
             (repository as UserInfoRepo).userInfoRepo(it, object : NetworkRequest.IOnResponse {
                 override fun onException(t: Throwable?) {
                     errorToastState.msg = "Something went wrong!"

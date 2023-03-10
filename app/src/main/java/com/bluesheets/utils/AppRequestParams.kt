@@ -137,8 +137,8 @@ object AppRequestParams {
         filter: String
     ): HashMap<String, Any?> {
         var params = HashMap<String, Any?>()
-        params.put("access_token", access_token)
         params.put("organization", organizationToken)
+        params.put("access_token", access_token)
         params.put("filter", filter)
         return params
     }

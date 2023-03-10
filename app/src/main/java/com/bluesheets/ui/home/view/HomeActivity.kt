@@ -8,6 +8,7 @@ import com.bluesheets.R
 import com.bluesheets.databinding.ActivityHomeBinding
 import com.bluesheets.ui.chat.view.FragmentChatList
 import com.bluesheets.ui.contact.view.FragmentContact
+import com.bluesheets.ui.documents.view.FragmentDocument
 import com.bluesheets.ui.home.viewmodel.HomeViewModel
 import com.bluesheets.utils.FragmentConstant
 import src.wrapperutil.model.ModelFlow
@@ -64,7 +65,7 @@ class HomeActivity : AppCompatActivity() {
                 binding.imageDocument.setImageResource(R.drawable.ic_blue_document)
                 binding.imageContact.setImageResource(R.drawable.ic_black_contact)
                 FragmentTransaction.add(type = FragmentConstant.HOME_ACTIVITY,
-                    fragment = FragmentContact()
+                    fragment = FragmentDocument()
                 )
             }
             else -> {
