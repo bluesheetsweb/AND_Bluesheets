@@ -33,7 +33,7 @@ class UserInfoViewModel : ParentVM() {
 
     fun getUserInfo() {
         mProgressState.value = WrapperEnumAnnotation(WrapperConstant.STATE_SCREEN_LOADING)
-        UserInfoUtil.authToken?.let {
+        UserInfoUtil.userId?.let {
             (repository as UserInfoRepo).userInfoRepo(it, object : NetworkRequest.IOnResponse {
                 override fun onException(t: Throwable?) {
                     errorToastState.msg = "Something went wrong!"
@@ -47,9 +47,7 @@ class UserInfoViewModel : ParentVM() {
                     data: Any?,
                     rawResponse: String?
                 ) {
-                    if (message != null) {
-                        Toaster.show(BluesheetApplication.instance.applicationContext, message)
-                    }
+
                     var user = Gson().fromJson(rawResponse, SignInModel::class.java)
                     UserInfoUtil.userEmail = user.email
                     mProgressState.value =
