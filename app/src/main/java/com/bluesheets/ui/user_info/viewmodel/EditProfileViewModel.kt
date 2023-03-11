@@ -87,7 +87,7 @@ class EditProfileViewModel : ParentVM() {
                     rawResponse: String?
                 ) {
                     Toaster.show(BluesheetApplication.instance.applicationContext, "Logout Success")
-
+                    clearPreferences()
                     mProgressState.value =
                         WrapperEnumAnnotation(WrapperConstant.STATE_SCREEN_SUCCESS)
                     NavigateTo.screen(
@@ -101,19 +101,30 @@ class EditProfileViewModel : ParentVM() {
                     data: Any?,
                     rawResponse: String?
                 ) {
-                    if (data != null && data is NetworkErrorBModel) {
-                        data.message?.let {
-                            errorToastState.msg = it
-                        }
-                    } else {
-                        errorToastState.msg = "Logout Failed"
-                    }
+                    errorToastState.msg = "Log Out Failed"
 
                     mProgressState.value =
                         WrapperEnumAnnotation(WrapperConstant.STATE_SCREEN_ERROR_TOAST)
                 }
             })
         }
+    }
+
+    fun clearPreferences() {
+        UserInfoUtil.isLogin = false
+        UserInfoUtil.workSpaceId = ""
+        UserInfoUtil.workSpaceToken = ""
+        UserInfoUtil.workSpaceName = ""
+        UserInfoUtil.organizationName = ""
+        UserInfoUtil.organizationId = ""
+        UserInfoUtil.organizationToken = ""
+        UserInfoUtil.authToken = ""
+        UserInfoUtil.userId = ""
+        UserInfoUtil.userName = ""
+        UserInfoUtil.chatToken = ""
+        UserInfoUtil.workSpaceLOGO = ""
+        UserInfoUtil.userProfileImage = ""
+        UserInfoUtil.userEmail = ""
     }
 
     fun deleteAccount() {
