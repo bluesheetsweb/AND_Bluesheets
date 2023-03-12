@@ -38,7 +38,10 @@ object AppRequestParams {
     }
 
     // Get Organizations for WorkSpaces
-    fun getOrganizationsForWorkSpace(access_token: String, workspaceId: String): HashMap<String, Any?> {
+    fun getOrganizationsForWorkSpace(
+        access_token: String,
+        workspaceId: String
+    ): HashMap<String, Any?> {
         var params = HashMap<String, Any?>()
         params.put("access_token", access_token)
         params.put("filter", "{\"where\":{\"workspaceId\":$workspaceId}}")
@@ -131,18 +134,18 @@ object AppRequestParams {
 
     // Get Documents
     fun getAllDocuments(
-        organizationToken: String,
         access_token: String,
+        organizationToken: String,
         filter: String
     ): HashMap<String, Any?> {
         var params = HashMap<String, Any?>()
-        params.put("organization", organizationToken)
         params.put("access_token", access_token)
+        params.put("organization", organizationToken)
         params.put("filter", filter)
         return params
     }
 
-    fun getUses() : HashMap<String, Any?> {
+    fun getUses(): HashMap<String, Any?> {
         var params = HashMap<String, Any?>()
         params.put("contactsLevel", "workspace")
         return params

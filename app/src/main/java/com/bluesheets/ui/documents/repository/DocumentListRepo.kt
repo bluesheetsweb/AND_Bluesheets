@@ -11,7 +11,7 @@ import src.networkutil.utilities.NetworkEnumAnnotation
 
 class DocumentListRepo {
 
-    fun getDocumentListRepo(orgToken: String, authToken: String, listener: NetworkRequest.IOnResponse?) {
+    fun getDocumentListRepo(authToken: String, orgToken: String, listener: NetworkRequest.IOnResponse?) {
         var baseNetwork = NetworkBase(context = BluesheetApplication.instance.applicationContext)
         baseNetwork.initializeService()
         var request = NetworkRequest(
@@ -20,8 +20,8 @@ class DocumentListRepo {
             context = BluesheetApplication.instance.applicationContext,
             requestType = NetworkEnumAnnotation(NetworkConstant.REQUEST_TYPE_GET),
             params = AppRequestParams.getAllDocuments(
-                orgToken,
                 authToken,
+                orgToken,
                 "{\"where\":{},\"include\":[\"bulkFilesAuthParams\"],\"fields\":[\"id\",\"filename\",\"exportPreviewUrl\",\"statusExport\",\"userId\"]}"
             )
         )
