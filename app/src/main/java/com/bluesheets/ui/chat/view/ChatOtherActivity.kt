@@ -55,6 +55,12 @@ class ChatOtherActivity : AppCompatActivity() {
                     }
                 }
             }
+            FragmentConstant.CREATE_CHANNEL_FRAGMENT -> {
+                FragmentTransaction.add(
+                    type = FragmentConstant.CHAT_OTHER_ACTIVITY,
+                    fragment = ChannelOneToOneFragment()
+                )
+            }
             else -> {
                 Toast.makeText(this, "Issue with Fragment Type $fragmentType", Toast.LENGTH_SHORT)
             }
