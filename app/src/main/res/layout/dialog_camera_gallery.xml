@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/_5dp">
+
+    <RelativeLayout
+        android:id="@+id/relativeHeader"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:elevation="@dimen/_20dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <src.wrapperutil.uicomponent.ImageView
+            android:id="@+id/imageCross"
+            android:layout_width="@dimen/_40dp"
+            android:layout_height="@dimen/_40dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/stream_ui_ic_close" />
+
+    </RelativeLayout>
+
+    <src.wrapperutil.uicomponent.Separator
+        android:id="@+id/separatorTop"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/relativeHeader"
+        app:seprator_mode="TINY" />
+
+    <src.wrapperutil.uicomponent.RadioButton
+        android:id="@+id/radioCamera"
+        android:layout_width="@dimen/_35dp"
+        android:layout_height="@dimen/_35dp"
+        android:layout_marginStart="@dimen/_12dp"
+        android:checked="true"
+        app:layout_constraintBottom_toBottomOf="@id/textViewCamera"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="@id/textViewCamera" />
+
+    <src.wrapperutil.uicomponent.TextView
+        android:id="@+id/textViewCamera"
+        android:layout_width="@dimen/_0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_12dp"
+        android:layout_marginTop="@dimen/_12dp"
+        android:layout_marginEnd="@dimen/_12dp"
+        android:text="Camera"
+        app:layout_constraintLeft_toRightOf="@id/radioCamera"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/separatorTop"
+        app:text_mode="SUB_HEADING_BOLD" />
+
+    <src.wrapperutil.uicomponent.Separator
+        android:id="@+id/separatorBetween"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_12dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewCamera"
+        app:seprator_mode="TINY" />
+
+
+    <src.wrapperutil.uicomponent.RadioButton
+        android:id="@+id/radioGallery"
+        android:layout_width="@dimen/_35dp"
+        android:layout_height="@dimen/_35dp"
+        android:layout_marginStart="@dimen/_12dp"
+        app:layout_constraintBottom_toBottomOf="@id/textViewGallery"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="@id/textViewGallery" />
+
+    <src.wrapperutil.uicomponent.TextView
+        android:id="@+id/textViewGallery"
+        android:layout_width="@dimen/_0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_12dp"
+        android:layout_marginTop="@dimen/_12dp"
+        android:layout_marginEnd="@dimen/_12dp"
+        android:text="Gallery"
+        app:layout_constraintLeft_toRightOf="@id/radioCamera"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/separatorBetween"
+        app:text_mode="SUB_HEADING_BOLD" />
+
+    <src.wrapperutil.uicomponent.Separator
+        android:id="@+id/separatorLast"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_12dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewGallery"
+        app:seprator_mode="TINY" />
+
+    <src.wrapperutil.uicomponent.Button
+        android:id="@+id/btnDone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_12dp"
+        android:text="Proceed"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/separatorLast" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

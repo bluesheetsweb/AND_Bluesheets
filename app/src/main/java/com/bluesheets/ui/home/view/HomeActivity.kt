@@ -11,6 +11,10 @@ import com.bluesheets.ui.contact.view.FragmentContact
 import com.bluesheets.ui.documents.view.FragmentDocument
 import com.bluesheets.ui.home.viewmodel.HomeViewModel
 import com.bluesheets.utils.FragmentConstant
+import com.bluesheets.utils.NavigateTo
+import com.bluesheets.utils.UserInfoUtil
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import src.wrapperutil.model.ModelFlow
 import src.wrapperutil.utilities.FragmentTransaction
 
@@ -37,6 +41,20 @@ class HomeActivity : AppCompatActivity() {
 
         binding?.imageWithButton?.updateImageSrc(R.drawable.ic_white_plus)
         binding?.imageWithButton?.textValue
+
+        binding?.let {
+            Glide.with(this)
+                .load(UserInfoUtil.workSpaceLOGO)
+                .apply(RequestOptions.circleCropTransform())
+                .placeholder(R.drawable.ic_pic)
+                .into(it.profilePic)
+        }
+
+        binding.layoutWorkNOrg.setOnClickListener {
+            NavigateTo.screen(
+                activityType = FragmentConstant.SWITCH_ORG_N_WORK_ACTIVITY
+            )
+        }
     }
 
     private fun navigateToFragment(selectedPos: Int){
