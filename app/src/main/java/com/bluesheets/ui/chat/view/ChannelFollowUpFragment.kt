@@ -17,8 +17,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bluesheets.databinding.FragmentChannelAddMoreBinding
 import com.bluesheets.databinding.FragmentChannelAddMoreBindingImpl
+import com.bluesheets.databinding.FragmentChannelFollowupBinding
 import com.bluesheets.databinding.FragmentChannelInfoBinding
 import com.bluesheets.ui.chat.viewmodel.ChannelAddMoreViewModel
+import com.bluesheets.ui.chat.viewmodel.ChannelCreateViewModel
 import com.bluesheets.ui.chat.viewmodel.ChannelInfoViewModel
 import com.bluesheets.utils.FragmentConstant
 import com.bumptech.glide.Glide
@@ -32,31 +34,23 @@ import src.wrapperutil.utilities.FragmentTransaction
 import src.wrapperutil.utilities.WrapperConstant
 import src.wrapperutil.utilities.WrapperEnumAnnotation
 
-private var binding: FragmentChannelAddMoreBinding? = null
-private lateinit var viewModel: ChannelAddMoreViewModel
-private lateinit var adapter: ChannelAddUserAdapter
+private var binding: FragmentChannelFollowupBinding? = null
+private lateinit var viewModel: ChannelCreateViewModel
 
-class ChannelAddMoreFragment(private val cId: String) : Fragment() {
+class ChannelFollowUpFragment(private val isGroup: Boolean) : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentChannelAddMoreBinding.inflate(inflater,container, false)
-        viewModel = ViewModelProvider(this).get(ChannelAddMoreViewModel::class.java)
-        viewModel.getChannel(cId)
+        binding = FragmentChannelFollowupBinding.inflate(inflater,container, false)
+        viewModel = ViewModelProvider(this).get(ChannelCreateViewModel::class.java)
+        viewModel.initOrg(isGroup)
         binding?.viewModel = viewModel
         binding?.backButton?.setOnClickListener {
             activity?.onBackPressedDispatcher?.onBackPressed()
         }
-        val layoutManager: RecyclerView.LayoutManager = LinearLayoutManager(context)
-        binding?.recyclerView?.setLayoutManager(layoutManager)
-        adapter = ChannelAddUserAdapter {
-            viewModel.selectParticipant(it)
-            adapter.updateSelection(viewModel.getSelectedList())
-        }
-        binding?.recyclerView?.adapter = adapter
 
         viewModel.getState().observe(viewLifecycleOwner) {
             (binding?.root as StateManagerConstraintLayout)?.setViewState(it.state, viewModel)
@@ -70,11 +64,18 @@ class ChannelAddMoreFragment(private val cId: String) : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        if (isGroup) {
+            binding?.titleText?.text = "Create Group"
+            binding?.editName?.visibility = View.VISIBLE
+            binding?.titleName?.visibility = View.VISIBLE
+        } else {
+            binding?.editName?.visibility = View.GONE
+            binding?.titleName?.visibility = View.GONE
+            binding?.titleText?.text = "Complete Process"
+        }
+
         binding?.addButton?.updateMode(WrapperEnumAnnotation(WrapperConstant.BUTTON_MODE_DISABLED))
 
-        viewModel.listNewUsers.observe(viewLifecycleOwner) {
-            adapter.updateList(it)
-        }
         viewModel.refreshChannel.observe(viewLifecycleOwner){
             if (it) {
                 activity?.onBackPressedDispatcher?.onBackPressed()

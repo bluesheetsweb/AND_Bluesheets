@@ -4,7 +4,7 @@ object ColorPicker {
     var WHITE: String = "#ffffff"
     var PRIMARY: String = "#0061FE"
     var SECONDARY: String = "#f62101"
-    var ERROR: String = "#F58C2A"
+    var ERROR: String = "#ED313D"
     var BLACK: String = "#444445"
     var BLACK_PURE: String = "#000000"
     var BLACK_TRANSPARENT_80: String = "#AA000000"

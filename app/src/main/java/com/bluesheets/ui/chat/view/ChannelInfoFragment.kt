@@ -40,7 +40,6 @@ class ChannelInfoFragment(private val cid: String) : Fragment() {
     ): View? {
         binding = FragmentChannelInfoBinding.inflate(inflater,container, false)
         viewModel = ViewModelProvider(this).get(ChannelInfoViewModel::class.java)
-        viewModel.getChannel(cid)
         binding?.imageClose?.setOnClickListener {
             activity?.onBackPressedDispatcher?.onBackPressed()
         }
@@ -62,14 +61,18 @@ class ChannelInfoFragment(private val cid: String) : Fragment() {
         return binding?.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-
+    override fun onResume() {
+        super.onResume()
+        viewModel.getChannel(cid)
     }
 
     fun updateUI(){
         binding?.viewModel = viewModel
+        if (viewModel.isChannelAdmin) {
+            binding?.deleteButton?.text = "Delete"
+        } else {
+            binding?.deleteButton?.text = "Leave"
+        }
         val layoutManager: RecyclerView.LayoutManager = LinearLayoutManager(context)
         binding?.recyclerView?.setLayoutManager(layoutManager)
         adapter = ChannelUserAdapter(viewModel.adminId, !viewModel.isOneToOne) {

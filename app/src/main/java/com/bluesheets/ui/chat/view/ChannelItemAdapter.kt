@@ -4,9 +4,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bluesheets.BluesheetApplication
 import com.bluesheets.R
 import com.bluesheets.databinding.AdapterChannelItemBinding
 import com.bluesheets.ui.chat.viewmodel.ChannelItemViewModel
+import com.bumptech.glide.Glide
 import io.getstream.chat.android.client.models.Channel
 
 class ChannelItemAdapter : RecyclerView.Adapter<ChannelItemAdapter.ChannelItemViewHolder>() {
@@ -35,7 +37,9 @@ class ChannelItemAdapter : RecyclerView.Adapter<ChannelItemAdapter.ChannelItemVi
             var viewModel = ChannelItemViewModel(channel)
             viewModel.initData()
             binding.viewModel = viewModel
-            viewModel.loadImage(binding.imageProfile, viewModel.image)
+            Glide.with(BluesheetApplication.instance).load(viewModel.image).centerCrop()
+                .placeholder(viewModel.imageThumb)
+                .into(binding.imageProfile)
         }
     }
 

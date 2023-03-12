@@ -24,26 +24,22 @@ import src.wrapperutil.utilities.WrapperConstant
 import src.wrapperutil.utilities.WrapperEnumAnnotation
 import src.wrapperutil.viewmodel.ParentVM
 
-class ChannelAddMoreViewModel: ParentVM() {
-
-    private lateinit var channel: Channel
+class ChannelCreateViewModel: ParentVM() {
 
     var isDisabled: MutableLiveData<Boolean> = MutableLiveData(true)
     var listNewUsers: MutableLiveData<MutableList<ConnectionUserModel>> = MutableLiveData()
     var tempMembers: MutableList<ConnectionUserModel> = mutableListOf()
     var refreshChannel: MutableLiveData<Boolean> = MutableLiveData(false)
     private var listSelected: MutableSet<String> = mutableSetOf()
+    private var isGroup: Boolean = false
 
-    fun getChannel(cid: String){
-        SharedUtils.getChannel(cid){
-            initChannel(it)
-        }
-    }
-
-    fun initChannel(channel: Channel) {
-        this.channel = channel
+    fun initData() {
         repository = ChatRepo()
         getList()
+    }
+
+    fun initOrg(isGroup: Boolean) {
+        this.isGroup = isGroup
     }
 
     private fun getList() {
@@ -56,7 +52,8 @@ class ChannelAddMoreViewModel: ParentVM() {
 
             override fun onSuccess(code: Int?, message: String?, data: Any?, rawResponse: String?) {
                 val listUsers: List<ConnectionUserModel> = Gson().fromJson(rawResponse , Array<ConnectionUserModel>::class.java).toList()
-                updateMembersList(listUsers)
+                tempMembers = listUsers.toMutableList()
+                listNewUsers.value = tempMembers
             }
 
             override fun onFailed(code: Int?, message: String?, data: Any?, rawResponse: String?) {
@@ -71,26 +68,6 @@ class ChannelAddMoreViewModel: ParentVM() {
                 mProgressState.value = WrapperEnumAnnotation(WrapperConstant.STATE_SCREEN_ERROR_TOAST)
             }
         })
-    }
-
-    private fun updateMembersList(listUsers: List<ConnectionUserModel>){
-        SharedUtils.getChannelMembers(channel.cid){
-            tempMembers = mutableListOf()
-            for (member in listUsers) {
-                var isAlreadyIn: Boolean = false
-                for (current in it) {
-                    if (current.user.id == member.getStreamId()) {
-                        isAlreadyIn = true
-                        break
-                    }
-                }
-                if (!isAlreadyIn) {
-                    tempMembers.add(member)
-                }
-            }
-            listNewUsers.value = tempMembers
-            mProgressState.value = WrapperEnumAnnotation(WrapperConstant.STATE_SCREEN_SUCCESS)
-            }
     }
 
     fun searchParticipant(s: CharSequence) {
@@ -119,15 +96,7 @@ class ChannelAddMoreViewModel: ParentVM() {
     }
 
     fun addParticipants(){
-        mProgressState.value = WrapperEnumAnnotation(WrapperConstant.STATE_SCREEN_LOADING)
-    SharedUtils.addParticipantsToChannel(channel, listSelected.toList()){
-        mProgressState.value = WrapperEnumAnnotation(WrapperConstant.STATE_SCREEN_SUCCESS)
-        if (it) {
-            refreshChannel.value = true
-        } else {
-            SharedUtils.showOKDialog(message = "Error while Removing Participant, Please try again after some time.")
-        }
-    }
+
     }
 
     override fun getState(): MutableLiveData<WrapperEnumAnnotation> {
