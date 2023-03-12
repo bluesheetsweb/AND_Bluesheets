@@ -8,7 +8,6 @@ import com.bluesheets.utils.FragmentConstant
 import com.bluesheets.utils.NavigateTo
 import com.bluesheets.utils.SharedUtils
 import com.bluesheets.utils.UserInfoUtil
-import io.getstream.chat.android.client.models.Member
 import src.networkutil.model.NetworkErrorBModel
 import src.networkutil.network.NetworkRequest
 import src.wrapperutil.utilities.Toaster

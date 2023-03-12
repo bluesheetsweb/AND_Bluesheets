@@ -1,231 +1,250 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
+
     <data>
+
         <variable
             name="viewModel"
             type="com.bluesheets.ui.home.viewmodel.HomeViewModel" />
     </data>
-    <src.wrapperutil.empty_state.StateManagerConstraintLayout
-        android:id="@+id/stateLayout"
+
+    <src.wrapperutil.empty_state.StateManagerConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/stateLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent">
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/layoutTop"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:background="#F2F2F2"
-            android:padding="@dimen/_20dp">
-            
-            <src.wrapperutil.uicomponent.TextView
-                android:id="@+id/textWorkSpaceName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{viewModel.workSpaceName}"
-                app:text_mode="SMALL_MEDIUM_GRAY_75"
-                app:layout_constraintLeft_toRightOf="@+id/imageSwitch"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginTop="@dimen/_20dp"
-                />
-            
-            <src.wrapperutil.uicomponent.ImageView
-                android:id="@+id/imageSwitch"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_marginTop="@dimen/_4dp"
-                app:layout_constraintTop_toBottomOf="@+id/textWorkSpaceName"
-                android:src="@drawable/ic_switch_workspace"/>
-            
-            <src.wrapperutil.uicomponent.TextView
-                android:id="@+id/textOrganizationName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{viewModel.organizationName}"
-                app:text_mode="SUB_HEADING_BOLD"
-                app:layout_constraintLeft_toRightOf="@+id/imageSwitch"
-                app:layout_constraintTop_toTopOf="@+id/imageSwitch"
-                android:layout_marginStart="@dimen/_8dp"
-                app:layout_constraintBottom_toBottomOf="@+id/imageSwitch"
-                />
-            
-            <src.wrapperutil.uicomponent.roundedimageview.RoundedImageView
-                android:layout_width="@dimen/_24dp"
-                android:layout_height="@dimen/_24dp"
-                android:id="@+id/profilePic"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintBottom_toBottomOf="@+id/imageSwitch"
-                app:layout_constraintTop_toTopOf="@+id/imageSwitch"
-                android:src="@drawable/ic_image_thumb"/>
+            app:layout_constraintTop_toTopOf="parent">
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layoutTop"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#F2F2F2"
+                android:padding="@dimen/_20dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <src.wrapperutil.uicomponent.LinearLayout
+                    android:id="@+id/layoutWorkNOrg"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <src.wrapperutil.uicomponent.ImageView
+                        android:id="@+id/imageSwitch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10dp"
+                        android:src="@drawable/ic_switch_workspace"
+                        app:layout_constraintTop_toBottomOf="@+id/textWorkSpaceName" />
+
+                    <src.wrapperutil.uicomponent.LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:orientation="vertical">
+
+                        <src.wrapperutil.uicomponent.TextView
+                            android:id="@+id/textWorkSpaceName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_8dp"
+                            android:layout_marginTop="@dimen/_20dp"
+                            android:text="@{viewModel.workSpaceName}"
+                            app:text_mode="SMALL_MEDIUM_GRAY_75" />
+
+                        <src.wrapperutil.uicomponent.TextView
+                            android:id="@+id/textOrganizationName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_8dp"
+                            android:text="@{viewModel.organizationName}"
+                            app:layout_constraintBottom_toBottomOf="@+id/imageSwitch"
+                            app:layout_constraintLeft_toRightOf="@+id/imageSwitch"
+                            app:layout_constraintTop_toTopOf="@+id/imageSwitch"
+                            app:text_mode="SUB_HEADING_BOLD" />
+
+                    </src.wrapperutil.uicomponent.LinearLayout>
+
+                </src.wrapperutil.uicomponent.LinearLayout>
+
+                <src.wrapperutil.uicomponent.roundedimageview.RoundedImageView
+                    android:id="@+id/profilePic"
+                    android:layout_width="@dimen/_24dp"
+                    android:layout_height="@dimen/_24dp"
+                    android:layout_marginTop="@dimen/_10dp"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintBottom_toBottomOf="@+id/layoutWorkNOrg"
+                    app:layout_constraintTop_toTopOf="@+id/layoutWorkNOrg"
+                    android:src="@drawable/ic_image_thumb" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
             <src.wrapperutil.uicomponent.TextView
                 android:id="@+id/titleHeader"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_12dp"
+                android:layout_marginTop="@dimen/_8dp"
+                android:text="Messages"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/layoutTop"
-                android:text="Messages"
-                app:text_mode="LARGE_MEDIUM_BLACK"
-                android:layout_marginStart="@dimen/_12dp"
-                android:layout_marginTop="@dimen/_8dp"/>
+                app:text_mode="LARGE_MEDIUM_BLACK" />
 
             <src.wrapperutil.uicomponent.ButtonWithImage
                 android:id="@+id/imageWithButton"
                 android:layout_width="@dimen/_80dp"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_12dp"
+                app:layout_constraintBottom_toBottomOf="@id/titleHeader"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="@id/titleHeader"
-                app:layout_constraintBottom_toBottomOf="@id/titleHeader"
-                app:text_value="New"
                 app:lessPadding="true"
-                android:layout_marginEnd="@dimen/_12dp"/>
+                app:text_value="New" />
+
             <src.wrapperutil.uicomponent.FrameLayout
                 android:id="@+id/frameLayout"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                app:layout_constraintTop_toBottomOf="@id/titleHeader"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/titleHeader" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layoutBottom"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_90dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/layoutBottom"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_90dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent">
-
-            <src.wrapperutil.uicomponent.ImageView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintBottom_toTopOf="parent"
-                app:layout_constraintTop_toBottomOf="parent"
-                android:scaleType="fitXY"
-                android:src="@drawable/ic_bottom_bg"/>
-
-            <src.wrapperutil.uicomponent.LinearLayout
-                android:id="@+id/layoutChat"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/_70dp"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintRight_toLeftOf="@id/layoutExpense"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:onClick="@{() -> viewModel.chatClicked()}">
+                app:layout_constraintRight_toRightOf="parent">
 
                 <src.wrapperutil.uicomponent.ImageView
-                    android:id="@+id/imageChat"
-                    android:layout_width="@dimen/_20dp"
-                    android:layout_height="@dimen/_20dp"
-                    android:src="@drawable/ic_black_chat"/>
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ic_bottom_bg"
+                    app:layout_constraintBottom_toTopOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="parent" />
 
-                <src.wrapperutil.uicomponent.TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_4dp"
-                    android:text="Chat"
-                    app:text_mode="PARAGRAPH_REGULAR"/>
+                <src.wrapperutil.uicomponent.LinearLayout
+                    android:id="@+id/layoutChat"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_70dp"
+                    android:gravity="center"
+                    android:onClick="@{() -> viewModel.chatClicked()}"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toLeftOf="@id/layoutExpense">
 
-            </src.wrapperutil.uicomponent.LinearLayout>
+                    <src.wrapperutil.uicomponent.ImageView
+                        android:id="@+id/imageChat"
+                        android:layout_width="@dimen/_20dp"
+                        android:layout_height="@dimen/_20dp"
+                        android:src="@drawable/ic_black_chat" />
 
-            <src.wrapperutil.uicomponent.LinearLayout
-                android:id="@+id/layoutExpense"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/_70dp"
-                app:layout_constraintLeft_toRightOf="@id/layoutChat"
-                app:layout_constraintRight_toLeftOf="@id/layoutDocument"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:onClick="@{() -> viewModel.expenseClicked()}">
+                    <src.wrapperutil.uicomponent.TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_4dp"
+                        android:text="Chat"
+                        app:text_mode="PARAGRAPH_REGULAR" />
 
-                <src.wrapperutil.uicomponent.ImageView
-                    android:id="@+id/imageExpense"
-                    android:layout_width="@dimen/_20dp"
-                    android:layout_height="@dimen/_20dp"
-                    android:src="@drawable/ic_black_expense"/>
+                </src.wrapperutil.uicomponent.LinearLayout>
 
-                <src.wrapperutil.uicomponent.TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_4dp"
-                    android:text="Expense"
-                    app:text_mode="PARAGRAPH_REGULAR"/>
+                <src.wrapperutil.uicomponent.LinearLayout
+                    android:id="@+id/layoutExpense"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_70dp"
+                    android:gravity="center"
+                    android:onClick="@{() -> viewModel.expenseClicked()}"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toRightOf="@id/layoutChat"
+                    app:layout_constraintRight_toLeftOf="@id/layoutDocument">
 
-            </src.wrapperutil.uicomponent.LinearLayout>
+                    <src.wrapperutil.uicomponent.ImageView
+                        android:id="@+id/imageExpense"
+                        android:layout_width="@dimen/_20dp"
+                        android:layout_height="@dimen/_20dp"
+                        android:src="@drawable/ic_black_expense" />
 
-            <src.wrapperutil.uicomponent.LinearLayout
-                android:id="@+id/layoutDocument"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/_70dp"
-                app:layout_constraintLeft_toRightOf="@id/layoutExpense"
-                app:layout_constraintRight_toLeftOf="@id/layoutContact"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:onClick="@{() -> viewModel.documentClicked()}">
+                    <src.wrapperutil.uicomponent.TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_4dp"
+                        android:text="Expense"
+                        app:text_mode="PARAGRAPH_REGULAR" />
 
-                <src.wrapperutil.uicomponent.ImageView
-                    android:id="@+id/imageDocument"
-                    android:layout_width="@dimen/_20dp"
-                    android:layout_height="@dimen/_20dp"
-                    android:src="@drawable/ic_black_document"/>
+                </src.wrapperutil.uicomponent.LinearLayout>
 
-                <src.wrapperutil.uicomponent.TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_4dp"
-                    android:text="Document"
-                    app:text_mode="PARAGRAPH_REGULAR"/>
+                <src.wrapperutil.uicomponent.LinearLayout
+                    android:id="@+id/layoutDocument"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_70dp"
+                    android:gravity="center"
+                    android:onClick="@{() -> viewModel.documentClicked()}"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toRightOf="@id/layoutExpense"
+                    app:layout_constraintRight_toLeftOf="@id/layoutContact">
 
-            </src.wrapperutil.uicomponent.LinearLayout>
+                    <src.wrapperutil.uicomponent.ImageView
+                        android:id="@+id/imageDocument"
+                        android:layout_width="@dimen/_20dp"
+                        android:layout_height="@dimen/_20dp"
+                        android:src="@drawable/ic_black_document" />
 
-            <src.wrapperutil.uicomponent.LinearLayout
-                android:id="@+id/layoutContact"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/_70dp"
-                app:layout_constraintLeft_toRightOf="@id/layoutDocument"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:onClick="@{() -> viewModel.contactClicked()}">
+                    <src.wrapperutil.uicomponent.TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_4dp"
+                        android:text="Document"
+                        app:text_mode="PARAGRAPH_REGULAR" />
 
-                <src.wrapperutil.uicomponent.ImageView
-                    android:id="@+id/imageContact"
-                    android:layout_width="@dimen/_20dp"
-                    android:layout_height="@dimen/_20dp"
-                    android:src="@drawable/ic_black_contact"/>
+                </src.wrapperutil.uicomponent.LinearLayout>
 
-                <src.wrapperutil.uicomponent.TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_4dp"
-                    android:text="Contact"
-                    app:text_mode="PARAGRAPH_REGULAR"/>
+                <src.wrapperutil.uicomponent.LinearLayout
+                    android:id="@+id/layoutContact"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_70dp"
+                    android:gravity="center"
+                    android:onClick="@{() -> viewModel.contactClicked()}"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toRightOf="@id/layoutDocument"
+                    app:layout_constraintRight_toRightOf="parent">
 
-            </src.wrapperutil.uicomponent.LinearLayout>
+                    <src.wrapperutil.uicomponent.ImageView
+                        android:id="@+id/imageContact"
+                        android:layout_width="@dimen/_20dp"
+                        android:layout_height="@dimen/_20dp"
+                        android:src="@drawable/ic_black_contact" />
+
+                    <src.wrapperutil.uicomponent.TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_4dp"
+                        android:text="Contact"
+                        app:text_mode="PARAGRAPH_REGULAR" />
+
+                </src.wrapperutil.uicomponent.LinearLayout>
 
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </src.wrapperutil.empty_state.StateManagerConstraintLayout>

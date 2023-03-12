@@ -38,18 +38,18 @@ object AppRequestParams {
     }
 
     // Get Organizations for WorkSpaces
-    fun getOrganizations(workspaceId: String, access_token: String): HashMap<String, Any?> {
+    fun getOrganizationsForWorkSpace(access_token: String, workspaceId: String): HashMap<String, Any?> {
         var params = HashMap<String, Any?>()
-        params.put("filter", "{\"where\":{\"workspaceId\":$workspaceId}}")
         params.put("access_token", access_token)
+        params.put("filter", "{\"where\":{\"workspaceId\":$workspaceId}}")
         return params
     }
 
     // Login To Organizations
-    fun loginToOrganizations(organizationId: String, access_token: String): HashMap<String, Any?> {
+    fun loginToOrganizations(access_token: String, organizationId: String): HashMap<String, Any?> {
         var params = HashMap<String, Any?>()
-        params.put("organizationId", organizationId)
         params.put("access_token", access_token)
+        params.put("organizationId", organizationId)
         return params
     }
 
@@ -62,18 +62,17 @@ object AppRequestParams {
     }
 
     // Login To WorkSpace
-    fun loginToWorkSpace(workspaceId: String, access_token: String): HashMap<String, Any?> {
+    fun loginToWorkSpace(access_token: String, workspaceId: String): HashMap<String, Any?> {
         var params = HashMap<String, Any?>()
-        params.put("workspaceId", workspaceId)
         params.put("access_token", access_token)
+        params.put("workspaceId", workspaceId)
         return params
     }
 
     // Get WorkSpace For Users
-    fun getWorkSpace(access_token: String): HashMap<String, Any?> {
+    fun getWorkSpaceForUser(filter: String): HashMap<String, Any?> {
         var params = HashMap<String, Any?>()
-        params.put("filter", "{\"searchValue\":\"\"}")
-        params.put("access_token", access_token)
+        params.put("filter", filter)
         return params
     }
 

@@ -7,6 +7,7 @@ object FragmentConstant {
     const val CHAT_ACTIVITY = 3
     const val USER_INFO_ACTIVITY = 4
     const val CHAT_OTHER_ACTIVITY = 5
+    const val SWITCH_ORG_N_WORK_ACTIVITY = 6
 
     //Fragments
     const val GET_STARTED_FRAGMENT = 1
