@@ -173,6 +173,10 @@ class NetworkBase(
                 requestUrl = InitNetworkUtils.server_path
                 NetworkManager.getNewClient(requestHeader)
             }
+            NetworkConstant.REQUESTING_SERVER_BASE_DEFAULT -> {
+                requestUrl = InitNetworkUtils.server_path
+                NetworkManager.getDefaultClient(requestHeader)
+            }
 //            NetworkConstant.REQUESTING_SERVER_LOCATION -> {
 //                requestUrl = InitNetworkUtils.locationPath
 //                NetworkManager.getThirdPartyClient()

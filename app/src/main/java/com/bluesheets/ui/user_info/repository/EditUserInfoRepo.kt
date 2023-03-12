@@ -11,7 +11,9 @@ import src.networkutil.utilities.NetworkEnumAnnotation
 class EditUserInfoRepo {
 
     fun userLogOut(access_token: String, listener: NetworkRequest.IOnResponse?) {
-        var baseNetwork = NetworkBase(context = BluesheetApplication.instance.applicationContext)
+        var baseNetwork = NetworkBase(
+            NetworkEnumAnnotation(NetworkConstant.REQUESTING_SERVER_BASE_DEFAULT),
+            context = BluesheetApplication.instance.applicationContext)
         baseNetwork.initializeService()
         var request = NetworkRequest(
             apiMethod = ApiMethods.USER_LOGOUT,

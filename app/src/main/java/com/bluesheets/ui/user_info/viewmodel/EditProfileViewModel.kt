@@ -10,6 +10,7 @@ import com.bluesheets.utils.SharedUtils
 import com.bluesheets.utils.UserInfoUtil
 import src.networkutil.model.NetworkErrorBModel
 import src.networkutil.network.NetworkRequest
+import src.networkutil.utilities.NetworkGlobalDataHolder
 import src.wrapperutil.utilities.Toaster
 import src.wrapperutil.utilities.WrapperConstant
 import src.wrapperutil.utilities.WrapperEnumAnnotation
@@ -87,11 +88,10 @@ class EditProfileViewModel : ParentVM() {
                 ) {
                     Toaster.show(BluesheetApplication.instance.applicationContext, "Logout Success")
                     clearPreferences()
+                    NetworkGlobalDataHolder.clearAllKeys()
                     mProgressState.value =
                         WrapperEnumAnnotation(WrapperConstant.STATE_SCREEN_SUCCESS)
-                    NavigateTo.screen(
-                        activityType = FragmentConstant.SIGN_UP_ACTIVITY
-                    )
+                    NavigateTo.reStartActivity()
                 }
 
                 override fun onFailed(

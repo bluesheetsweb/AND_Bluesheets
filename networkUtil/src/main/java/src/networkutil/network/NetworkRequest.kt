@@ -101,15 +101,15 @@ class NetworkRequest(
                         rawResponse = response.errorBody()?.string()
 //                    FirebaseCrashlytics.getInstance().log("Request :- $mRequest\n\nResponse :- $rawResponse")
 
-                    if (android.text.TextUtils.isEmpty(rawResponse)) {
-                        listener?.onFailed(
-                            -1,
-                            NetworkConstant.TEXT_MESSAGE_INVALID_RESPONSE,
-                            null,
-                            rawResponse
-                        )
-                        return
-                    }
+//                    if (android.text.TextUtils.isEmpty(rawResponse)) {
+//                        listener?.onFailed(
+//                            -1,
+//                            NetworkConstant.TEXT_MESSAGE_INVALID_RESPONSE,
+//                            null,
+//                            rawResponse
+//                        )
+//                        return
+//                    }
 //                    var jsonBody = JSONObject(rawResponse)
                     var status: Int = response.code()
 //

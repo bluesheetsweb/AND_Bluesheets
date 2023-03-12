@@ -3,6 +3,7 @@ package com.bluesheets.utils
 import android.content.Intent
 import android.os.Bundle
 import com.bluesheets.BluesheetApplication
+import com.bluesheets.SplashActivity
 import com.bluesheets.ui.chat.view.ChatOtherActivity
 import com.bluesheets.ui.chat.view.CustomMessageListActivity
 import com.bluesheets.ui.home.view.HomeActivity
@@ -101,5 +102,15 @@ object NavigateTo {
             myIntent.putExtras(it)
         }
         BluesheetApplication.instance.activityLifeCycle.currentActivity?.startActivity(myIntent)
+    }
+
+     fun reStartActivity() {
+        val myIntent = Intent(
+            BluesheetApplication.instance.activityLifeCycle.currentActivity,
+            SplashActivity::class.java
+        )
+        myIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        BluesheetApplication.instance.activityLifeCycle.currentActivity?.startActivity(myIntent)
+         BluesheetApplication.instance.activityLifeCycle.currentActivity?.finish()
     }
 }

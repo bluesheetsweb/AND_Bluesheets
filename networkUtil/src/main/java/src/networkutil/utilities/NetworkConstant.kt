@@ -75,7 +75,7 @@ object NetworkConstant {
     const val REQUEST_TYPE_POST_MUTIPART = 3
 
     const val REQUESTING_SERVER_BASE = 1
-//    const val REQUESTING_SERVER_BASE_LATEST = 2
+    const val REQUESTING_SERVER_BASE_DEFAULT = 2
 //    const val REQUESTING_SERVER_PUBLICATION = 3
 //    const val REQUESTING_SERVER_PUBLICATION_OTHER = 4
 //    const val REQUESTING_SERVER_NOTIFY_OLD = 5
