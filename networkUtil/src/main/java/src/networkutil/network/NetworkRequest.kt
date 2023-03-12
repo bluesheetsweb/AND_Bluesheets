@@ -94,8 +94,8 @@ class NetworkRequest(
 
                     var rawResponse = response.body()?.string()
                     // send response on server
-                    if (rawResponse != null)
-                        Log.i(rawResponse.toString(), "Api Log - " + requestUrl)
+//                    if (rawResponse != null)
+//                        Log.i(rawResponse.toString(), "Api Log - " + requestUrl)
 
                     if (android.text.TextUtils.isEmpty(rawResponse))
                         rawResponse = response.errorBody()?.string()
