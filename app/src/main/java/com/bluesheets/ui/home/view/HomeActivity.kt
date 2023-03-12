@@ -76,7 +76,10 @@ class HomeActivity : AppCompatActivity() {
 
         val newMessage: LinearLayout? = bottomSheetDialog.findViewById(R.id.layoutNewMessage)
         newMessage?.setOnClickListener {
-
+            NavigateTo.screen(
+                activityType = FragmentConstant.CHAT_OTHER_ACTIVITY,
+                fragmentType = FragmentConstant.CREATE_CHANNEL_FRAGMENT
+            )
             bottomSheetDialog.dismiss()
         }
         bottomSheetDialog.show()

@@ -68,10 +68,12 @@ class ChannelFollowUpFragment(private val isGroup: Boolean) : Fragment() {
             binding?.titleText?.text = "Create Group"
             binding?.editName?.visibility = View.VISIBLE
             binding?.titleName?.visibility = View.VISIBLE
+            binding?.addButton?.text = "Next"
         } else {
             binding?.editName?.visibility = View.GONE
             binding?.titleName?.visibility = View.GONE
             binding?.titleText?.text = "Complete Process"
+            binding?.addButton?.text = "Create Chat"
         }
 
         binding?.addButton?.updateMode(WrapperEnumAnnotation(WrapperConstant.BUTTON_MODE_DISABLED))

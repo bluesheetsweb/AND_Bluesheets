@@ -18,6 +18,7 @@ object FragmentConstant {
     const val CHAT_MESSAGE_FRAGMENT = 10
     const val CHAT_INFO_FRAGMENT = 11
     const val CHAT_ADD_MORE_FRAGMENT = 12
+    const val CREATE_CHANNEL_FRAGMENT = 13
 
     const val FRAGMENT_TYPE = "fragmentType"
     const val ACTIVITY_BUNDLE = "bundle"
@@ -60,4 +61,6 @@ object ApiMethods {
     //Get Users
     const val GET_USERS = "workspaces/contacts"
 
+    //Get Org and Tags
+    const val GET_ORG_TAGS = "workspaces/available-tags/"
 }

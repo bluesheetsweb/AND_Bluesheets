@@ -40,10 +40,10 @@ class ChatRepo {
         var baseNetwork = NetworkBase(context = BluesheetApplication.instance.applicationContext)
         baseNetwork.initializeService()
         var request = NetworkRequest(
-            apiMethod = ApiMethods.GET_USERS,
+            apiMethod = ApiMethods.GET_ORG_TAGS,
             baseNetwork = baseNetwork,
             context = BluesheetApplication.instance.applicationContext,
-            requestType = NetworkEnumAnnotation(NetworkConstant.REQUEST_TYPE_POST),
+            requestType = NetworkEnumAnnotation(NetworkConstant.REQUEST_TYPE_GET),
             params = AppRequestParams.getUses()
         )
 

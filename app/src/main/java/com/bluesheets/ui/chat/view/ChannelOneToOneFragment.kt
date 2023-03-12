@@ -47,21 +47,18 @@ class ChannelOneToOneFragment() : Fragment() {
     ): View? {
         binding = FragmentOneToOneChannelBinding.inflate(inflater,container, false)
         viewModel = ViewModelProvider(this).get(ChannelCreateViewModel::class.java)
-        viewModel.initData()
-        binding?.viewModel = viewModel
         binding?.backButton?.setOnClickListener {
             activity?.onBackPressedDispatcher?.onBackPressed()
         }
         val layoutManager: RecyclerView.LayoutManager = LinearLayoutManager(context)
         binding?.recyclerView?.setLayoutManager(layoutManager)
-        adapter = ChannelAddUserAdapter {
+        adapter = ChannelAddUserAdapter(true) {
             viewModel.selectParticipant(it)
-            adapter.updateSelection(viewModel.getSelectedList())
         }
         binding?.recyclerView?.adapter = adapter
 
         viewModel.getState().observe(viewLifecycleOwner) {
-            (binding?.root as StateManagerConstraintLayout)?.setViewState(it.state, viewModel)
+            (binding?.root as StateManagerConstraintLayout).setViewState(it.state, viewModel)
             if (it.state == WrapperConstant.STATE_SCREEN_SUCCESS) {
                 binding?.viewModel = viewModel
             }
@@ -72,6 +69,7 @@ class ChannelOneToOneFragment() : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        viewModel.initData()
         viewModel.listNewUsers.observe(viewLifecycleOwner) {
             adapter.updateList(it)
         }
