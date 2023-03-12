@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="viewModel"
+            type="com.bluesheets.ui.chat.viewmodel.ChannelCreateViewModel" />
+    </data>
+<src.wrapperutil.empty_state.StateManagerConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/white"
+    android:clickable="true">
+
+    <src.wrapperutil.uicomponent.ImageView
+        android:layout_width="@dimen/_18dp"
+        android:layout_height="@dimen/_18dp"
+        android:id="@+id/backButton"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_margin="@dimen/_12dp"
+        android:src="@drawable/ic_back_arrow"/>
+
+    <src.wrapperutil.uicomponent.TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/titleText"
+        app:layout_constraintTop_toTopOf="@id/backButton"
+        app:layout_constraintLeft_toRightOf="@id/backButton"
+        app:layout_constraintBottom_toBottomOf="@id/backButton"
+        app:layout_constraintRight_toRightOf="parent"
+        app:text_mode="SUB_HEADING_BOLD"
+        android:text="Complete Process"/>
+
+    <src.wrapperutil.uicomponent.Separator
+        android:layout_width="@dimen/_0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="@dimen/_12dp"
+        app:layout_constraintTop_toBottomOf="@id/titleText"
+        android:id="@+id/separatorTwo"
+        app:seprator_mode="TINY"
+        />
+
+    <src.wrapperutil.uicomponent.LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:padding="@dimen/_12dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/addButton"
+        app:layout_constraintTop_toBottomOf="@id/separatorTwo"
+        android:orientation="vertical">
+        <src.wrapperutil.uicomponent.TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:text_mode="PARAGRAPH_BOLD"
+            android:id="@+id/titleName"
+            android:text="Please Enter Group Name"/>
+
+        <src.wrapperutil.uicomponent.EditText
+            android:id="@+id/editName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_12dp"/>
+
+        <src.wrapperutil.uicomponent.TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:text_mode="PARAGRAPH_BOLD"
+            android:text="Please Select Organization"/>
+
+        <src.wrapperutil.uicomponent.LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="@dimen/_12dp"
+            android:id="@+id/layoutOrganization"
+            android:gravity="center_vertical"
+            android:paddingBottom="@dimen/_12dp">
+
+            <src.wrapperutil.uicomponent.TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:text_mode="PARAGRAPH_REGULAR"
+                android:text="Include Organization"/>
+
+            <src.wrapperutil.uicomponent.TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:text_mode="PARAGRAPH_MEDIUM_ERROR"
+                android:gravity="right"
+                android:id="@+id/textOrganization"
+                android:layout_weight="1"
+                android:layout_marginEnd="@dimen/_6dp"
+                android:text="Select Organization"/>
+            <src.wrapperutil.uicomponent.ImageView
+                android:layout_width="@dimen/_12dp"
+                android:layout_height="@dimen/_12dp"
+                android:src="@drawable/ic_right_arrow"/>
+        </src.wrapperutil.uicomponent.LinearLayout>
+        <src.wrapperutil.uicomponent.TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:text_mode="PARAGRAPH_BOLD"
+            android:id="@+id/textSelectTag"
+            android:text="Please Select Tag"/>
+
+        <src.wrapperutil.uicomponent.LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="@dimen/_12dp"
+            android:id="@+id/layoutTag"
+            android:gravity="center_vertical"
+            android:paddingBottom="@dimen/_12dp">
+
+            <src.wrapperutil.uicomponent.TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:text_mode="PARAGRAPH_REGULAR"
+                android:text="Include Tag"/>
+
+            <src.wrapperutil.uicomponent.TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:text_mode="PARAGRAPH_MEDIUM_ERROR"
+                android:gravity="right"
+                android:id="@+id/textTag"
+                android:layout_weight="1"
+                android:layout_marginEnd="@dimen/_6dp"
+                android:text="Select Tag"/>
+            <src.wrapperutil.uicomponent.ImageView
+                android:layout_width="@dimen/_12dp"
+                android:layout_height="@dimen/_12dp"
+                android:src="@drawable/ic_right_arrow"/>
+        </src.wrapperutil.uicomponent.LinearLayout>
+    </src.wrapperutil.uicomponent.LinearLayout>
+
+    <src.wrapperutil.uicomponent.Button
+        android:id="@+id/addButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="Create Chat"
+        app:lessPadding="true"
+        app:button_mode="PRIMARY"
+        android:onClick="@{() -> viewModel.addParticipants()}"
+        android:layout_margin="@dimen/_12dp"/>
+
+</src.wrapperutil.empty_state.StateManagerConstraintLayout>
+
+</layout>

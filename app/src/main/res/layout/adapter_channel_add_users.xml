@@ -47,7 +47,7 @@
         android:clickable="false"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="@id/textName"
-        android:checked="@{viewModel.isChecked}"
+        android:checked="@{viewModel.checked}"
         app:layout_constraintBottom_toBottomOf="@id/textName"/>
 
 <!--    <src.wrapperutil.uicomponent.Separator-->

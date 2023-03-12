@@ -18,7 +18,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bluesheets.databinding.FragmentChannelAddMoreBinding
 import com.bluesheets.databinding.FragmentChannelAddMoreBindingImpl
 import com.bluesheets.databinding.FragmentChannelInfoBinding
+import com.bluesheets.databinding.FragmentGroupChannelBinding
 import com.bluesheets.ui.chat.viewmodel.ChannelAddMoreViewModel
+import com.bluesheets.ui.chat.viewmodel.ChannelCreateViewModel
 import com.bluesheets.ui.chat.viewmodel.ChannelInfoViewModel
 import com.bluesheets.utils.FragmentConstant
 import com.bumptech.glide.Glide
@@ -32,20 +34,20 @@ import src.wrapperutil.utilities.FragmentTransaction
 import src.wrapperutil.utilities.WrapperConstant
 import src.wrapperutil.utilities.WrapperEnumAnnotation
 
-private var binding: FragmentChannelAddMoreBinding? = null
-private lateinit var viewModel: ChannelAddMoreViewModel
+private var binding: FragmentGroupChannelBinding? = null
+private lateinit var viewModel: ChannelCreateViewModel
 private lateinit var adapter: ChannelAddUserAdapter
 
-class ChannelAddMoreFragment(private val cId: String) : Fragment() {
+class ChannelGroupFragment(private val cId: String) : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentChannelAddMoreBinding.inflate(inflater,container, false)
-        viewModel = ViewModelProvider(this).get(ChannelAddMoreViewModel::class.java)
-        viewModel.getChannel(cId)
+        binding = FragmentGroupChannelBinding.inflate(inflater,container, false)
+        viewModel = ViewModelProvider(this).get(ChannelCreateViewModel::class.java)
+        viewModel.initData()
         binding?.viewModel = viewModel
         binding?.backButton?.setOnClickListener {
             activity?.onBackPressedDispatcher?.onBackPressed()

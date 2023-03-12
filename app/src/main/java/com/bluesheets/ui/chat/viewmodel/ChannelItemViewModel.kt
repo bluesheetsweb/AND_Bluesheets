@@ -44,13 +44,6 @@ class ChannelItemViewModel(val channel: Channel): AdapterPVM() {
         }.toString()
     }
 
-    @BindingAdapter("imageUrl")
-    fun loadImage(view: RoundedImageView, url: String?) {
-            Glide.with(view.context).load(url).centerCrop()
-                .placeholder(imageThumb)
-                .into(view)
-    }
-
     fun onItemClicked() {
         val bundle = Bundle()
         bundle.putString("cId", channel.cid)

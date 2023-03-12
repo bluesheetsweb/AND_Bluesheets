@@ -29,7 +29,6 @@ class ChannelInfoViewModel: ParentVM() {
     var channelSubDes: String = ""
     var isChannelAdmin: Boolean = false
     var isOneToOne: Boolean = false
-    var deleteButtonText: String = "Delete"
     var editButtonText: String = "Edit"
     var channelThumb: Int = 0
     var adminId: String = ""
@@ -47,7 +46,6 @@ class ChannelInfoViewModel: ParentVM() {
         this.channel = channel
         isChannelAdmin = channel.createdBy.id == UserInfoUtil.getChatId()
         adminId = channel.createdBy.id
-        updateMembersList()
         if (SharedUtils.isTypeGroup(channel)) {
             isOneToOne = false
             canEditing = isChannelAdmin
@@ -55,11 +53,6 @@ class ChannelInfoViewModel: ParentVM() {
             channelName = channel.name
             participants.value = "${channel.memberCount} Participants"
             isToShowSearch.value = true
-            deleteButtonText = if (isChannelAdmin) {
-                "Delete"
-            } else {
-                "Leave"
-            }
         } else {
             isToShowSearch.value = false
             isOneToOne = true
@@ -70,10 +63,11 @@ class ChannelInfoViewModel: ParentVM() {
         channelSubDes = SharedUtils.getSubMessage(channel)
         channelThumb = SharedUtils.getChannelThumb(channel)
         newName = channelName
-        mProgressState.value = WrapperEnumAnnotation(WrapperConstant.STATE_SCREEN_SUCCESS)
+        updateMembersList()
     }
 
     private fun updateMembersList(){
+        listUsers.value = mutableListOf()
         SharedUtils.getChannelMembers(channel.cid){
             tempMembers = mutableListOf()
             for (member in it) {
@@ -86,6 +80,7 @@ class ChannelInfoViewModel: ParentVM() {
                 }
             }
             listUsers.value = tempMembers
+            mProgressState.value = WrapperEnumAnnotation(WrapperConstant.STATE_SCREEN_SUCCESS)
         }
     }
 
@@ -100,7 +95,6 @@ class ChannelInfoViewModel: ParentVM() {
                     SharedUtils.updateChannelName(channel, newName){
                         if (it.isNotEmpty()){
                             channelName = it
-                            refreshChannel.value = true
                             cancelEditing()
                         }
                     }
@@ -157,7 +151,16 @@ class ChannelInfoViewModel: ParentVM() {
             listenerPositive = { dialog, which ->
                 when(which) {
                     DialogInterface.BUTTON_POSITIVE -> {
-                        Toaster.show(BluesheetApplication.instance, "YES")
+                        mProgressState.value = WrapperEnumAnnotation(WrapperConstant.STATE_SCREEN_LOADING)
+                        SharedUtils.removeParticipantFromChannel(channel, member.getUserId()) {
+                            mProgressState.value = WrapperEnumAnnotation(WrapperConstant.STATE_SCREEN_SUCCESS)
+                            if (it){
+                                tempMembers.remove(member)
+                                listUsers.value = tempMembers
+                            } else {
+                                SharedUtils.showOKDialog(message = "Error while Removing Participant, Please try again after some time.")
+                            }
+                        }
                     }
                     DialogInterface.BUTTON_NEGATIVE -> {
                         Toaster.show(BluesheetApplication.instance, "NO")
@@ -185,7 +188,28 @@ class ChannelInfoViewModel: ParentVM() {
             listenerPositive = { dialog, which ->
                 when(which) {
                     DialogInterface.BUTTON_POSITIVE -> {
-                        Toaster.show(BluesheetApplication.instance, "YES")
+                        mProgressState.value = WrapperEnumAnnotation(WrapperConstant.STATE_SCREEN_LOADING)
+                        if (isChannelAdmin) {
+                            SharedUtils.deleteChannel(channel) {
+                                mProgressState.value =
+                                    WrapperEnumAnnotation(WrapperConstant.STATE_SCREEN_SUCCESS)
+                                if (it) {
+                                    refreshChannel.value = true
+                                } else {
+                                    SharedUtils.showOKDialog(message = "Error while Deleting Channel, Please try again after some time.")
+                                }
+                            }
+                        } else {
+                            SharedUtils.leaveChannel(channel) {
+                                mProgressState.value =
+                                    WrapperEnumAnnotation(WrapperConstant.STATE_SCREEN_SUCCESS)
+                                if (it) {
+                                    refreshChannel.value = true
+                                } else {
+                                    SharedUtils.showOKDialog(message = "Error while Leaving Channel, Please try again after some time.")
+                                }
+                            }
+                        }
                     }
                     DialogInterface.BUTTON_NEGATIVE -> {
                         Toaster.show(BluesheetApplication.instance, "NO")

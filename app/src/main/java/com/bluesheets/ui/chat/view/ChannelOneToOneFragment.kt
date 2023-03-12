@@ -18,7 +18,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bluesheets.databinding.FragmentChannelAddMoreBinding
 import com.bluesheets.databinding.FragmentChannelAddMoreBindingImpl
 import com.bluesheets.databinding.FragmentChannelInfoBinding
+import com.bluesheets.databinding.FragmentOneToOneChannelBinding
 import com.bluesheets.ui.chat.viewmodel.ChannelAddMoreViewModel
+import com.bluesheets.ui.chat.viewmodel.ChannelCreateViewModel
 import com.bluesheets.ui.chat.viewmodel.ChannelInfoViewModel
 import com.bluesheets.utils.FragmentConstant
 import com.bumptech.glide.Glide
@@ -32,20 +34,20 @@ import src.wrapperutil.utilities.FragmentTransaction
 import src.wrapperutil.utilities.WrapperConstant
 import src.wrapperutil.utilities.WrapperEnumAnnotation
 
-private var binding: FragmentChannelAddMoreBinding? = null
-private lateinit var viewModel: ChannelAddMoreViewModel
+private var binding: FragmentOneToOneChannelBinding? = null
+private lateinit var viewModel: ChannelCreateViewModel
 private lateinit var adapter: ChannelAddUserAdapter
 
-class ChannelAddMoreFragment(private val cId: String) : Fragment() {
+class ChannelOneToOneFragment() : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentChannelAddMoreBinding.inflate(inflater,container, false)
-        viewModel = ViewModelProvider(this).get(ChannelAddMoreViewModel::class.java)
-        viewModel.getChannel(cId)
+        binding = FragmentOneToOneChannelBinding.inflate(inflater,container, false)
+        viewModel = ViewModelProvider(this).get(ChannelCreateViewModel::class.java)
+        viewModel.initData()
         binding?.viewModel = viewModel
         binding?.backButton?.setOnClickListener {
             activity?.onBackPressedDispatcher?.onBackPressed()
@@ -70,8 +72,6 @@ class ChannelAddMoreFragment(private val cId: String) : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding?.addButton?.updateMode(WrapperEnumAnnotation(WrapperConstant.BUTTON_MODE_DISABLED))
-
         viewModel.listNewUsers.observe(viewLifecycleOwner) {
             adapter.updateList(it)
         }
@@ -83,22 +83,5 @@ class ChannelAddMoreFragment(private val cId: String) : Fragment() {
                 }, 100)
             }
         }
-        viewModel.isDisabled.observe(viewLifecycleOwner){
-            if (it) {
-               binding?.addButton?.updateMode(WrapperEnumAnnotation(WrapperConstant.BUTTON_MODE_DISABLED))
-            } else {
-                binding?.addButton?.updateMode(WrapperEnumAnnotation(WrapperConstant.BUTTON_MODE_PRIMARY))
-            }
-        }
     }
-
-//    override fun onStart() {
-//        super.onStart()
-//        val dialog: Dialog? = dialog
-//        if (dialog != null) {
-//            val width = ViewGroup.LayoutParams.MATCH_PARENT
-//            val height = ViewGroup.LayoutParams.MATCH_PARENT
-//            dialog.getWindow()?.setLayout(width, height)
-//        }
-//    }
 }
