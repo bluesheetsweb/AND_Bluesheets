@@ -1,8 +1,11 @@
 package com.bluesheets.ui.documents.viewmodel
 
 import androidx.lifecycle.MutableLiveData
+import com.bluesheets.ui.chat.model.ConnectionUserModel
+import com.bluesheets.ui.documents.model.DocumentListData
 import com.bluesheets.ui.documents.repository.DocumentListRepo
 import com.bluesheets.utils.UserInfoUtil
+import com.google.gson.Gson
 import src.networkutil.model.NetworkErrorBModel
 import src.networkutil.network.NetworkRequest
 import src.wrapperutil.utilities.WrapperConstant
@@ -39,6 +42,7 @@ class DocumentListViewModel : ParentVM() {
                             data: Any?,
                             rawResponse: String?
                         ) {
+                            val listDocuments: List<DocumentListData> = Gson().fromJson(rawResponse , Array<DocumentListData>::class.java).toList()
                             mProgressState.value =
                                 WrapperEnumAnnotation(WrapperConstant.STATE_SCREEN_SUCCESS)
 

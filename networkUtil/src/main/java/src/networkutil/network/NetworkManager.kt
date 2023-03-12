@@ -99,7 +99,31 @@ object NetworkManager {
 //
 //        return builder.build().create(NetworkService::class.java)
 //    }
+fun getDefaultClient(header: NetworkRequestHeader): NetworkService {
+//        val authToken = Credentials.basic(InitNetworkUtils.app_auth, "")
+//        Log.e(TAG, "authToken is $authToken")
+//        header.authToken = authToken
 
+    val okHttpClientG = getHttClientBuilder()
+        .connectTimeout(NetworkConstant.NETWORK_REQUEST_TIME_OUT.toLong(), TimeUnit.SECONDS)
+        .writeTimeout(NetworkConstant.NETWORK_REQUEST_TIME_OUT.toLong(), TimeUnit.SECONDS)
+        .readTimeout(NetworkConstant.NETWORK_REQUEST_TIME_OUT.toLong(), TimeUnit.SECONDS)
+
+//        val gson = GsonBuilder()
+//                .setLenient()
+//                .create()
+    val builder = Retrofit.Builder().baseUrl(InitNetworkUtils.server_path)
+//                .addConverterFactory(GsonConverterFactory.create(gson))
+
+    val interceptor = RetrofitNewCustomHeader()
+
+    if (!okHttpClientG.interceptors().contains(interceptor)) {
+        okHttpClientG.addInterceptor(interceptor)
+        builder.client(okHttpClientG.build())
+    }
+
+    return builder.build().create(NetworkService::class.java)
+}
     fun getNewClient(header: NetworkRequestHeader): NetworkService {
 //        val authToken = Credentials.basic(InitNetworkUtils.app_auth, "")
 //        Log.e(TAG, "authToken is $authToken")
@@ -146,7 +170,8 @@ object NetworkManager {
 //        val interceptor = HeaderNewAPI(authToken, authkey, apiVersion,
 //                app_version, lang, iso_code, device_type,
 //                auth_token_onboarding)
-        val interceptor = RetrofitNewCustomHeader(key, value, header)
+//        val interceptor = RetrofitNewCustomHeader(key, value, header)
+        val interceptor = RetrofitNewCustomHeader()
 //        val interceptor = DCRetrofitNewApiHeader(
 //                DCNetworkRequestHeader(
 //                        authToken = authToken,

@@ -6,17 +6,17 @@ import okhttp3.Response
 import src.networkutil.utilities.NetworkConstant
 import java.io.IOException
 
-class RetrofitNewCustomHeader(val key: String, val value: String, val header: NetworkRequestHeader) : Interceptor {
+class RetrofitNewCustomHeader : Interceptor {
 
     @Throws(IOException::class)
     override fun intercept(chain: Interceptor.Chain): Response {
         val original = chain.request()
 
         val builder = original.newBuilder()
-            .addHeader(key, value)
+//            .addHeader(key, value)
 //                .addHeader(NetworkConstant.HEADER_AUTH_KEY, header.authorization.trim())
-//            .addHeader(NetworkConstant.HEADER_VER, header.apiVersion)
-//            .addHeader(NetworkConstant.HEADER_APPVERSION, header.appVersion)
+            .addHeader(NetworkConstant.HEADER_ACCEPT, "application/json")
+            .addHeader(NetworkConstant.HEADER_CONTENT_TYPE, "application/x-www-form-urlencoded")
 //            .addHeader(NetworkConstant.HEADER_LANG, header.lang)
 //            .addHeader(NetworkConstant.HEADER_DEVICETYPE, header.deviceType)
 //            .addHeader(NetworkConstant.HEADER_TOKENID, header.tokenId)
@@ -50,7 +50,7 @@ class RetrofitNewCustomHeader(val key: String, val value: String, val header: Ne
 //        Log.d(NetworkConstant.HEADER_USER_SESSION_TOKEN, header.userSessionToken)
 //        Log.d(NetworkConstant.HEADER_SQS_X_API_KEY, header.x_api_key)
 //        Log.d(NetworkConstant.HEADER_OTP_TOKEN, header.otpToken)
-        Log.d(key, value)
+//        Log.d(key, value)
 
         val request = builder.build()
         return chain.proceed(request)
