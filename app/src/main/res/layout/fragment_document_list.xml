@@ -8,7 +8,9 @@
             type="com.bluesheets.ui.documents.viewmodel.DocumentListViewModel" />
     </data>
 
-    <src.wrapperutil.empty_state.StateManagerConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <src.wrapperutil.empty_state.StateManagerConstraintLayout
+        android:id="@+id/stateLayout"
+        xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
