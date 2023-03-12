@@ -7,6 +7,7 @@ import com.bluesheets.ui.chat.view.ChatOtherActivity
 import com.bluesheets.ui.chat.view.CustomMessageListActivity
 import com.bluesheets.ui.home.view.HomeActivity
 import com.bluesheets.ui.signup.view.SignUpActivity
+import com.bluesheets.ui.switch_org_n_workspace.ui.SwitchOrgAndWorkActivity
 import com.bluesheets.ui.user_info.view.UserInfoActivity
 
 object NavigateTo {
@@ -32,6 +33,10 @@ object NavigateTo {
             FragmentConstant.CHAT_OTHER_ACTIVITY ->
             {
                 toOtherChat(fragmentType, bundle)
+            }
+            FragmentConstant.SWITCH_ORG_N_WORK_ACTIVITY ->
+            {
+                toSwitchOrgAndWorkSpace(bundle)
             }
         }
     }
@@ -87,6 +92,14 @@ object NavigateTo {
         val myIntent = Intent(BluesheetApplication.instance.activityLifeCycle.currentActivity, ChatOtherActivity::class.java)
         myIntent.putExtra(FragmentConstant.FRAGMENT_TYPE, fragmentType)
         myIntent.putExtra(FragmentConstant.ACTIVITY_BUNDLE, bundle)
+        BluesheetApplication.instance.activityLifeCycle.currentActivity?.startActivity(myIntent)
+    }
+
+    private fun toSwitchOrgAndWorkSpace(bundle: Bundle?) {
+        val myIntent = Intent(BluesheetApplication.instance.activityLifeCycle.currentActivity, SwitchOrgAndWorkActivity::class.java)
+        bundle ?. let {
+            myIntent.putExtras(it)
+        }
         BluesheetApplication.instance.activityLifeCycle.currentActivity?.startActivity(myIntent)
     }
 }

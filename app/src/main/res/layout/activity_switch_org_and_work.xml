@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <src.wrapperutil.empty_state.StateManagerConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/stateLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <src.wrapperutil.uicomponent.LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            tools:context=".ui.switch_org_n_workspace.ui.SwitchOrgAndWorkActivity">
+
+            <src.wrapperutil.uicomponent.AppBarLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+                <src.wrapperutil.uicomponent.TabLayout
+                    android:id="@+id/tabs"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:tabGravity="fill"
+                    app:tabMode="fixed" />
+            </src.wrapperutil.uicomponent.AppBarLayout>
+
+            <src.wrapperutil.uicomponent.ViewPager
+                android:id="@+id/viewpager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@android:color/white" />
+        </src.wrapperutil.uicomponent.LinearLayout>
+    </src.wrapperutil.empty_state.StateManagerConstraintLayout>
+</layout>

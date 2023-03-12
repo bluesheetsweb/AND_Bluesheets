@@ -29,7 +29,9 @@ class FragmentDocument: Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        viewModel.getState().observe(viewLifecycleOwner) {
+            binding?.stateLayout?.setViewState(it.state, viewModel)
+        }
         viewModel.getDocumentList()
-
     }
 }
