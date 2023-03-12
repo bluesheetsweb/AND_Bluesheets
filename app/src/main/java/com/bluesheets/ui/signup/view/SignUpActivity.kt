@@ -13,31 +13,38 @@ class SignUpActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding =  ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        FragmentTransaction.initParentFrameForFragment(type = FragmentConstant.SIGN_UP_ACTIVITY,
-        ModelFlow(
-            frameLayout = binding.frameLayout,
-            fragmentManager = supportFragmentManager
+        FragmentTransaction.initParentFrameForFragment(
+            type = FragmentConstant.SIGN_UP_ACTIVITY,
+            ModelFlow(
+                frameLayout = binding.frameLayout,
+                fragmentManager = supportFragmentManager
+            )
         )
-        )
-        navigateToFragment(intent.getIntExtra(FragmentConstant.FRAGMENT_TYPE,0))
+        navigateToFragment(intent.getIntExtra(FragmentConstant.FRAGMENT_TYPE, 0))
     }
 
-    private fun navigateToFragment(fragmentType: Int, bundle: Bundle? = null){
-        when (fragmentType){
+    private fun navigateToFragment(fragmentType: Int, bundle: Bundle? = null) {
+        when (fragmentType) {
             FragmentConstant.GET_STARTED_FRAGMENT -> {
-                FragmentTransaction.add(type = FragmentConstant.SIGN_UP_ACTIVITY,
-                    fragment = FragmentGetStarted())
+                FragmentTransaction.add(
+                    type = FragmentConstant.SIGN_UP_ACTIVITY,
+                    fragment = FragmentGetStarted()
+                )
             }
             FragmentConstant.SIGN_IN_FRAGMENT -> {
-                FragmentTransaction.add(type = FragmentConstant.SIGN_UP_ACTIVITY,
-                    fragment = FragmentSignIn())
+                FragmentTransaction.add(
+                    type = FragmentConstant.SIGN_UP_ACTIVITY,
+                    fragment = FragmentSignIn()
+                )
             }
             FragmentConstant.SIGN_UP_FRAGMENT -> {
-                FragmentTransaction.add(type = FragmentConstant.SIGN_UP_ACTIVITY,
-                    fragment = FragmentSignUp())
+                FragmentTransaction.add(
+                    type = FragmentConstant.SIGN_UP_ACTIVITY,
+                    fragment = FragmentSignUp()
+                )
             }
             else -> {
                 Toast.makeText(this, "Issue with Fragment Type $fragmentType", Toast.LENGTH_SHORT)
@@ -47,7 +54,7 @@ class SignUpActivity : AppCompatActivity() {
 
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
-        intent?.getIntExtra(FragmentConstant.FRAGMENT_TYPE,0)?.let {
+        intent?.getIntExtra(FragmentConstant.FRAGMENT_TYPE, 0)?.let {
             navigateToFragment(it)
         }
     }

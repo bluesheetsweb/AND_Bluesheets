@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="viewModel"
+            type="com.bluesheets.ui.chat.viewmodel.ChannelInfoViewModel" />
+    </data>
+<src.wrapperutil.empty_state.StateManagerConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/white"
+    android:clickable="true">
+
+    <src.wrapperutil.uicomponent.ImageView
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_140dp"
+        android:id="@+id/imageBlur"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:scaleType="centerCrop"/>
+
+    <src.wrapperutil.uicomponent.roundedimageview.RoundedImageView
+        android:layout_width="@dimen/_60dp"
+        android:layout_height="@dimen/_60dp"
+        android:id="@+id/imageProfile"
+        app:riv_corner_radius="30dip"
+        app:riv_mutate_background="true"
+        app:riv_oval="true"
+        android:scaleType="centerCrop"
+        app:layout_constraintLeft_toLeftOf="@id/imageBlur"
+        app:layout_constraintTop_toTopOf="@id/imageBlur"
+        app:layout_constraintBottom_toBottomOf="@id/imageBlur"
+        app:layout_constraintRight_toRightOf="@id/imageBlur"
+        />
+
+    <src.wrapperutil.uicomponent.ImageView
+        android:layout_width="@dimen/_24dp"
+        android:layout_height="@dimen/_24dp"
+        android:id="@+id/changeImage"
+        app:layout_constraintRight_toRightOf="@id/imageProfile"
+        app:layout_constraintBottom_toBottomOf="@id/imageProfile"
+        android:onClick="@{() -> viewModel.changePic()}"
+        android:src="@drawable/ic_edit_pencil"/>
+
+    <src.wrapperutil.uicomponent.ImageView
+        android:layout_width="@dimen/_24dp"
+        android:layout_height="@dimen/_24dp"
+        android:id="@+id/imageClose"
+        android:src="@drawable/ic_close_square_black"
+        android:layout_margin="@dimen/_12dp"
+        app:layout_constraintRight_toRightOf="@id/imageBlur"
+        app:layout_constraintTop_toTopOf="@id/imageBlur"/>
+
+    <src.wrapperutil.uicomponent.Separator
+        android:layout_width="@dimen/_0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imageBlur"
+        android:id="@+id/separatorTop"
+        app:seprator_mode="TINY_PLUS"
+        />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/layoutMainName"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/separatorTop">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/layoutName"
+        android:layout_marginRight="@dimen/_12dp"
+        android:layout_marginTop="@dimen/_12dp"
+        android:layout_marginStart="@dimen/_12dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/editButton">
+
+    <src.wrapperutil.uicomponent.TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textName"
+        app:layout_constraintTop_toTopOf="@id/layoutName"
+        app:layout_constraintLeft_toLeftOf="@id/layoutName"
+        app:layout_constraintRight_toRightOf="@id/layoutName"
+        app:text_mode="SUB_HEADING_BOLD"
+        android:text="@{viewModel.channelName}"/>
+
+    <src.wrapperutil.uicomponent.TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textSubDesc"
+        app:layout_constraintTop_toBottomOf="@id/textName"
+        app:layout_constraintLeft_toLeftOf="@id/layoutName"
+        app:layout_constraintRight_toRightOf="@id/layoutName"
+        app:text_mode="PARAGRAPH_REGULAR"
+        android:text="@{viewModel.channelSubDes}"/>
+
+        <src.wrapperutil.uicomponent.RelativeLayout
+            android:id="@+id/layoutEdit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:background_state="GRAY_LIGHT"
+            android:paddingStart="@dimen/_8dp"
+            android:paddingTop="@dimen/_4dp"
+            android:paddingBottom="@dimen/_4dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:corner_radius="@dimen/_8dp"
+            android:gravity="center_vertical"
+            android:visibility="gone"
+            android:orientation="horizontal">
+
+            <src.wrapperutil.uicomponent.EditText
+                android:id="@+id/editChannel"
+                android:layout_width="match_parent"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@id/imageCross2"
+                android:layout_marginEnd="@dimen/_8dp"
+                android:layout_toRightOf="@id/imageSearch2"
+                android:background="@null"
+                android:hint="Edit"
+                android:text="@{viewModel.channelName}"
+                android:onTextChanged="@{(text, start, before, count) -> viewModel.editChannelName(text)}"
+                android:layout_height="wrap_content"/>
+
+            <src.wrapperutil.uicomponent.ImageView
+                android:id="@+id/imageCross"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_width="@dimen/_14dp"
+                android:layout_height="@dimen/_14dp"
+                android:onClick="@{()->viewModel.cancelEditing()}"
+                android:src="@drawable/ic_cross_black"/>
+        </src.wrapperutil.uicomponent.RelativeLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <src.wrapperutil.uicomponent.Button
+        android:id="@+id/editButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/layoutName"
+        app:layout_constraintBottom_toBottomOf="@id/layoutName"
+        app:lessPadding="true"
+        android:onClick="@{() -> viewModel.editChannel()}"
+        android:layout_marginEnd="@dimen/_12dp"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <src.wrapperutil.uicomponent.Separator
+        android:layout_width="@dimen/_0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="@dimen/_8dp"
+        app:layout_constraintTop_toBottomOf="@id/layoutMainName"
+        android:id="@+id/separatorTwo"
+        app:seprator_mode="TINY"
+        />
+
+    <src.wrapperutil.uicomponent.RelativeLayout
+        android:id="@+id/layoutSearch"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:background_state="GRAY_LIGHT"
+        android:paddingStart="@dimen/_12dp"
+        android:paddingEnd="@dimen/_12dp"
+        android:paddingTop="@dimen/_4dp"
+        android:paddingBottom="@dimen/_4dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/separatorTwo"
+        app:corner_radius="@dimen/_8dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <src.wrapperutil.uicomponent.ImageView
+            android:id="@+id/imageSearch2"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_width="@dimen/_14dp"
+            android:layout_height="@dimen/_14dp"
+            android:src="@drawable/ic_search_icon"/>
+
+        <src.wrapperutil.uicomponent.EditText
+            android:id="@+id/editSearch2"
+            android:layout_width="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/imageCross2"
+            android:layout_marginStart="@dimen/_8dp"
+            android:layout_marginEnd="@dimen/_8dp"
+            android:layout_toRightOf="@id/imageSearch2"
+            android:background="@null"
+            android:hint="Search"
+            android:onTextChanged="@{(text, start, before, count) -> viewModel.searchParticipant(text)}"
+            android:layout_height="wrap_content"/>
+
+        <src.wrapperutil.uicomponent.ImageView
+            android:id="@+id/imageCross2"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_width="@dimen/_14dp"
+            android:onClick="@{()-> viewModel.searchParticipants()}"
+            android:layout_height="@dimen/_14dp"
+            android:src="@drawable/ic_cross_black"/>
+    </src.wrapperutil.uicomponent.RelativeLayout>
+    <src.wrapperutil.uicomponent.TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/textParticipants"
+        android:layout_marginRight="@dimen/_12dp"
+        android:layout_marginStart="@dimen/_12dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="@id/imageSearch"
+        app:layout_constraintBottom_toBottomOf="@id/imageSearch"
+        app:text_mode="PARAGRAPH_REGULAR"
+        android:visibility="@{viewModel.isOneToOne ? View.GONE : View.VISIBLE, default = gone}"
+        android:text="@{viewModel.participants}"/>
+
+    <src.wrapperutil.uicomponent.ImageView
+        android:layout_width="@dimen/_24dp"
+        android:layout_height="@dimen/_24dp"
+        android:id="@+id/imageSearch"
+        android:src="@drawable/ic_search_blue"
+        android:layout_margin="@dimen/_12dp"
+        android:visibility="@{viewModel.isOneToOne ? View.GONE : View.VISIBLE, default = gone}"
+        android:onClick="@{()-> viewModel.searchParticipants()}"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layoutSearch"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="@dimen/_0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imageSearch"
+        android:background="#F0F3FA"
+        android:id="@+id/layoutAddUser"
+        android:padding="@dimen/_12dp"
+        android:layout_marginTop="@dimen/_4dp"
+        android:visibility="gone"
+        >
+
+        <src.wrapperutil.uicomponent.ImageView
+            android:layout_width="@dimen/_40dp"
+            android:layout_height="@dimen/_40dp"
+            android:id="@+id/imageAddUser"
+            android:src="@drawable/ic_add_user"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <src.wrapperutil.uicomponent.TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textAddUser"
+            android:layout_marginStart="@dimen/_12dp"
+            app:layout_constraintLeft_toRightOf="@id/imageAddUser"
+            app:layout_constraintTop_toTopOf="@id/imageAddUser"
+            app:layout_constraintBottom_toBottomOf="@id/imageAddUser"
+            app:text_mode="SUB_HEADING_REGULAR"
+            android:text="Add Participants"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <src.wrapperutil.uicomponent.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/_12dp"
+        app:layout_constraintBottom_toTopOf="@id/deleteButton"
+        android:layout_marginTop="@dimen/_8dp"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layoutAddUser"
+        app:layout_constraintVertical_bias="0.0"
+        tools:listitem="@layout/adapter_channel_users" />
+
+    <src.wrapperutil.uicomponent.Button
+        android:id="@+id/deleteButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="@{viewModel.deleteButtonText}"
+        app:lessPadding="true"
+        app:button_mode="SECONDARY"
+        android:layout_margin="@dimen/_12dp"/>
+
+</src.wrapperutil.empty_state.StateManagerConstraintLayout>
+
+</layout>

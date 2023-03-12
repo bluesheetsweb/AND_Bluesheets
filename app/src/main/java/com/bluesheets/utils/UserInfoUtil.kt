@@ -1,5 +1,7 @@
 package com.bluesheets.utils
 
+import com.bluesheets.BuildConfig
+
 object UserInfoUtil {
     var isLogin: Boolean?
     get() = SharedPrefUtils.INSTANCE.getFromPreferencesBoolval("IS_LOG_IN")
@@ -61,13 +63,31 @@ object UserInfoUtil {
             SharedPrefUtils.INSTANCE.savePreferences("USER_NAME", value)
         }
 
-    var chatToken: String?
+    var chatToken: String
         get() = SharedPrefUtils.INSTANCE.getFromPreferences("CHAT_TOKEN")
         set(value) {
             SharedPrefUtils.INSTANCE.savePreferences("CHAT_TOKEN", value)
         }
 
+    var workSpaceLOGO: String?
+        get() = SharedPrefUtils.INSTANCE.getFromPreferences("WORKSPACE_LOGO")
+        set(value) {
+            SharedPrefUtils.INSTANCE.savePreferences("WORKSPACE_LOGO", value)
+        }
+
+    var userProfileImage: String?
+        get() = SharedPrefUtils.INSTANCE.getFromPreferences("USER_LOGO")
+        set(value) {
+            SharedPrefUtils.INSTANCE.savePreferences("USER_LOGO", value)
+        }
+
+    var userEmail: String?
+        get() = SharedPrefUtils.INSTANCE.getFromPreferences("USER_EMAIL")
+        set(value) {
+            SharedPrefUtils.INSTANCE.savePreferences("USER_EMAIL", value)
+        }
+
     fun getChatId() : String {
-        return "development-$userId"
+        return "${BuildConfig.FLAVOR}-$userId"
     }
 }

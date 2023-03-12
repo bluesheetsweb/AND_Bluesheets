@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+            name="viewModel"
+            type="com.bluesheets.ui.chat.viewmodel.ChatListViewModel" />
+    </data>
+<src.wrapperutil.empty_state.StateManagerConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/color_white"
+    android:clickable="true">
+    <src.wrapperutil.uicomponent.LinearLayout
+        android:id="@+id/layoutSearch"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:background_state="GRAY_LIGHT"
+        android:paddingStart="@dimen/_8dp"
+        android:paddingEnd="@dimen/_8dp"
+        android:paddingTop="@dimen/_4dp"
+        android:paddingBottom="@dimen/_4dp"
+        android:layout_margin="@dimen/_8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:corner_radius="@dimen/_8dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <src.wrapperutil.uicomponent.ImageView
+            android:layout_width="@dimen/_14dp"
+            android:layout_height="@dimen/_14dp"
+            android:src="@drawable/ic_search_icon"/>
+
+        <src.wrapperutil.uicomponent.EditText
+            android:layout_width="match_parent"
+            android:background="@null"
+            android:hint="Search"
+            android:onTextChanged="@{(text, start, before, count) -> viewModel.getChannelWithName(text)}"
+            android:layout_height="wrap_content"/>
+    </src.wrapperutil.uicomponent.LinearLayout>
+
+    <src.wrapperutil.uicomponent.RecyclerView
+        android:id="@+id/recycleView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layoutSearch"
+        app:layout_constraintVertical_bias="0.0"
+        tools:listitem="@layout/adapter_channel_item" />
+
+</src.wrapperutil.empty_state.StateManagerConstraintLayout>
+</layout>

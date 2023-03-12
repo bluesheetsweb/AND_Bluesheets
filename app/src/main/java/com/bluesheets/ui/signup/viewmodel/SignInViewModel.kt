@@ -6,15 +6,14 @@ import com.bluesheets.ui.signup.model.OrganizationItem
 import com.bluesheets.ui.signup.model.SignInModel
 import com.bluesheets.ui.signup.model.WorkspaceItem
 import com.bluesheets.ui.signup.repository.SignInRepo
-import com.bluesheets.utils.AppUtils
-import com.bluesheets.utils.FragmentConstant
-import com.bluesheets.utils.NavigateTo
-import com.bluesheets.utils.UserInfoUtil
+import com.bluesheets.utils.*
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import org.json.JSONObject
 import src.networkutil.model.NetworkErrorBModel
 import src.networkutil.network.NetworkRequest
+import src.networkutil.utilities.NetworkConstant
+import src.networkutil.utilities.NetworkSharedPrefUtils
 import src.wrapperutil.utilities.Toaster
 import src.wrapperutil.utilities.WrapperConstant
 import src.wrapperutil.utilities.WrapperEnumAnnotation
@@ -67,14 +66,22 @@ class SignInViewModel: ParentVM() {
                 UserInfoUtil.userId = user.userId
                 UserInfoUtil.authToken = user.id
                 UserInfoUtil.userName = user.userName
-                UserInfoUtil.chatToken = user.mobileToken
+                UserInfoUtil.chatToken = user.mobileToken.toString()
+                UserInfoUtil.userProfileImage = user.profileImageUrl.toString()
                 UserInfoUtil.organizationId = user.organization?.organizationId
                 UserInfoUtil.organizationName = user.organization?.name
                 UserInfoUtil.organizationToken = user.organization?.id
                 UserInfoUtil.workSpaceId = user.workspace?.workspaceId
                 UserInfoUtil.workSpaceName = user.workspace?.name
                 UserInfoUtil.workSpaceToken = user.workspace?.id
+                UserInfoUtil.workSpaceLOGO = user.workspace?.logoUrl
                 mProgressState.value = WrapperEnumAnnotation(WrapperConstant.STATE_SCREEN_SUCCESS)
+                NetworkSharedPrefUtils.INSTANCE.savePreferences(NetworkConstant.PREF_KEY_USER_AUTH_KEY, user.id?: "")
+                NetworkSharedPrefUtils.INSTANCE.savePreferences(NetworkConstant.PREF_KEY_WORKSPACE_AUTH_KEY, user.workspace?.id?: "")
+                NetworkSharedPrefUtils.INSTANCE.savePreferences(NetworkConstant.PREF_KEY_ORG_AUTH_KEY, user.organization?.id?: "")
+                AppLogger.e("com.bluesheets",  " => " +NetworkSharedPrefUtils.INSTANCE.getFromPreferences(NetworkConstant.PREF_KEY_USER_AUTH_KEY))
+                AppLogger.e("com.bluesheets",  " => " +NetworkSharedPrefUtils.INSTANCE.getFromPreferences(NetworkConstant.PREF_KEY_WORKSPACE_AUTH_KEY))
+                AppLogger.e("com.bluesheets",  " => " +NetworkSharedPrefUtils.INSTANCE.getFromPreferences(NetworkConstant.PREF_KEY_ORG_AUTH_KEY))
                 NavigateTo.screen(
                     activityType = FragmentConstant.HOME_ACTIVITY
                 )

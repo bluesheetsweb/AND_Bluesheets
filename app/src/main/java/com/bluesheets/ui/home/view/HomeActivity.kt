@@ -6,9 +6,15 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.bluesheets.R
 import com.bluesheets.databinding.ActivityHomeBinding
+import com.bluesheets.ui.chat.view.FragmentChatList
 import com.bluesheets.ui.contact.view.FragmentContact
+import com.bluesheets.ui.documents.view.FragmentDocument
 import com.bluesheets.ui.home.viewmodel.HomeViewModel
 import com.bluesheets.utils.FragmentConstant
+import com.bluesheets.utils.NavigateTo
+import com.bluesheets.utils.UserInfoUtil
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import src.wrapperutil.model.ModelFlow
 import src.wrapperutil.utilities.FragmentTransaction
 
@@ -32,6 +38,23 @@ class HomeActivity : AppCompatActivity() {
             navigateToFragment(it)
         }
         viewModel.currentSelectedPos.value = 0
+
+        binding?.imageWithButton?.updateImageSrc(R.drawable.ic_white_plus)
+        binding?.imageWithButton?.textValue
+
+        binding?.let {
+            Glide.with(this)
+                .load(UserInfoUtil.workSpaceLOGO)
+                .apply(RequestOptions.circleCropTransform())
+                .placeholder(R.drawable.ic_pic)
+                .into(it.profilePic)
+        }
+
+        binding.layoutWorkNOrg.setOnClickListener {
+            NavigateTo.screen(
+                activityType = FragmentConstant.SWITCH_ORG_N_WORK_ACTIVITY
+            )
+        }
     }
 
     private fun navigateToFragment(selectedPos: Int){
@@ -42,7 +65,7 @@ class HomeActivity : AppCompatActivity() {
                 binding.imageDocument.setImageResource(R.drawable.ic_black_document)
                 binding.imageContact.setImageResource(R.drawable.ic_black_contact)
                 FragmentTransaction.add(type = FragmentConstant.HOME_ACTIVITY,
-                    fragment = FragmentContact()
+                    fragment = FragmentChatList()
                 )
             }
             1 -> {
@@ -60,7 +83,7 @@ class HomeActivity : AppCompatActivity() {
                 binding.imageDocument.setImageResource(R.drawable.ic_blue_document)
                 binding.imageContact.setImageResource(R.drawable.ic_black_contact)
                 FragmentTransaction.add(type = FragmentConstant.HOME_ACTIVITY,
-                    fragment = FragmentContact()
+                    fragment = FragmentDocument()
                 )
             }
             else -> {

@@ -20,12 +20,18 @@ class NetworkBase(
     init {
         @src.networkutil.utilities.NetworkEnumAnnotation.RequestingServer val server =
             requestingServer.state
-        requestHeader = when (server) {
-            NetworkConstant.REQUESTING_SERVER_BASE -> {
-                NetworkRequestHeader(
-                    authorization = InitNetworkUtils.userAuth
-                )
-            }
+
+        requestHeader =
+            NetworkRequestHeader(
+            authorization = NetworkGlobalDataHolder.getMyAuthKey(),
+            organizationToken = NetworkGlobalDataHolder.getOrgAuthKey(),
+            workspaceToken = NetworkGlobalDataHolder.getWorkAuthKey())
+//        requestHeader = when (server) {
+//            NetworkConstant.REQUESTING_SERVER_BASE -> {
+//                NetworkRequestHeader(
+//                    authorization = InitNetworkUtils.userAuth
+//                )
+//            }
 
 //            NetworkConstant.REQUESTING_SERVER_BASE_LATEST -> {
 //
@@ -148,14 +154,14 @@ class NetworkBase(
 //                        userSessionToken = NetworkSharedPrefUtils.INSTANCE.getFromPreferences(NetworkConstant.PREF_KEY_SESSION_USER_TOKEN),
 //                        x_api_key = NetworkConstant.SQS_TOKEN)
 //            }
-
-            else -> {
-                NetworkRequestHeader(
-                    authorization = NetworkGlobalDataHolder.getMyAuthKey(),
-                    organizationToken = NetworkGlobalDataHolder.getOrgAuthKey(),
-                    workspaceToken = NetworkGlobalDataHolder.getWorkAuthKey())
-            }
-        }
+//
+//            else -> {
+//                NetworkRequestHeader(
+//                    authorization = NetworkGlobalDataHolder.getMyAuthKey(),
+//                    organizationToken = NetworkGlobalDataHolder.getOrgAuthKey(),
+//                    workspaceToken = NetworkGlobalDataHolder.getWorkAuthKey())
+//            }
+//        }
     }
 
     fun initializeService() {

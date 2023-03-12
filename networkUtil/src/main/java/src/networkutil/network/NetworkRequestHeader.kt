@@ -6,6 +6,7 @@ data class NetworkRequestHeader(
     var authorization: String? = "",
     var organizationToken: String = "",
     var workspaceToken: String = "",
-    var contentType: String = "",
-    var accept: String = "*/*"
+    var contentType: String = "application/json",
+    var accept: String = "*/*",
+    var user_agent: String = "bluesheets-mobile"
 )
