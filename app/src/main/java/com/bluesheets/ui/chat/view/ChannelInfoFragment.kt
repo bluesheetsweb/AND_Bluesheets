@@ -68,6 +68,7 @@ class ChannelInfoFragment(private val cid: String) : Fragment() {
 
     fun updateUI(){
         binding?.viewModel = viewModel
+        binding?.textName?.text = viewModel.channelName
         if (viewModel.isChannelAdmin) {
             binding?.deleteButton?.text = "Delete"
         } else {
@@ -118,6 +119,7 @@ class ChannelInfoFragment(private val cid: String) : Fragment() {
                 binding?.textSubDesc?.visibility = View.GONE
                 binding?.layoutMainName?.setBackgroundColor(Color.parseColor(ColorPicker.GRAY_LIGHT))
             } else {
+                binding?.textName?.text = viewModel.channelName
                 binding?.layoutEdit?.visibility = View.GONE
                 binding?.textName?.visibility = View.VISIBLE
                 binding?.textSubDesc?.visibility = View.VISIBLE
@@ -142,7 +144,10 @@ class ChannelInfoFragment(private val cid: String) : Fragment() {
             }
         }
         viewModel.refreshChannel.observe(viewLifecycleOwner){
-            binding?.textName?.text = viewModel.channelName
+            if (it) {
+                activity?.finish()
+                NavigateTo.reStartActivity()
+            }
         }
         viewModel.isDisabled.observe(viewLifecycleOwner){
             if (it) {
