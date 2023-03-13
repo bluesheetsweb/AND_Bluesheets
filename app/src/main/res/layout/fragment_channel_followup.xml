@@ -65,6 +65,7 @@
             android:id="@+id/editName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:onTextChanged="@{(text, start, before, count) -> viewModel.enterGroupName(text)}"
             android:layout_marginBottom="@dimen/_12dp"/>
 
         <src.wrapperutil.uicomponent.TextView
@@ -150,7 +151,7 @@
         android:text="Create Chat"
         app:lessPadding="true"
         app:button_mode="PRIMARY"
-        android:onClick="@{() -> viewModel.addParticipants()}"
+        android:onClick="@{() -> viewModel.createGroup()}"
         android:layout_margin="@dimen/_12dp"/>
 
 </src.wrapperutil.empty_state.StateManagerConstraintLayout>

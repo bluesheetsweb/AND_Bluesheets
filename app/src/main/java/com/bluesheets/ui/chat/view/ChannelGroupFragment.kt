@@ -19,6 +19,8 @@ import com.bluesheets.databinding.FragmentChannelAddMoreBinding
 import com.bluesheets.databinding.FragmentChannelAddMoreBindingImpl
 import com.bluesheets.databinding.FragmentChannelInfoBinding
 import com.bluesheets.databinding.FragmentGroupChannelBinding
+import com.bluesheets.ui.chat.model.OrgTagModel
+import com.bluesheets.ui.chat.model.TagsModel
 import com.bluesheets.ui.chat.viewmodel.ChannelAddMoreViewModel
 import com.bluesheets.ui.chat.viewmodel.ChannelCreateViewModel
 import com.bluesheets.ui.chat.viewmodel.ChannelInfoViewModel
@@ -38,7 +40,7 @@ private var binding: FragmentGroupChannelBinding? = null
 private lateinit var viewModel: ChannelCreateViewModel
 private lateinit var adapter: ChannelAddUserAdapter
 
-class ChannelGroupFragment(private val cId: String) : Fragment() {
+class ChannelGroupFragment(var selectedOrg: OrgTagModel?,var selectedTag: TagsModel?, var groupName: String?) : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,7 +49,7 @@ class ChannelGroupFragment(private val cId: String) : Fragment() {
     ): View? {
         binding = FragmentGroupChannelBinding.inflate(inflater,container, false)
         viewModel = ViewModelProvider(this).get(ChannelCreateViewModel::class.java)
-        viewModel.initData()
+        viewModel.initData(selectedOrg, selectedTag, groupName)
         binding?.viewModel = viewModel
         binding?.backButton?.setOnClickListener {
             activity?.onBackPressedDispatcher?.onBackPressed()
@@ -61,7 +63,7 @@ class ChannelGroupFragment(private val cId: String) : Fragment() {
         binding?.recyclerView?.adapter = adapter
 
         viewModel.getState().observe(viewLifecycleOwner) {
-            (binding?.root as StateManagerConstraintLayout)?.setViewState(it.state, viewModel)
+            (binding?.root as StateManagerConstraintLayout).setViewState(it.state, viewModel)
             if (it.state == WrapperConstant.STATE_SCREEN_SUCCESS) {
                 binding?.viewModel = viewModel
             }
@@ -79,10 +81,7 @@ class ChannelGroupFragment(private val cId: String) : Fragment() {
         }
         viewModel.refreshChannel.observe(viewLifecycleOwner){
             if (it) {
-                activity?.onBackPressedDispatcher?.onBackPressed()
-                Handler(Looper.getMainLooper()).postDelayed({
-                    FragmentTransaction.getCurrentFragment(FragmentConstant.CHAT_OTHER_ACTIVITY)?.onResume()
-                }, 100)
+                activity?.finish()
             }
         }
         viewModel.isDisabled.observe(viewLifecycleOwner){
