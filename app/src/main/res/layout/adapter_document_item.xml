@@ -28,7 +28,6 @@
                 android:layout_width="@dimen/_30dp"
                 android:layout_height="@dimen/_30dp"
                 android:layout_marginStart="@dimen/_12dp"
-                android:src="@drawable/ic_doc_placeholder"
                 app:riv_corner_radius="30dip"
                 app:riv_mutate_background="true"
                 app:riv_oval="true" />
@@ -52,7 +51,7 @@
                 android:layout_marginEnd="@dimen/_8dp"
                 android:padding="@dimen/_8dp"
                 android:background="@drawable/ic_processing"
-                android:visibility="visible"
+                android:visibility="gone"
                 android:text="@{viewModel.docStatusProcessing}"
                 app:text_mode="SUB_HEADING_BOLD" />
 
@@ -64,13 +63,11 @@
                 android:visibility="gone"
                 android:src="@drawable/ic_tick" />
 
-
-
             <src.wrapperutil.uicomponent.LinearLayout
                 android:id="@+id/layoutErrorView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:visibility="gone"
+                android:visibility="visible"
                 android:layout_gravity="center_vertical"
                 android:orientation="horizontal">
 
@@ -81,15 +78,17 @@
                 android:layout_marginStart="@dimen/_6dp"
                 android:layout_marginEnd="@dimen/_8dp"
                 android:background="@drawable/ic_action_required"
-                android:padding="@dimen/_2dp"
+                android:padding="@dimen/_10dp"
                 android:text="@{viewModel.docStatusActionRequired}"
                 app:text_mode="SUB_HEADING_BOLD" />
 
 
             <src.wrapperutil.uicomponent.ImageView
+                android:id="@+id/imageDeleteDocument"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/_8dp"
+                android:padding="@dimen/_10dp"
                 android:src="@drawable/ic_trash" />
             </src.wrapperutil.uicomponent.LinearLayout>
 
