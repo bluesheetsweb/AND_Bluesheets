@@ -55,7 +55,11 @@ object NavigateTo {
         bundle?.let {
             myIntent.putExtras(it)
         }
+        myIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         BluesheetApplication.instance.activityLifeCycle.currentActivity?.startActivity(myIntent)
+        BluesheetApplication.instance.activityLifeCycle.currentActivity ?. let {
+            ActivityCompat.finishAffinity(it)
+        }
     }
 
     private fun toCreateWOrkSpace(fragmentType: Int, bundle: Bundle?) {
