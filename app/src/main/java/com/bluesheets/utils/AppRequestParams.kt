@@ -151,4 +151,33 @@ object AppRequestParams {
         return params
     }
 
+    fun uploadFiles(
+        source: String,
+        size: String,
+        title: String,
+        channelID: String,
+        userDocID: String
+    ): HashMap<String, Any?> {
+        val files = arrayListOf<HashMap<String, Any?>>()
+        val file = hashMapOf<String, Any?>(
+            "src" to source,
+            "size" to size,
+            "title" to title
+        )
+        files.add(file)
+
+        val data = hashMapOf<String, Any?>(
+            "channelId" to channelID,
+            "sentFromChat" to true,
+            "userDocumentTypeId" to userDocID
+        )
+
+        val params = hashMapOf<String, Any?>(
+            "files" to files,
+            "data" to data
+        )
+
+        return params
+    }
+
 }

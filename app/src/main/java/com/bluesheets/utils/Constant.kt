@@ -63,4 +63,9 @@ object ApiMethods {
 
     //Get Org and Tags
     const val GET_ORG_TAGS = "workspaces/available-tags/"
+
+    // Upload Related APIs
+    const val DOCUMENT_UPLOAD_FILES = "documents/uploadFiles"
+    const val GET = "mobileChannels/"
+
 }

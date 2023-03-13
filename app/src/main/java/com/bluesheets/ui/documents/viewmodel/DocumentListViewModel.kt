@@ -84,4 +84,45 @@ class DocumentListViewModel : ParentVM() {
         }
     }
 
+
+    fun uploadFiles() {
+        mProgressState.value = WrapperEnumAnnotation(WrapperConstant.STATE_SCREEN_LOADING)
+        (repository as DocumentListRepo).uploadFiles(
+            object : NetworkRequest.IOnResponse {
+                override fun onException(t: Throwable?) {
+                    errorToastState.msg = "Something went wrong!"
+                    mProgressState.value =
+                        WrapperEnumAnnotation(WrapperConstant.STATE_SCREEN_ERROR_TOAST)
+                }
+
+                override fun onSuccess(
+                    code: Int?,
+                    message: String?,
+                    data: Any?,
+                    rawResponse: String?
+                ) {
+                    mProgressState.value =
+                        WrapperEnumAnnotation(WrapperConstant.STATE_SCREEN_SUCCESS)
+                }
+
+                override fun onFailed(
+                    code: Int?,
+                    message: String?,
+                    data: Any?,
+                    rawResponse: String?
+                ) {
+                    if (data != null && data is NetworkErrorBModel) {
+                        data.message?.let {
+                            errorToastState.msg = it
+                        }
+                    } else {
+                        errorToastState.msg = "Failed to upload Documents"
+                    }
+
+                    mProgressState.value =
+                        WrapperEnumAnnotation(WrapperConstant.STATE_SCREEN_ERROR_TOAST)
+                }
+            })
+    }
+
 }
