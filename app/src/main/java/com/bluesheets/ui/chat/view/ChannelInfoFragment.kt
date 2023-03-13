@@ -145,7 +145,6 @@ class ChannelInfoFragment(private val cid: String) : Fragment() {
         }
         viewModel.refreshChannel.observe(viewLifecycleOwner){
             if (it) {
-                activity?.finish()
                 NavigateTo.reStartActivity()
             }
         }

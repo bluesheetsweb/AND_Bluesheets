@@ -298,7 +298,6 @@ class ChannelCreateViewModel : ParentVM() {
                 SharedUtils.showOKDialog(message = "Unable to create channel with the following members. please try again")
             }
         }
-        Toaster.show(BluesheetApplication.instance.applicationContext, "Create Group")
     }
 
     fun createGroupProcess() {

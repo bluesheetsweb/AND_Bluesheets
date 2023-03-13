@@ -46,7 +46,7 @@
         <activity
             android:name=".ui.signup.view.SignUpActivity"
             android:exported="true"
-            android:launchMode="singleInstance"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.app.lib_name"
@@ -55,7 +55,7 @@
         <activity
             android:name=".ui.home.view.HomeActivity"
             android:exported="true"
-            android:launchMode="singleInstance"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.app.lib_name"
@@ -64,12 +64,12 @@
         <activity
             android:name=".ui.chat.view.CustomMessageListActivity"
             android:exported="true"
-            android:launchMode="singleInstance"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.user_info.view.UserInfoActivity"
             android:exported="true"
-            android:launchMode="singleInstance"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.app.lib_name"
@@ -78,13 +78,13 @@
         <activity
             android:name=".ui.chat.view.ChatOtherActivity"
             android:exported="true"
-            android:launchMode="singleInstance"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait" />
 
         <activity
             android:name=".ui.switch_org_n_workspace.ui.SwitchOrgAndWorkActivity"
             android:exported="true"
-            android:launchMode="singleInstance"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.app.lib_name"
