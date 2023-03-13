@@ -15,20 +15,25 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bluesheets.R
 import com.bluesheets.databinding.FragmentChannelAddMoreBinding
 import com.bluesheets.databinding.FragmentChannelAddMoreBindingImpl
 import com.bluesheets.databinding.FragmentChannelFollowupBinding
 import com.bluesheets.databinding.FragmentChannelInfoBinding
+import com.bluesheets.ui.chat.model.ConnectionUserModel
 import com.bluesheets.ui.chat.viewmodel.ChannelAddMoreViewModel
 import com.bluesheets.ui.chat.viewmodel.ChannelCreateViewModel
 import com.bluesheets.ui.chat.viewmodel.ChannelInfoViewModel
 import com.bluesheets.utils.FragmentConstant
+import com.bluesheets.utils.NavigateTo
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import io.getstream.chat.android.client.models.Channel
 import jp.wasabeef.glide.transformations.BlurTransformation
 import src.wrapperutil.empty_state.StateManagerConstraintLayout
 import src.wrapperutil.uicomponent.BaseDialogFragment
+import src.wrapperutil.uicomponent.LinearLayout
 import src.wrapperutil.utilities.ColorPicker
 import src.wrapperutil.utilities.FragmentTransaction
 import src.wrapperutil.utilities.WrapperConstant
@@ -37,7 +42,7 @@ import src.wrapperutil.utilities.WrapperEnumAnnotation
 private var binding: FragmentChannelFollowupBinding? = null
 private lateinit var viewModel: ChannelCreateViewModel
 
-class ChannelFollowUpFragment(private val isGroup: Boolean) : Fragment() {
+class ChannelFollowUpFragment(private val isGroup: Boolean, private var selectedUser: ConnectionUserModel? = null) : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -46,10 +51,16 @@ class ChannelFollowUpFragment(private val isGroup: Boolean) : Fragment() {
     ): View? {
         binding = FragmentChannelFollowupBinding.inflate(inflater,container, false)
         viewModel = ViewModelProvider(this).get(ChannelCreateViewModel::class.java)
-        viewModel.initOrg(isGroup)
+        viewModel.initOrg(isGroup, selectedUser)
         binding?.viewModel = viewModel
         binding?.backButton?.setOnClickListener {
             activity?.onBackPressedDispatcher?.onBackPressed()
+        }
+        binding?.layoutOrganization?.setOnClickListener {
+            showOrgBottomSheet()
+        }
+        binding?.layoutTag?.setOnClickListener {
+            showTagBottomSheet()
         }
 
         viewModel.getState().observe(viewLifecycleOwner) {
@@ -63,6 +74,8 @@ class ChannelFollowUpFragment(private val isGroup: Boolean) : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding?.textSelectTag?.visibility = View.GONE
+        binding?.layoutTag?.visibility = View.GONE
 
         if (isGroup) {
             binding?.titleText?.text = "Create Group"
@@ -80,12 +93,31 @@ class ChannelFollowUpFragment(private val isGroup: Boolean) : Fragment() {
 
         viewModel.refreshChannel.observe(viewLifecycleOwner){
             if (it) {
-                activity?.onBackPressedDispatcher?.onBackPressed()
-                Handler(Looper.getMainLooper()).postDelayed({
-                    FragmentTransaction.getCurrentFragment(FragmentConstant.CHAT_OTHER_ACTIVITY)?.onResume()
-                }, 100)
+                activity?.finish()
             }
         }
+        viewModel.selectedOrg.observe(viewLifecycleOwner){
+            if (it == null) {
+                binding?.textOrganization?.text = "Select Organization"
+                binding?.textOrganization?.updateMode(WrapperEnumAnnotation(WrapperConstant.TEXT_MODE_PARAGRAPH_MEDIUM_ERROR))
+            }
+            it ?. let {
+                binding?.textOrganization?.text = it.name
+                binding?.textOrganization?.updateMode(WrapperEnumAnnotation(WrapperConstant.TEXT_MODE_PARAGRAPH_REGULAR))
+                binding?.textSelectTag?.visibility = View.VISIBLE
+                binding?.layoutTag?.visibility = View.VISIBLE
+                binding?.textTag?.text = "Select Tag"
+                binding?.textTag?.updateMode(WrapperEnumAnnotation(WrapperConstant.TEXT_MODE_PARAGRAPH_MEDIUM_ERROR))
+            }
+        }
+
+        viewModel.selectedTag.observe(viewLifecycleOwner){
+            it ?. let {
+                binding?.textTag?.text = it.name
+                binding?.textTag?.updateMode(WrapperEnumAnnotation(WrapperConstant.TEXT_MODE_PARAGRAPH_REGULAR))
+            }
+        }
+
         viewModel.isDisabled.observe(viewLifecycleOwner){
             if (it) {
                binding?.addButton?.updateMode(WrapperEnumAnnotation(WrapperConstant.BUTTON_MODE_DISABLED))
@@ -93,6 +125,38 @@ class ChannelFollowUpFragment(private val isGroup: Boolean) : Fragment() {
                 binding?.addButton?.updateMode(WrapperEnumAnnotation(WrapperConstant.BUTTON_MODE_PRIMARY))
             }
         }
+    }
+
+    fun showOrgBottomSheet() {
+        val bottomSheetDialog = BottomSheetDialog(requireActivity())
+        bottomSheetDialog.setContentView(R.layout.bottomsheet_org_tag)
+
+        val recyclerView: RecyclerView? = bottomSheetDialog.findViewById(R.id.recyclerView)
+        val layoutManager: RecyclerView.LayoutManager = LinearLayoutManager(context)
+        recyclerView?.setLayoutManager(layoutManager)
+        var adapter = OrgTagAdapter(true) {
+            viewModel.selectOrg(it)
+            bottomSheetDialog.dismiss()
+        }
+        adapter.updateList(viewModel.listOrgTags)
+        recyclerView?.adapter = adapter
+        bottomSheetDialog.show()
+    }
+
+    fun showTagBottomSheet() {
+        val bottomSheetDialog = BottomSheetDialog(requireActivity())
+        bottomSheetDialog.setContentView(R.layout.bottomsheet_org_tag)
+
+        val recyclerView: RecyclerView? = bottomSheetDialog.findViewById(R.id.recyclerView)
+        val layoutManager: RecyclerView.LayoutManager = LinearLayoutManager(context)
+        recyclerView?.setLayoutManager(layoutManager)
+        var adapter = OrgTagAdapter(false) {
+            viewModel.selectTag(it)
+            bottomSheetDialog.dismiss()
+        }
+        adapter.updateList(viewModel.listTag)
+        recyclerView?.adapter = adapter
+        bottomSheetDialog.show()
     }
 
 //    override fun onStart() {
