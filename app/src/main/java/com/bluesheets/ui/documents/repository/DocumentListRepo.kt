@@ -40,4 +40,32 @@ class DocumentListRepo {
             }
         })
     }
+
+    fun uploadFiles(listener: NetworkRequest.IOnResponse?) {
+        var baseNetwork = NetworkBase(context = BluesheetApplication.instance.applicationContext)
+        baseNetwork.initializeService()
+        var request = NetworkRequest(
+            apiMethod = ApiMethods.DOCUMENT_UPLOAD_FILES,
+            baseNetwork = baseNetwork,
+            context = BluesheetApplication.instance.applicationContext,
+            requestType = NetworkEnumAnnotation(NetworkConstant.REQUEST_TYPE_POST),
+            params = AppRequestParams.uploadFiles("", "", "", "", "")
+        )
+
+        request.callService(listener = object : NetworkRequest.IOnResponse{
+            override fun onException(t: Throwable?) {
+                listener?.onException(t)
+            }
+
+            override fun onSuccess(code: Int?, message: String?, data: Any?, rawResponse: String?) {
+                listener?.onSuccess(code,message,data,rawResponse)
+            }
+
+            override fun onFailed(code: Int?, message: String?, data: Any?, rawResponse: String?) {
+                listener?.onFailed(code,message,data,rawResponse)
+            }
+        })
+    }
+
+
 }
