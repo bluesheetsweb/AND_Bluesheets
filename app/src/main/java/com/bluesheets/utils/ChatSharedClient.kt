@@ -54,10 +54,18 @@ class ChatSharedClient private constructor() {
     var client: ChatClient? = null
 
     fun connectUser(onResponse: (Boolean) -> Unit) {
+        var userName = ""
+        UserInfoUtil.userName ?. let {
+            userName = it
+        }
+        var userImage = ""
+        UserInfoUtil.userProfileImage ?. let {
+            userImage = it
+        }
         val user = User(
             id = UserInfoUtil.getChatId(),
-            name = "",
-            image = "",
+            name = userName,
+            image = userImage,
         )
         client?.connectUser(
             user = user,

@@ -38,6 +38,7 @@ class ChannelUserViewModel(val adminId: String,val isGroup:Boolean, val member: 
         } else {
             canDelete = false
         }
+        image = member.user.image
 //        image = SharedUtils.getChannelImageUrl(channel).toString()
     }
 

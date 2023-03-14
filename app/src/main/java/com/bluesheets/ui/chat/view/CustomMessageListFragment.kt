@@ -1,14 +1,20 @@
 package com.bluesheets.ui.chat.view
 
 import android.os.Bundle
+import android.view.ViewGroup
 import com.bluesheets.utils.FragmentConstant
 import com.bluesheets.utils.NavigateTo
 import com.bluesheets.utils.SharedUtils
+import com.getstream.sdk.chat.adapter.MessageListItem
 import io.getstream.chat.android.client.models.Channel
 import io.getstream.chat.android.ui.message.MessageListFragment
 import io.getstream.chat.android.ui.message.input.MessageInputView
 import io.getstream.chat.android.ui.message.list.MessageListView
+import io.getstream.chat.android.ui.message.list.adapter.BaseMessageItemViewHolder
+import io.getstream.chat.android.ui.message.list.adapter.MessageListItemViewHolderFactory
 import io.getstream.chat.android.ui.message.list.header.MessageListHeaderView
+import java.util.*
+import java.util.concurrent.TimeUnit
 
 class CustomMessageListFragment : MessageListFragment() {
     private var channel: Channel? = null
@@ -30,10 +36,6 @@ class CustomMessageListFragment : MessageListFragment() {
                 val bundle = Bundle()
                 bundle.putString("cId", it.cid)
                 NavigateTo.screen(FragmentConstant.CHAT_OTHER_ACTIVITY, FragmentConstant.CHAT_INFO_FRAGMENT, bundle)
-//                var bottomSheet = ChannelInfoFragment(it)
-//                val ft = childFragmentManager!!.beginTransaction()
-//                ft.add(android.R.id.content, bottomSheet).commit()
-//                bottomSheet.show(childFragmentManager,ChannelInfoFragment::class.java.simpleName)
             }
         }
 
@@ -42,10 +44,6 @@ class CustomMessageListFragment : MessageListFragment() {
                 val bundle = Bundle()
                 bundle.putString("cId", it.cid)
                 NavigateTo.screen(FragmentConstant.CHAT_OTHER_ACTIVITY, FragmentConstant.CHAT_INFO_FRAGMENT, bundle)
-//                var bottomSheet = ChannelInfoFragment(it)
-//                val ft = childFragmentManager!!.beginTransaction()
-//                ft.add(android.R.id.content, bottomSheet).commit()
-//                bottomSheet.show(childFragmentManager,ChannelInfoFragment::class.java.simpleName)
             }
         }
     }
@@ -55,6 +53,10 @@ class CustomMessageListFragment : MessageListFragment() {
         // Customize message list view
         messageListView.setReactionsEnabled(false)
         messageListView.setMessageFlagEnabled(false)
+        messageListView.setShowAvatarPredicate(MessageListView.ShowAvatarPredicate { _ ->
+            false
+        })
+//        messageListView.set
     }
 
     override fun setupMessageInput(messageInputView: MessageInputView) {
@@ -62,7 +64,3 @@ class CustomMessageListFragment : MessageListFragment() {
         // Customize message input view
     }
 }
-
-//private fun MessageListHeaderViewModel.bindView(view: Any, lifecycle: LifecycleOwner) {
-//
-//}

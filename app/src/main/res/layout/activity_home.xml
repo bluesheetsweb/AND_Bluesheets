@@ -116,7 +116,7 @@
                 android:id="@+id/frameLayout"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/layoutBottom"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/titleHeader" />
@@ -124,20 +124,11 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/layoutBottom"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_90dp"
+                android:layout_height="@dimen/_70dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent">
-
-                <src.wrapperutil.uicomponent.ImageView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/ic_bottom_bg"
-                    app:layout_constraintBottom_toTopOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="parent" />
+                app:layout_constraintRight_toRightOf="parent"
+                android:background="#F5F5F5">
 
                 <src.wrapperutil.uicomponent.LinearLayout
                     android:id="@+id/layoutChat"
@@ -153,10 +144,10 @@
                     <src.wrapperutil.uicomponent.ImageView
                         android:id="@+id/imageChat"
                         android:layout_width="@dimen/_20dp"
-                        android:layout_height="@dimen/_20dp"
-                        android:src="@drawable/ic_black_chat" />
+                        android:layout_height="@dimen/_20dp" />
 
                     <src.wrapperutil.uicomponent.TextView
+                        android:id="@+id/textChat"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_4dp"
@@ -179,10 +170,10 @@
                     <src.wrapperutil.uicomponent.ImageView
                         android:id="@+id/imageExpense"
                         android:layout_width="@dimen/_20dp"
-                        android:layout_height="@dimen/_20dp"
-                        android:src="@drawable/ic_black_expense" />
+                        android:layout_height="@dimen/_20dp" />
 
                     <src.wrapperutil.uicomponent.TextView
+                        android:id="@+id/textExpense"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_4dp"
@@ -205,10 +196,10 @@
                     <src.wrapperutil.uicomponent.ImageView
                         android:id="@+id/imageDocument"
                         android:layout_width="@dimen/_20dp"
-                        android:layout_height="@dimen/_20dp"
-                        android:src="@drawable/ic_black_document" />
+                        android:layout_height="@dimen/_20dp" />
 
                     <src.wrapperutil.uicomponent.TextView
+                        android:id="@+id/textDocument"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_4dp"
@@ -231,10 +222,10 @@
                     <src.wrapperutil.uicomponent.ImageView
                         android:id="@+id/imageContact"
                         android:layout_width="@dimen/_20dp"
-                        android:layout_height="@dimen/_20dp"
-                        android:src="@drawable/ic_black_contact" />
+                        android:layout_height="@dimen/_20dp" />
 
                     <src.wrapperutil.uicomponent.TextView
+                        android:id="@+id/textContact"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_4dp"

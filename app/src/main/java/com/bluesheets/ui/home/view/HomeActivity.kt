@@ -1,6 +1,7 @@
 package com.bluesheets.ui.home.view
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -111,47 +112,63 @@ class HomeActivity : AppCompatActivity() {
         when (selectedPos){
             0 -> {
                 binding.titleHeader.text = "Messages"
+                binding.textChat.updateTextColor(Color.parseColor("#0060FD"))
+                binding.textExpense.updateTextColor(Color.parseColor("#9D9D9D"))
+                binding.textDocument.updateTextColor(Color.parseColor("#9D9D9D"))
+                binding.textContact.updateTextColor(Color.parseColor("#9D9D9D"))
                 binding.titleHeader.visibility = View.VISIBLE
                 binding.imageWithButton.visibility = View.VISIBLE
-                binding.imageChat.setImageResource(R.drawable.ic_blue_chat)
-                binding.imageExpense.setImageResource(R.drawable.ic_black_expense)
-                binding.imageDocument.setImageResource(R.drawable.ic_black_document)
-                binding.imageContact.setImageResource(R.drawable.ic_black_contact)
+                binding.imageChat.setImageResource(R.drawable.ic_chat_selected)
+                binding.imageExpense.setImageResource(R.drawable.ic_expenses_unselected)
+                binding.imageDocument.setImageResource(R.drawable.ic_document_unselected)
+                binding.imageContact.setImageResource(R.drawable.ic_contact_unselected)
                 FragmentTransaction.add(type = FragmentConstant.HOME_ACTIVITY,
                     fragment = FragmentChatList()
                 )
             }
             1 -> {
                 binding.titleHeader.text = "Expenses"
+                binding.textChat.updateTextColor(Color.parseColor("#9D9D9D"))
+                binding.textExpense.updateTextColor(Color.parseColor("#0060FD"))
+                binding.textDocument.updateTextColor(Color.parseColor("#9D9D9D"))
+                binding.textContact.updateTextColor(Color.parseColor("#9D9D9D"))
                 binding.titleHeader.visibility = View.VISIBLE
                 binding.imageWithButton.visibility = View.VISIBLE
-                binding.imageChat.setImageResource(R.drawable.ic_black_chat)
-                binding.imageExpense.setImageResource(R.drawable.ic_blue_expense)
-                binding.imageDocument.setImageResource(R.drawable.ic_black_document)
-                binding.imageContact.setImageResource(R.drawable.ic_black_contact)
+                binding.imageChat.setImageResource(R.drawable.ic_chat_unselected)
+                binding.imageExpense.setImageResource(R.drawable.ic_expenses_selected)
+                binding.imageDocument.setImageResource(R.drawable.ic_document_unselected)
+                binding.imageContact.setImageResource(R.drawable.ic_contact_unselected)
                 FragmentTransaction.add(type = FragmentConstant.HOME_ACTIVITY,
                     fragment = FragmentContact()
                 )
             }
             2 -> {
                 binding.titleHeader.text = "Documents"
+                binding.textChat.updateTextColor(Color.parseColor("#9D9D9D"))
+                binding.textExpense.updateTextColor(Color.parseColor("#9D9D9D"))
+                binding.textDocument.updateTextColor(Color.parseColor("#0060FD"))
+                binding.textContact.updateTextColor(Color.parseColor("#9D9D9D"))
                 binding.titleHeader.visibility = View.VISIBLE
                 binding.imageWithButton.visibility = View.VISIBLE
-                binding.imageChat.setImageResource(R.drawable.ic_black_chat)
-                binding.imageExpense.setImageResource(R.drawable.ic_black_expense)
-                binding.imageDocument.setImageResource(R.drawable.ic_blue_document)
-                binding.imageContact.setImageResource(R.drawable.ic_black_contact)
+                binding.imageChat.setImageResource(R.drawable.ic_chat_unselected)
+                binding.imageExpense.setImageResource(R.drawable.ic_expenses_unselected)
+                binding.imageDocument.setImageResource(R.drawable.ic_document_selected)
+                binding.imageContact.setImageResource(R.drawable.ic_contact_unselected)
                 FragmentTransaction.add(type = FragmentConstant.HOME_ACTIVITY,
                     fragment = FragmentDocument()
                 )
             }
             else -> {
+                binding.textChat.updateTextColor(Color.parseColor("#9D9D9D"))
+                binding.textExpense.updateTextColor(Color.parseColor("#9D9D9D"))
+                binding.textDocument.updateTextColor(Color.parseColor("#9D9D9D"))
+                binding.textContact.updateTextColor(Color.parseColor("#0060FD"))
                 binding.titleHeader.visibility = View.GONE
                 binding.imageWithButton.visibility = View.GONE
-                binding.imageChat.setImageResource(R.drawable.ic_black_chat)
-                binding.imageExpense.setImageResource(R.drawable.ic_black_expense)
-                binding.imageDocument.setImageResource(R.drawable.ic_black_document)
-                binding.imageContact.setImageResource(R.drawable.ic_blue_contact)
+                binding.imageChat.setImageResource(R.drawable.ic_chat_unselected)
+                binding.imageExpense.setImageResource(R.drawable.ic_expenses_unselected)
+                binding.imageDocument.setImageResource(R.drawable.ic_document_unselected)
+                binding.imageContact.setImageResource(R.drawable.ic_contact_selected)
                 FragmentTransaction.add(type = FragmentConstant.HOME_ACTIVITY,
                     fragment = FragmentContact()
                 )

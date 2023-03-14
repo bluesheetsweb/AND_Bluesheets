@@ -34,7 +34,7 @@ class ChannelAddUserViewModel(val member: ConnectionUserModel, val onSelectedUse
 
     fun initData(){
         name = member.username
-        image = member.profileimageurl
+        image = member.profileImageUrl
     }
 
     fun onItemClicked() {

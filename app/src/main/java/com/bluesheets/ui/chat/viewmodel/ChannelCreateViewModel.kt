@@ -235,7 +235,7 @@ class ChannelCreateViewModel : ParentVM() {
             }
 
             map.put("name", selectedUser!!.username)
-            selectedUser?.profileimageurl ?. let {
+            selectedUser?.profileImageUrl ?. let {
                 map.put("image", it)
             }
 
